@@ -93,7 +93,7 @@ export function DefaultClientWrapper({}: IDefaultLayoutProps): JSX.Element {
           </div>
 
           {/* scroll order */}
-          <div className=''>
+          <div className='w-full flex md:flex-row flex-col flex-wrap justify-between'>
             {Array.from({ length: 6 }).map((product, index) => (
               <ProductCard
                 avaliable='4.5'
