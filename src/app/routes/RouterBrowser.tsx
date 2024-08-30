@@ -7,7 +7,7 @@ import {
 } from 'react-router-dom';
 
 import { Button } from '@/resources/components/ui';
-import { CatalogView } from '@/resources/views';
+import { CartView, CatalogView, PaymentView } from '@/resources/views';
 
 export function RouterBrowser() {
   return (
@@ -16,6 +16,16 @@ export function RouterBrowser() {
         <Route
           path='/'
           element={<CatalogView />}
+        />
+
+        <Route
+          path='/cart'
+          element={<CartView />}
+        />
+
+        <Route
+          path='/payment'
+          element={<PaymentView />}
         />
 
         <Route
