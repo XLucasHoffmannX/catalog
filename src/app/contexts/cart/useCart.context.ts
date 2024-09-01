@@ -3,9 +3,9 @@ import { create } from 'zustand';
 import { IUseCartontext } from './useCartContext.types';
 
 export const useCartContext = create<IUseCartontext>()(set => ({
-  isOpenCart: false,
+  isOpenDeliveryOptionsModal: false,
 
-  handleChangeIsOpenCart: (value: boolean) => {
-    return set({ isOpenCart: value });
+  handleChangeIsOpenDeliveryOptionsModal: (value: boolean) => {
+    return set({ isOpenDeliveryOptionsModal: value });
   }
 }));

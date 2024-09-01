@@ -4,7 +4,7 @@ import { DefaultClientWrapper } from '@/resources/components/layouts';
 export function CatalogView(): JSX.Element {
   return (
     <DefaultClientWrapper>
-      <div className='w-full flex md:flex-row flex-col flex-wrap justify-between'>
+      <div className='w-full flex md:flex-row flex-col flex-wrap justify-center gap-5'>
         {Array.from({ length: 6 }).map((product, index) => (
           <ProductCard
             avaliable='4.5'

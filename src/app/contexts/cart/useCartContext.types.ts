@@ -1,4 +1,4 @@
 export interface IUseCartontext {
-  isOpenCart: boolean;
-  handleChangeIsOpenCart: (value: boolean) => void;
+  isOpenDeliveryOptionsModal: boolean;
+  handleChangeIsOpenDeliveryOptionsModal: (value: boolean) => void;
 }

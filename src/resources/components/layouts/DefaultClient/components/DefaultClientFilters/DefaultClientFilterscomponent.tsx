@@ -10,7 +10,7 @@ import {
 
 export function DefaultClientFilters(): JSX.Element {
   return (
-    <div className='flex items-center gap-2 mb-6 max-w-[800px]'>
+    <div className='flex items-center gap-2 mb-6 max-w-[800px] w-full'>
       <Select defaultValue='0'>
         <SelectTrigger className='bg-gray-100 text-black'>
           <SelectValue placeholder='Ordernar' />

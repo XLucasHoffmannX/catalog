@@ -10,9 +10,12 @@ export function Content({
   children,
   className,
   isBack,
+  isBackTo,
   ...rest
 }: IContentProps): JSX.Element {
   const navigate = useNavigate();
+
+  const isBackCondition = isBack || isBackTo;
 
   return (
     <div
@@ -24,13 +27,14 @@ export function Content({
     >
       {title && (
         <h2
-          className='w-full mb-3 text-xl font-bold flex items-center gap-3'
+          className='w-full mb-3 text-xl font-bold flex items-center gap-3 cursor-pointer'
           onClick={() => {
-            if (isBack) navigate(-1);
+            if (isBack && !isBackTo) navigate(-1);
+            if (isBackTo) navigate(isBackTo);
             return;
           }}
         >
-          {isBack && <IoChevronBack className='cursor-pointer' />}
+          {isBackCondition && <IoChevronBack />}
 
           {title}
         </h2>
