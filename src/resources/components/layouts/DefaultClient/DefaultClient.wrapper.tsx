@@ -1,6 +1,6 @@
 import {
   DefaultClientCartFloat,
-  DefaultClientFilters,
+  DefaultClientCategories,
   DefaultClientHeader
 } from './components';
 
@@ -11,18 +11,19 @@ export function DefaultClientWrapper({
   pageGeneral
 }: IDefaultLayoutProps): JSX.Element {
   return (
-    <div className='h-screen w-screen flex justify-center items-center overflow-hidden relative bg-neutral-200'>
-      <div className='w-full max-w-[1920px] h-full overflow-auto bg-white '>
-        <DefaultClientHeader pageGeneral={pageGeneral} />
+    <div>
+      <div className='h-screen w-screen flex justify-center items-center overflow-x-hidden relative bg-secondary'>
+        <div className='w-full max-w-[1920px] h-full  bg-secondary '>
+          <DefaultClientHeader pageGeneral={pageGeneral} />
 
-        <div className='mt-8 p-3 flex flex-col gap-3 animate-up items-center'>
-          {!pageGeneral && <DefaultClientFilters />}
+          <div className='mt-8 p-3 flex flex-col gap-3 animate-up items-center'>
+            <DefaultClientCategories />
 
-          {/* scroll order */}
-          <>{children}</>
+            {/* scroll order */}
+            <>{children}</>
+          </div>
         </div>
       </div>
-
       <DefaultClientCartFloat />
     </div>
   );

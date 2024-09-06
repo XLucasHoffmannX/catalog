@@ -10,9 +10,9 @@ import {
 
 export function DefaultClientFilters(): JSX.Element {
   return (
-    <div className='flex items-center gap-2 mb-6 max-w-[800px] w-full'>
+    <div className='flex items-center gap-2 mb-6 max-w-[800px] w-full z-50'>
       <Select defaultValue='0'>
-        <SelectTrigger className='bg-gray-100 text-black'>
+        <SelectTrigger className='bg-neutral-50 text-black'>
           <SelectValue placeholder='Ordernar' />
         </SelectTrigger>
         <SelectContent>
@@ -24,7 +24,7 @@ export function DefaultClientFilters(): JSX.Element {
           </SelectGroup>
         </SelectContent>
       </Select>
-      <Button className='bg-gray-100 text-black border border-solid border-gray-200'>
+      <Button className='bg-neutral-50 text-black border border-solid border-gray-200'>
         Promoções 🔥
       </Button>
     </div>
