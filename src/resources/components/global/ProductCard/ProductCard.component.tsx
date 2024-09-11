@@ -14,30 +14,39 @@ import {
 import {
   Carousel,
   CarouselContent,
-  CarouselItem
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious
 } from '@/resources/components/ui/carousel';
+import { Currency } from '@/shared/utils/format';
+
+import { ImageWithLoader } from '../';
 
 import { IProductCardProps } from './ProductCard.types';
 
 export function ProductCard({
-  avaliable,
-  price,
-  quantity,
   title,
+  subTitle,
+  quantity,
   discount,
-  subTitle
+  isDiscount,
+  minQuantity,
+  avaliable,
+  images,
+  isAvaliable,
+  price
 }: IProductCardProps): JSX.Element {
   return (
     <Card className='shadow-md w-full md:w-96 mb-10'>
       <CardHeader>
         <div className='mb-3 flex gap-2'>
-          {discount && (
+          {isDiscount && discount && (
             <Badge className='w-auto bg-orange-600 hover:bg-orange-600 flex gap-1'>
               {discount}%
               <TbSquareRoundedArrowDownFilled className='h-4 w-4' />
             </Badge>
           )}
-          {quantity >= 20 && (
+          {minQuantity && quantity <= minQuantity && (
             <Badge className='w-auto bg-orange-600 hover:bg-orange-600 flex gap-1'>
               Últimas unidades
               <LuBoxes className='h-4 w-4' />
@@ -47,43 +56,54 @@ export function ProductCard({
         <CardTitle>{title}</CardTitle>
         {subTitle && <CardDescription>{subTitle}</CardDescription>}
       </CardHeader>
+
       <CardContent>
         <Carousel className='w-full'>
           <CarouselContent>
-            {/* eslint-disable-next-line @typescript-eslint/naming-convention */}
-            {Array.from({ length: 2 }).map((_, index) => (
+            {images?.map((image, index) => (
               <CarouselItem key={index}>
-                <Card className='bg-primary flex items-center justify-center'>
-                  <CardContent className='flex items-center justify-center p-6 h-56 w-full text-secondary'>
-                    <span className='text-4xl font-semibold'>{index + 1}</span>
+                <Card className='bg-primary flex items-center justify-center animate-right'>
+                  <CardContent className='flex items-center justify-center w-full text-secondary p-3 '>
+                    <ImageWithLoader
+                      src={image}
+                      alt={title}
+                    />
                   </CardContent>
                 </Card>
               </CarouselItem>
             ))}
           </CarouselContent>
+          <CarouselPrevious className='absolute left-0 top-1/2 transform -translate-y-1/2 ml-2 z-10' />
+          <CarouselNext className='absolute right-0 top-1/2 transform -translate-y-1/2 mr-2 z-10' />
         </Carousel>
       </CardContent>
+
       <CardFooter>
         <div className='w-full'>
-          <div className='flex items-center justify-between gap-2 mb-3'>
-            <span className='text-sm text-gray-500'>Avaliação</span>
-            <div className='flex items-center gap-2'>
-              <LuStar className='h-6 w-6 text-yellow-500' />
-              <span className='text-sm text-gray-500 font-medium'>
-                {avaliable}
-              </span>
+          {isAvaliable && avaliable && (
+            <div className='flex items-center justify-between gap-2 mb-3'>
+              <span className='text-sm text-gray-500'>Avaliação</span>
+              <div className='flex items-center gap-2'>
+                <LuStar className='h-6 w-6 text-yellow-500' />
+                <span className='text-sm text-gray-500 font-medium'>
+                  {avaliable}
+                </span>
+              </div>
             </div>
-          </div>
-          {discount && (
+          )}
+
+          {isDiscount && discount && (
             <span className='line-through text-sm text-red-400'>
-              R$ {price}
+              {Currency.format('BRL', price, true)}
             </span>
           )}
           <h2 className='text-2xl font-bold'>
-            {discount ? (
-              <>R$ {price - price * (discount / 100)}</>
+            {isDiscount && discount ? (
+              <>
+                {Currency.format('BRL', price - price * (discount / 100), true)}
+              </>
             ) : (
-              <>R$ {price}</>
+              <> {Currency.format('BRL', price, true)}</>
             )}
           </h2>
           <p className='text-sm text-gray-500'>Á vista</p>

@@ -42,17 +42,21 @@ export function DeliveryOptionsModal(): JSX.Element {
             </p>
             <IoChevronForward className='text-violet-600 text-lg' />
           </div>
-
           <Button
             variant='link'
             className=''
           >
             Editar local de entrega
-          </Button>
-
+          </Button>{' '}
           <Separator className='' />
+          <h1>Retirar em:</h1>
+          <div className='rounded-lg border p-3 w-full flex items-center justify-between cursor-pointer'>
+            <div className='flex flex-col leading-5'>
+              <h2 className='font-medium'>Shopping Centro norte</h2>
+              <span className='text-sm text-gray-500'>Entre 12/06 e 17/06</span>
+            </div>
+          </div>
           <h1>Receber por:</h1>
-
           {/* opçoes de entrega */}
           <div className='rounded-lg border p-3 w-full flex items-center justify-between cursor-pointer'>
             <div className='flex flex-col leading-3'>
@@ -65,7 +69,6 @@ export function DeliveryOptionsModal(): JSX.Element {
               <span className='font-medium text-green-600'>R$ 12,00</span>
             </div>
           </div>
-
           <div className='rounded-lg border p-3 w-full flex items-center justify-between cursor-pointer'>
             <div className='flex flex-col leading-3'>
               <h2 className='font-medium'>JadLog</h2>

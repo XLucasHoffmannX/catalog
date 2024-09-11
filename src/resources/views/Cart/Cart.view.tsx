@@ -21,7 +21,7 @@ export function CartView(): JSX.Element {
           <div className='w-full flex flex-col gap-5 justify-center '>
             <div className='flex items-center flex-wrap w-full gap-2'>
               <Input
-                className='bg-white h-14 rounded-2xl shadow-lg shadow-slate-500/30 animate-up md:w-[500px]'
+                className='bg-white h-14 rounded-2xl shadow-lg shadow-slate-500/30 animate-up md:w-[500px] text-black'
                 placeholder='Buscar...'
               />
 

@@ -106,7 +106,8 @@ module.exports = {
         up: 'up 0.5s ease-out',
         down: 'down 0.5s ease-in-out forwards',
         left: 'left 0.5s ease-in-out forwards',
-        right: 'right 0.5s ease-in-out forwards'
+        right: 'right 0.5s ease-in-out forwards',
+        spin: 'spin 1s linear infinite'
       }
     }
   },

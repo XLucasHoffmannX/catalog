@@ -1,8 +1,5 @@
-export interface IProductCardProps {
-  title: string;
-  subTitle?: string;
-  avaliable: string;
-  discount?: number;
-  price: number;
-  quantity: number;
-}
+/* eslint-disable @typescript-eslint/no-empty-object-type */
+
+import { IProductClient } from '@/shared/types';
+
+export interface IProductCardProps extends IProductClient {}

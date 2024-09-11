@@ -22,7 +22,7 @@ export function CartSubmitFloat(): JSX.Element {
             </div>
 
             <Button
-              className='p-2 rounded-xl'
+              className='p-2 rounded-xl bg-secondary text-secondary-foreground'
               onClick={() => navigate('/payment')}
             >
               Continuar

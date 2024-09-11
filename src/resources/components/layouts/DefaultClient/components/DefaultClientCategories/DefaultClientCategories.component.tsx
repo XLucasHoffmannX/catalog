@@ -1,6 +1,6 @@
 export function DefaultClientCategories(): JSX.Element {
   return (
-    <div className='w-full flex flex-col justify-center gap-2 mb-2 max-w-[900px] cursor-pointer bg-primary-foreground rounded-xl p-3'>
+    <div className='w-full shadow-md flex flex-col justify-center gap-2 mb-2 max-w-[900px] cursor-pointer bg-primary-foreground rounded-xl p-3'>
       <p className='text-muted-foreground font-bold'>Categorias</p>
       <div className='flex items-center gap-3 overflow-x-auto'>
         {Array.from({ length: 20 }).map((cate, index) => (

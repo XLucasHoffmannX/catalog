@@ -16,7 +16,7 @@ export function DeliveryAndCollection(): JSX.Element {
 
       <div className='flex items-center gap-3 text-neutral-700'>
         <Button
-          className='bg-primary '
+          className='bg-secondary text-secondary-foreground hover:text-secondary'
           onClick={() => handleChangeIsOpenDeliveryOptionsModal(true)}
         >
           Alterar

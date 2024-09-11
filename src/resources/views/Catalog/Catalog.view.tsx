@@ -1,7 +1,15 @@
-import { ProductCard } from '@/resources/components/global';
+import { useGetProductList } from '@/app/modules/client';
+import {
+  ProductCard,
+  ProductCardSkeleton
+} from '@/resources/components/global';
 import { DefaultClientWrapper } from '@/resources/components/layouts';
 
 export function CatalogView(): JSX.Element {
+  const { productList, isLoadingProducts } = useGetProductList({ limit: 5 });
+
+  console.log(productList);
+
   return (
     <DefaultClientWrapper>
       <div className='flex flex-col mb-36 w-full'>
@@ -10,23 +18,36 @@ export function CatalogView(): JSX.Element {
         </div>
 
         <div className='w-full flex md:flex-row flex-col flex-wrap justify-center gap-3 '>
-          {Array.from({ length: 6 }).map((product, index) => (
+          {isLoadingProducts &&
+            Array.from({ length: 5 }).map((item, index) => (
+              <ProductCardSkeleton key={index} />
+            ))}
+
+          {productList?.map((product, index) => (
             <ProductCard
-              avaliable='4.5'
-              title=''
-              subTitle='Steam'
-              quantity={20}
-              price={100}
-              discount={20}
+              avaliable={product.avaliable}
+              isDiscount={product.isDiscount}
+              isAvaliable={product.isAvaliable}
+              title={product.title}
+              subTitle={product.subTitle}
+              quantity={product.quantity}
+              minQuantity={product.minQuantity}
+              price={product.price}
+              discount={product.discount}
               key={index}
+              resource={product.resource}
+              images={product.images}
             />
           ))}
         </div>
-        <div className='flex items-center justify-center'>
-          <div className='bg-primary text-white border border-input py-3 px-4 rounded-xl cursor-pointer'>
-            <p>Ver mais produtos</p>
+
+        {productList && productList?.length > 0 && (
+          <div className='flex items-center justify-center'>
+            <div className='bg-primary text-secondary border border-input py-3 px-4 rounded-xl cursor-pointer'>
+              <p>Ver mais produtos</p>
+            </div>
           </div>
-        </div>
+        )}
       </div>
     </DefaultClientWrapper>
   );
