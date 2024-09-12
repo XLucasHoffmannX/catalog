@@ -1,6 +1,7 @@
 import { LuBoxes, LuStar } from 'react-icons/lu';
 import { TbSquareRoundedArrowDownFilled } from 'react-icons/tb';
 
+import { useCartContext } from '@/app/contexts';
 import { Badge } from '@/resources/components/ui/badge';
 import { Button } from '@/resources/components/ui/button';
 import {
@@ -24,49 +25,42 @@ import { ImageWithLoader } from '../';
 
 import { IProductCardProps } from './ProductCard.types';
 
-export function ProductCard({
-  title,
-  subTitle,
-  quantity,
-  discount,
-  isDiscount,
-  minQuantity,
-  avaliable,
-  images,
-  isAvaliable,
-  price
-}: IProductCardProps): JSX.Element {
+export function ProductCard({ product }: IProductCardProps): JSX.Element {
+  const { handleSetCartItem } = useCartContext();
+
   return (
-    <Card className='shadow-md w-full md:w-96 mb-10'>
+    <Card className='shadow-md w-full md:w-96 mb-10 flex flex-col justify-between'>
       <CardHeader>
         <div className='mb-3 flex gap-2'>
-          {isDiscount && discount && (
+          {product.isDiscount && product.discount && (
             <Badge className='w-auto bg-orange-600 hover:bg-orange-600 flex gap-1'>
-              {discount}%
+              {product.discount}%
               <TbSquareRoundedArrowDownFilled className='h-4 w-4' />
             </Badge>
           )}
-          {minQuantity && quantity <= minQuantity && (
+          {product.minQuantity && product.quantity <= product.minQuantity && (
             <Badge className='w-auto bg-orange-600 hover:bg-orange-600 flex gap-1'>
               Últimas unidades
               <LuBoxes className='h-4 w-4' />
             </Badge>
           )}
         </div>
-        <CardTitle>{title}</CardTitle>
-        {subTitle && <CardDescription>{subTitle}</CardDescription>}
+        <CardTitle>{product.title}</CardTitle>
+        {product.subTitle && (
+          <CardDescription>{product.subTitle}</CardDescription>
+        )}
       </CardHeader>
 
       <CardContent>
         <Carousel className='w-full'>
           <CarouselContent>
-            {images?.map((image, index) => (
+            {product.images?.map((image, index) => (
               <CarouselItem key={index}>
                 <Card className='bg-primary flex items-center justify-center animate-right'>
                   <CardContent className='flex items-center justify-center w-full text-secondary p-3 '>
                     <ImageWithLoader
                       src={image}
-                      alt={title}
+                      alt={product.title}
                     />
                   </CardContent>
                 </Card>
@@ -80,30 +74,34 @@ export function ProductCard({
 
       <CardFooter>
         <div className='w-full'>
-          {isAvaliable && avaliable && (
+          {product.isAvaliable && product.avaliable && (
             <div className='flex items-center justify-between gap-2 mb-3'>
               <span className='text-sm text-gray-500'>Avaliação</span>
               <div className='flex items-center gap-2'>
                 <LuStar className='h-6 w-6 text-yellow-500' />
                 <span className='text-sm text-gray-500 font-medium'>
-                  {avaliable}
+                  {product.avaliable}
                 </span>
               </div>
             </div>
           )}
 
-          {isDiscount && discount && (
+          {product.isDiscount && product.discount && (
             <span className='line-through text-sm text-red-400'>
-              {Currency.format('BRL', price, true)}
+              {Currency.format('BRL', product.price, true)}
             </span>
           )}
           <h2 className='text-2xl font-bold'>
-            {isDiscount && discount ? (
+            {product.isDiscount && product.discount ? (
               <>
-                {Currency.format('BRL', price - price * (discount / 100), true)}
+                {Currency.format(
+                  'BRL',
+                  product.price - product.price * (product.discount / 100),
+                  true
+                )}
               </>
             ) : (
-              <> {Currency.format('BRL', price, true)}</>
+              <> {Currency.format('BRL', product.price, true)}</>
             )}
           </h2>
           <p className='text-sm text-gray-500'>Á vista</p>
@@ -113,7 +111,27 @@ export function ProductCard({
               Comprar
             </Button>
 
-            <Button className='w-full text-primary bg-white hover:text-white border border-primary'>
+            <Button
+              className='w-full text-primary bg-white hover:text-white border border-primary'
+              onClick={() => {
+                if (product.isDiscount && product.discount) {
+                  handleSetCartItem({
+                    ...product,
+                    price:
+                      product.price - product.price * (product.discount / 100),
+                    uuidControl: crypto.randomUUID(),
+                    dateAdd: new Date().toISOString()
+                  });
+                  return;
+                }
+
+                handleSetCartItem({
+                  ...product,
+                  uuidControl: crypto.randomUUID(),
+                  dateAdd: new Date().toISOString()
+                });
+              }}
+            >
               Adicionar ao carrinho
             </Button>
           </div>

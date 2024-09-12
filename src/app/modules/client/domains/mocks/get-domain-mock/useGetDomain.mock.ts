@@ -81,7 +81,7 @@ export async function useGetDomainMock(
     }
   };
 
-  await MockApi.sleep(3000);
+  await MockApi.sleep(500);
 
   return payload.domain === 'localhost' ? data : null;
 }

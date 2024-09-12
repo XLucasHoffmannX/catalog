@@ -10,6 +10,7 @@ export interface IClient {
 }
 
 export interface IProductClient {
+  id: string;
   avaliable: string;
   isAvaliable?: boolean /* mostrar icone de avaliação */;
   title: string;
@@ -23,4 +24,11 @@ export interface IProductClient {
   resource: boolean;
   images?: string[];
   category?: string;
+  fareUnique?: number;
+}
+
+export interface ICartItemClient extends IProductClient {
+  uuidControl: string;
+  quantityCart?: number;
+  dateAdd: string;
 }

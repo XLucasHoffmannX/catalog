@@ -18,6 +18,7 @@ export async function useGetProductListMock(
       const isLastUnits = faker.datatype.boolean();
 
       return {
+        id: faker.string.uuid(),
         isAvaliable: faker.datatype.boolean(),
         title: faker.commerce.productName(),
         avaliable: faker.number

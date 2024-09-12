@@ -9,6 +9,7 @@ import { MdOutlineLightMode } from 'react-icons/md';
 import { TbFilterSearch } from 'react-icons/tb';
 import { useNavigate } from 'react-router-dom';
 
+import { useCartContext } from '@/app/contexts';
 import { useGetClient } from '@/app/modules/client';
 import { Avatar, AvatarImage, Badge, Input } from '@/resources/components/ui';
 import { useTheme } from '@/shared/styles/theme/theme-provider';
@@ -25,6 +26,8 @@ export function DefaultClientHeader({
   const { client, theme: themeClient, isLoading } = useGetClient();
 
   const { setTheme, theme } = useTheme();
+
+  const { cart } = useCartContext();
 
   return (
     <div
@@ -68,11 +71,13 @@ export function DefaultClientHeader({
             >
               <HiShoppingBag className='text-primary text-lg ' />
 
-              <Badge className='rounded-full absolute mb-8 mr-8 bg-secondary'>
-                <p className='leading-4 font-semibold text-secondary-foreground'>
-                  1
-                </p>
-              </Badge>
+              {!!cart.quantityItems && (
+                <Badge className='rounded-full absolute mb-8 mr-8 bg-secondary'>
+                  <p className='leading-4 font-semibold text-secondary-foreground'>
+                    {cart.quantityItems > 0 && cart.quantityItems}
+                  </p>
+                </Badge>
+              )}
             </div>
 
             <div

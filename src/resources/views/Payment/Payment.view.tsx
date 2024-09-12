@@ -1,12 +1,16 @@
 import { FiEdit } from 'react-icons/fi';
 import { useNavigate } from 'react-router-dom';
 
+import { useCartContext } from '@/app/contexts';
 import { Content } from '@/resources/components/global';
 import { DefaultPageWrapper } from '@/resources/components/layouts';
 import { Button, Separator } from '@/resources/components/ui';
+import { Currency } from '@/shared/utils/format';
 
 export function PaymentView(): JSX.Element {
   const navigate = useNavigate();
+
+  const { cart } = useCartContext();
 
   return (
     <DefaultPageWrapper>
@@ -22,12 +26,22 @@ export function PaymentView(): JSX.Element {
                 <h2 className='font-medium'>Resumo da compra</h2>
                 <div className='flex items-center justify-between'>
                   <span className='font-bold text-secondary-foreground'>
-                    Total: R$ 120,00
+                    Total:{' '}
+                    {Currency.format(
+                      'BRL',
+                      cart.amountTotal + cart.fareTotal,
+                      true
+                    )}
                   </span>
-                  <span className='font-bold text-primary'>Items: 3</span>
+                  <span className='font-bold text-primary'>
+                    Items: {cart.quantityItems}
+                  </span>
                 </div>
               </div>
-              <Button className='flex items-center gap-2'>
+              <Button
+                className='flex items-center gap-2'
+                onClick={() => navigate('/cart')}
+              >
                 <p className='text-sm'>Editar</p>
                 <FiEdit className='text-sm' />
               </Button>

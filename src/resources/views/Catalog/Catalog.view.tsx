@@ -8,8 +8,6 @@ import { DefaultClientWrapper } from '@/resources/components/layouts';
 export function CatalogView(): JSX.Element {
   const { productList, isLoadingProducts } = useGetProductList({ limit: 5 });
 
-  console.log(productList);
-
   return (
     <DefaultClientWrapper>
       <div className='flex flex-col mb-36 w-full'>
@@ -25,18 +23,8 @@ export function CatalogView(): JSX.Element {
 
           {productList?.map((product, index) => (
             <ProductCard
-              avaliable={product.avaliable}
-              isDiscount={product.isDiscount}
-              isAvaliable={product.isAvaliable}
-              title={product.title}
-              subTitle={product.subTitle}
-              quantity={product.quantity}
-              minQuantity={product.minQuantity}
-              price={product.price}
-              discount={product.discount}
-              key={index}
-              resource={product.resource}
-              images={product.images}
+              product={product}
+              key={`${product.id}-${index}`}
             />
           ))}
         </div>

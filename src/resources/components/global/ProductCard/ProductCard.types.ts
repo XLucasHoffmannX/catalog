@@ -2,4 +2,6 @@
 
 import { IProductClient } from '@/shared/types';
 
-export interface IProductCardProps extends IProductClient {}
+export interface IProductCardProps {
+  product: IProductClient;
+}
