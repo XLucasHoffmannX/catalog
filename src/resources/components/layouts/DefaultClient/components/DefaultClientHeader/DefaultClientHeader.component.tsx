@@ -10,7 +10,7 @@ import { TbFilterSearch } from 'react-icons/tb';
 import { useNavigate } from 'react-router-dom';
 
 import { useCartContext } from '@/app/contexts';
-import { useGetClient } from '@/app/modules/client';
+import { useGetClient } from '@/app/modules/client/products';
 import { Avatar, AvatarImage, Badge, Input } from '@/resources/components/ui';
 import { useTheme } from '@/shared/styles/theme/theme-provider';
 

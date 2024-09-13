@@ -2,6 +2,7 @@ export interface IClient {
   clientName: string;
   clientLogo: string;
   clientDescription: string;
+  titleHmtl: string;
   clientDomain: string;
   token: string;
   clientBackground?: string;
@@ -31,4 +32,10 @@ export interface ICartItemClient extends IProductClient {
   uuidControl: string;
   quantityCart?: number;
   dateAdd: string;
+}
+
+export interface ICategoriesClient {
+  name: string;
+  defaultIcon: string;
+  icon: string | null;
 }

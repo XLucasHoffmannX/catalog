@@ -10,6 +10,7 @@ export async function useGetDomainMock(
   const data: IGetDomain = {
     client: {
       clientDescription: 'Levar a moda da rua para fora dela.',
+      titleHmtl: 'Jhon Roger',
       clientDomain: payload.domain,
       clientLogo:
         'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS8GcwXkYZrbCU7lvGmBQyZHDu_KiwX-aKH5Q&s',
@@ -83,5 +84,5 @@ export async function useGetDomainMock(
 
   await MockApi.sleep(500);
 
-  return payload.domain === 'localhost' ? data : null;
+  return payload.domain === 'client.localhost' ? data : null;
 }

@@ -70,14 +70,14 @@ export function CartView(): JSX.Element {
               {!items?.length && (
                 <div className='flex flex-col items-center justify-center mt-12 w-full gap-3'>
                   <p className='font-medium text-lg'>
-                    Não itens no seu carrinho.
+                    Não há itens no seu carrinho.
                   </p>
                   <div className='w-[200px]  h-[200px] mt-4'>
                     <Lottie options={defaultOptions} />
                   </div>
                   <Link
                     to='/'
-                    className='font-medium text-lg text-blue-500 underline leading-3'
+                    className='font-medium text-lg text-blue-500 underline leading-3 mt-4'
                   >
                     Voltar para a loja
                   </Link>

@@ -1,6 +1,6 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
-import { RouterBrowser } from '@/app/routes';
+import { Router } from '@/app/routes/Router';
 import { Toaster } from '@/resources/components/ui';
 import { ThemeProvider } from '@/shared/styles/theme';
 
@@ -23,8 +23,7 @@ export function App(): JSX.Element {
       storageKey='vite-ui-theme'
     >
       <QueryClientProvider client={queryClient}>
-        <RouterBrowser />
-
+        <Router />
         <Toaster
           richColors
           position='top-center'

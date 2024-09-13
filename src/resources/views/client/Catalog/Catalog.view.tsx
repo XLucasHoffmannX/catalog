@@ -1,4 +1,4 @@
-import { useGetProductList } from '@/app/modules/client';
+import { useGetProductList } from '@/app/modules/client/products';
 import {
   ProductCard,
   ProductCardSkeleton

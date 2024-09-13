@@ -3,7 +3,7 @@ import { ReactNode } from 'react';
 import { FaUser } from 'react-icons/fa';
 import { MdLocationPin } from 'react-icons/md';
 
-import { useGetClient } from '@/app/modules/client';
+import { useGetClient } from '@/app/modules/client/products';
 
 export function DefaultPageWrapper({
   children

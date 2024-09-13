@@ -2,16 +2,20 @@ import { useEffect } from 'react';
 
 import { Outlet } from 'react-router-dom';
 
-import { useGetClient } from '@/app/modules/client';
+import { useGetClient } from '@/app/modules/client/products';
 import { SplashScreen } from '@/resources/components/global';
 import { useTheme } from '@/shared/styles/theme/theme-provider';
 
 export function ClientThemeMiddleware(): JSX.Element {
   const { theme } = useTheme();
 
-  const { theme: themeClient, isLoading } = useGetClient();
+  const { theme: themeClient, isLoading, client } = useGetClient();
 
   useEffect(() => {
+    if (client?.titleHmtl && client?.titleHmtl !== '') {
+      document.title = client.titleHmtl;
+    }
+
     const root = document.documentElement;
 
     const themeVariables = themeClient;

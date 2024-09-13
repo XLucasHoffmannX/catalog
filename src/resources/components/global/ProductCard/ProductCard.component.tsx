@@ -112,7 +112,7 @@ export function ProductCard({ product }: IProductCardProps): JSX.Element {
             </Button>
 
             <Button
-              className='w-full text-primary bg-white hover:text-white border border-primary'
+              className='w-full hover:text-primary hover:bg-white'
               onClick={() => {
                 if (product.isDiscount && product.discount) {
                   handleSetCartItem({
