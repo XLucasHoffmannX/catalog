@@ -1,4 +1,4 @@
-import { ClientRouter, LandingRouter, ManagementRouter } from './routes';
+import { ClientRouter, ManagementRouter, PublicRouter } from './routes';
 
 export const domain = [
   {
@@ -13,7 +13,7 @@ export const domain = [
   },
   {
     subdomain: '',
-    app: LandingRouter,
+    app: PublicRouter,
     main: true
   }
 ];

@@ -1,6 +1,6 @@
-export function useAnimationLottie(file: unknown) {
+export function useAnimationLottie(file: unknown, loop?: boolean) {
   return {
-    loop: true,
+    loop: loop,
     autoplay: true,
     animationData: file,
     rendererSettings: {

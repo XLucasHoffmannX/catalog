@@ -1,6 +1,6 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
-import { Router } from '@/app/routes/Router';
+import { Router } from '@/app/router/Router';
 import { Toaster } from '@/resources/components/ui';
 import { ThemeProvider } from '@/shared/styles/theme';
 
@@ -24,6 +24,7 @@ export function App(): JSX.Element {
     >
       <QueryClientProvider client={queryClient}>
         <Router />
+
         <Toaster
           richColors
           position='top-center'

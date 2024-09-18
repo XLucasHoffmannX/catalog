@@ -18,7 +18,7 @@ export async function useGetDomainMock(
       token: faker.string.uuid(),
       useBackgroundDefaultPage: false,
       clientBackground:
-        'https://scontent.fldb10-1.fna.fbcdn.net/v/t39.30808-6/439979087_7430909733661670_8943930251751380713_n.jpg?stp=dst-jpg_s960x960&_nc_cat=101&ccb=1-7&_nc_sid=cc71e4&_nc_ohc=dchlE44gPa0Q7kNvgFJosxq&_nc_ht=scontent.fldb10-1.fna&_nc_gid=AnmxPS6jyBTgN65bNfDcDqb&oh=00_AYDRHxW2eYf5_RM4sECfaI7yxESxr-7jLbumvY-Ac0mkZQ&oe=66E6A3EA'
+        'https://scontent.fldb10-1.fna.fbcdn.net/v/t39.30808-6/439979087_7430909733661670_8943930251751380713_n.jpg?stp=dst-jpg_s960x960&_nc_cat=101&ccb=1-7&_nc_sid=cc71e4&_nc_ohc=noa41nNvRxkQ7kNvgHtrtnQ&_nc_ht=scontent.fldb10-1.fna&_nc_gid=AAgLcoKb8kmOPhPb6b8fxl1&oh=00_AYAGk5JR3PQkVp6rzeNnAR8m40kdtiNqybFiTN34Wer4rA&oe=66EE8CEA'
     },
     theme: {
       header: {
