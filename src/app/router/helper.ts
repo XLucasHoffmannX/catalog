@@ -23,6 +23,7 @@ export function useGetSubdomain(loc: string) {
   const isLocalHost = locationParts.slice(-1)[0] === 'localhost';
 
   if (isLocalHost && locationParts.length > 1) {
+    console.log('entrei');
     return locationParts.slice(0, -1).join('');
   }
 

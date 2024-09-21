@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 import { useCartContext } from '@/app/contexts';
 import { Content } from '@/resources/components/global';
-import { DefaultPageWrapper } from '@/resources/components/layouts';
+import { DefaultPageWrapper } from '@/resources/components/layouts/client';
 import { Input } from '@/resources/components/ui';
 import EmptyAnimation from '@/shared/assets/animations/empty-list-anm.json';
 import { useAnimationLottie } from '@/shared/hooks/useAnimationLottie';
@@ -69,8 +69,8 @@ export function CartView(): JSX.Element {
 
               {!items?.length && (
                 <div className='flex flex-col items-center justify-center mt-12 w-full gap-3'>
-                  <p className='font-medium text-lg'>
-                    Não há itens no seu carrinho.
+                  <p className='font-medium text-lg text-center'>
+                    Não há itens no seu carrinho ou produto não encontrado.
                   </p>
                   <div className='w-[200px]  h-[200px] mt-4'>
                     <Lottie options={defaultOptions} />

@@ -1,4 +1,4 @@
-import { type MaskType } from 'data/modules/global';
+import { MaskType } from '@/shared/types';
 
 class Mask {
   apply(mask?: MaskType, value?: string | null): string {

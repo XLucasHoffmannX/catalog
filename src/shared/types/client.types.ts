@@ -39,3 +39,13 @@ export interface ICategoriesClient {
   defaultIcon: string;
   icon: string | null;
 }
+
+export interface IAddressClient {
+  postalCode: string;
+  street: string;
+  number: string;
+  complement?: string;
+  neighborhood: string;
+  city: string;
+  state: string;
+}

@@ -5,7 +5,7 @@ import {
   CardHeader
 } from '@/resources/components/ui/card';
 
-import { Skeleton } from '../../ui';
+import { Skeleton } from '../../../ui';
 
 export function ProductCardSkeleton(): JSX.Element {
   return (

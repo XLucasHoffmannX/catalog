@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 
 import { useCartContext } from '@/app/contexts';
 import { Content } from '@/resources/components/global';
-import { DefaultPageWrapper } from '@/resources/components/layouts';
+import { DefaultPageWrapper } from '@/resources/components/layouts/client';
 import { Button, Separator } from '@/resources/components/ui';
 import { Currency } from '@/shared/utils/format';
 

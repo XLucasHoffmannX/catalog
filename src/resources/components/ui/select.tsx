@@ -112,11 +112,13 @@ const SelectLabel = React.forwardRef<
   React.ComponentPropsWithoutRef<typeof SelectPrimitive.Label>
   // eslint-disable-next-line react/prop-types
 >(({ className, ...props }, ref) => (
-  <SelectPrimitive.Label
-    ref={ref}
-    className={cn('px-2 py-1.5 text-sm font-semibold', className)}
-    {...props}
-  />
+  <>
+    <SelectPrimitive.Label
+      ref={ref}
+      className={cn('px-2 py-1.5 text-sm font-semibold', className)}
+      {...props}
+    />
+  </>
 ));
 SelectLabel.displayName = SelectPrimitive.Label.displayName;
 

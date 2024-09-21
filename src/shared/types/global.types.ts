@@ -8,3 +8,28 @@ export type CurrencyOptionsType = {
 } | null;
 
 export type CurrencyType = 'BRL' | 'USD' | 'EUR';
+
+export interface ISelectOption {
+  value: string;
+  label: string;
+}
+
+export type MaskType =
+  | 'phone'
+  | 'cpf'
+  | 'cnpj'
+  | 'date'
+  | 'currency'
+  | 'numeric'
+  | 'cep'
+  | 'integer'
+  | 'letters'
+  | 'alphanumeric'
+  | 'alphanumericWithAccents'
+  | 'negative-currency'
+  | 'cnae'
+  | 'negative-currency'
+  | 'legalNature'
+  | 'cpf-cnpj'
+  | 'credit-card'
+  | 'date-mm/yy';

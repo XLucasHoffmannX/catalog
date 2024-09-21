@@ -1,7 +1,7 @@
 import { LuBan } from 'react-icons/lu';
 import { Link } from 'react-router-dom';
 
-import { Button } from '../../ui';
+import { Button } from '../../../ui';
 
 import { IErrorScreenProps } from './ErrorScreen.types';
 

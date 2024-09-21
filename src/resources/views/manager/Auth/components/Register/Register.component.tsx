@@ -22,11 +22,12 @@ export function Register(): JSX.Element {
           <div className='flex flex-col gap-2'>
             <Label className='text-base'>Nome completo</Label>
             <Controller
-              name='email'
+              name='name'
               control={methods.control}
               render={({ field }) => (
                 <Input
                   {...field}
+                  value={field.value ?? ''}
                   className='col-span-3 h-[50px] rounded-xl bg-white text-black'
                   errorMessage={errors.name?.message}
                   placeholder='Insira seu nome completo'
@@ -42,6 +43,7 @@ export function Register(): JSX.Element {
               render={({ field }) => (
                 <Input
                   {...field}
+                  value={field.value ?? ''}
                   className='col-span-3 h-[50px] rounded-xl bg-white text-black'
                   errorMessage={errors.email?.message}
                   placeholder='Insira seu melhor email'
@@ -57,6 +59,7 @@ export function Register(): JSX.Element {
               render={({ field }) => (
                 <PasswordInput
                   {...field}
+                  value={field.value ?? ''}
                   className='col-span-3 h-[50px] rounded-xl bg-white text-black'
                   errorMessage={errors.password?.message}
                   iconOn='text-primary'
@@ -69,11 +72,12 @@ export function Register(): JSX.Element {
           <div className='flex flex-col gap-2'>
             <Label className='text-base'>Confirmar senha</Label>
             <Controller
-              name='password'
+              name='confirmPassword'
               control={methods.control}
               render={({ field }) => (
                 <PasswordInput
                   {...field}
+                  value={field.value ?? ''}
                   className='col-span-3 h-[50px] rounded-xl bg-white text-black'
                   errorMessage={errors.confirmPassword?.message}
                   iconOn='text-primary'

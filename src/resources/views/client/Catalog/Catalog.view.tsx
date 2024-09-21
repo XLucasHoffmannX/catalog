@@ -3,7 +3,7 @@ import {
   ProductCard,
   ProductCardSkeleton
 } from '@/resources/components/global';
-import { DefaultClientWrapper } from '@/resources/components/layouts';
+import { DefaultClientWrapper } from '@/resources/components/layouts/client';
 
 export function CatalogView(): JSX.Element {
   const { productList, isLoadingProducts } = useGetProductList({ limit: 5 });

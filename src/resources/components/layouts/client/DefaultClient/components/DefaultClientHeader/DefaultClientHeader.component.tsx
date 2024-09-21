@@ -3,7 +3,6 @@ import { FaUser } from 'react-icons/fa';
 import { HiShoppingBag } from 'react-icons/hi2';
 import { IoLogoWhatsapp } from 'react-icons/io';
 import { IoMenu } from 'react-icons/io5';
-import { MdLocationPin } from 'react-icons/md';
 import { MdDarkMode } from 'react-icons/md';
 import { MdOutlineLightMode } from 'react-icons/md';
 import { TbFilterSearch } from 'react-icons/tb';
@@ -53,14 +52,6 @@ export function DefaultClientHeader({
             <div className='bg-secondary p-2 rounded-lg flex gap-2 items-center justify-center cursor-pointer'>
               <FaUser className='text-primary text-sm' />
               <p className='leading-4 text-sm font-semibold'>Entrar</p>
-            </div>
-
-            <div className='bg-secondary p-2 rounded-lg flex gap-2 items-center justify-center cursor-pointer'>
-              <MdLocationPin className='text-primary text-lg ' />
-
-              <p className='leading-4 text-sm font-semibold max-w-[80px] truncate'>
-                Minha localização
-              </p>
             </div>
           </div>
 

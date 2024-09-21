@@ -17,8 +17,6 @@ const PasswordInput = forwardRef<HTMLInputElement, IPasswordInputProps>(
   ({ className, errorMessage, iconOn, iconOff, ...props }, ref) => {
     const [showPassword, setShowPassword] = useState(false);
 
-    console.log(props.value);
-
     const disabled =
       props.value === '' || props.value === undefined || props.disabled;
 

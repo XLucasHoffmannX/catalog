@@ -21,7 +21,7 @@ import {
 } from '@/resources/components/ui/carousel';
 import { Currency } from '@/shared/utils/format';
 
-import { ImageWithLoader } from '../';
+import { ImageWithLoader } from '../..';
 
 import { IProductCardProps } from './ProductCard.types';
 
