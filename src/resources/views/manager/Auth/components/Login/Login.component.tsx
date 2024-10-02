@@ -1,12 +1,26 @@
-import { Controller } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 
-import { Button, Input, Label, PasswordInput } from '@/resources/components/ui';
+import {
+  Button,
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  Input,
+  PasswordInput
+} from '@/resources/components/ui';
 
 import { useLogin } from './useLogin';
 
 export function Login(): JSX.Element {
-  const { errors, handleSubmit, methods, disabledContinue } = useLogin();
+  const {
+    errors,
+    handleSubmit,
+    methods,
+    disabledContinue,
+    isPendingMutateAuth
+  } = useLogin();
 
   return (
     <div className='animate-up'>
@@ -14,69 +28,83 @@ export function Login(): JSX.Element {
         Insira seus dados abaixo para continuar gerenciando seu negócio.
       </p>
 
-      <form
-        className='flex flex-col gap-6'
-        onSubmit={handleSubmit}
-      >
-        <div className='flex flex-col gap-5 p-1'>
-          <div className='flex flex-col gap-2'>
-            <Label className='text-base'>Email</Label>
-            <Controller
-              name='email'
+      <Form {...methods}>
+        <form
+          className='flex flex-col gap-6'
+          onSubmit={handleSubmit}
+        >
+          <div className='flex flex-col gap-5 p-1'>
+            <FormField
               control={methods.control}
+              name='login'
               render={({ field }) => (
-                <Input
-                  {...field}
-                  className='col-span-3 h-[50px] rounded-xl bg-white text-black'
-                  errorMessage={errors.email?.message}
-                />
+                <FormItem>
+                  <FormLabel className='text-base'>Usuário ou email</FormLabel>
+
+                  <FormControl>
+                    <Input
+                      {...field}
+                      className='col-span-3 h-[50px] rounded-xl bg-white text-black'
+                      placeholder='Insira seu email'
+                      errorMessage={errors.login?.message}
+                      value={field.value || ''}
+                    />
+                  </FormControl>
+                </FormItem>
               )}
             />
-          </div>
-          <div className='flex flex-col gap-2'>
-            <Label className='text-base'>Senha</Label>
-            <Controller
+
+            <FormField
+              control={methods.control}
               name='password'
-              control={methods.control}
               render={({ field }) => (
-                <PasswordInput
-                  {...field}
-                  className='col-span-3 h-[50px] rounded-xl bg-white text-black'
-                  errorMessage={errors.password?.message}
-                  iconOn='text-primary'
-                  iconOff='text-primary'
-                />
+                <FormItem>
+                  <FormLabel className='text-base'>Senha</FormLabel>
+
+                  <FormControl>
+                    <PasswordInput
+                      {...field}
+                      className='col-span-3 h-[50px] rounded-xl bg-white text-black'
+                      errorMessage={errors.password?.message}
+                      iconOn='text-primary'
+                      iconOff='text-primary'
+                      placeholder='Sua senha'
+                      value={field.value || ''}
+                    />
+                  </FormControl>
+                </FormItem>
               )}
             />
+
+            <p className='text-muted font-medium text-neutral-400 text-base text-center'>
+              <Link
+                to='/register'
+                className='underline'
+              >
+                Esqueceu a senha ?
+              </Link>
+            </p>
           </div>
 
-          <p className='text-muted font-medium text-neutral-600 text-base text-center'>
+          <Button
+            className='hover:scale-105 h-[50px] transition-all duration-300 flex items-center justify-center gap-[8px] px-[24px] rounded-full transform active:scale-90 hover:opacity-[80%] w-full'
+            type='submit'
+            disabled={disabledContinue}
+            isLoading={isPendingMutateAuth}
+          >
+            Entrar
+          </Button>
+          <p className='text-muted font-medium text-neutral-400 text-base text-center'>
+            Não possui uma conta ainda? {''}
             <Link
               to='/register'
               className='underline'
             >
-              Esqueceu a senha ?
+              Cadastre-se aqui.
             </Link>
           </p>
-        </div>
-
-        <Button
-          className='hover:scale-105 h-[50px] transition-all duration-300 flex items-center justify-center gap-[8px] px-[24px] rounded-full transform active:scale-90 hover:opacity-[80%] w-full'
-          type='submit'
-          disabled={disabledContinue}
-        >
-          Entrar
-        </Button>
-        <p className='text-muted font-medium text-neutral-600 text-base text-center'>
-          Não possui uma conta ainda? {''}
-          <Link
-            to='/register'
-            className='underline'
-          >
-            Cadastre-se aqui.
-          </Link>
-        </p>
-      </form>
+        </form>
+      </Form>
     </div>
   );
 }

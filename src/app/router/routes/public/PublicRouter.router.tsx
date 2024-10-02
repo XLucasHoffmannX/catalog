@@ -1,7 +1,8 @@
 import { Route, Routes } from 'react-router-dom';
 
+import { AutManagementhMiddleware } from '@/app/middlewares';
 import { FallbackError } from '@/resources/components/manager';
-import { AuthView } from '@/resources/views/manager';
+import { AuthView, HomeView } from '@/resources/views/manager';
 
 export function PublicRouter(): JSX.Element {
   return (
@@ -20,6 +21,16 @@ export function PublicRouter(): JSX.Element {
         path='/register'
         element={<AuthView context='register' />}
       />
+
+      <Route
+        key='private-routes'
+        element={<AutManagementhMiddleware />}
+      >
+        <Route
+          path='/home'
+          element={<HomeView />}
+        />
+      </Route>
 
       <Route
         path='*'

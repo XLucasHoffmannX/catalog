@@ -7,7 +7,8 @@ export default defineConfig({
   plugins: [react(), tsconfigPaths()],
   server: {
     open: '/',
-    host: true
+    host: true,
+    port: 4200
   },
   resolve: {
     alias: {

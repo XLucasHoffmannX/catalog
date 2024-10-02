@@ -4,6 +4,7 @@ import * as React from 'react';
 
 import { Slot } from '@radix-ui/react-slot';
 import { cva, type VariantProps } from 'class-variance-authority';
+import { LuLoader2 } from 'react-icons/lu';
 
 import { cn } from '@/shared/lib/utils';
 
@@ -41,11 +42,25 @@ export interface IButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>,
     VariantProps<typeof buttonVariants> {
   asChild?: boolean;
+  isLoading?: boolean;
 }
 
 const Button = React.forwardRef<HTMLButtonElement, IButtonProps>(
-  ({ className, variant, size, asChild = false, ...props }, ref) => {
+  ({ className, variant, size, asChild = false, isLoading, ...props }, ref) => {
     const Comp = asChild ? Slot : 'button';
+
+    if (isLoading)
+      return (
+        <button
+          className={cn(buttonVariants({ variant, size, className }))}
+          ref={ref}
+          {...props}
+          disabled={isLoading}
+        >
+          <LuLoader2 className='animate-spin text-xl' />
+        </button>
+      );
+
     return (
       <Comp
         className={cn(buttonVariants({ variant, size, className }))}

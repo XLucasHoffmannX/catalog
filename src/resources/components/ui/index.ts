@@ -4,6 +4,7 @@ export * from './badge';
 export * from './button';
 export * from './dialog';
 export * from './drawer';
+export * from './form';
 export * from './input';
 export * from './label';
 export * from './password-input';
