@@ -4,3 +4,4 @@ export { ImageWithLoader } from './client/ImageWithLoader/ImageWithLoader.compon
 export { ProductCard } from './client/ProductCard/ProductCard.component';
 export { ProductCardSkeleton } from './client/ProductCardSkeleton/ProductCardSkeleton.component';
 export { SplashScreen } from './client/SplashScreen/SplashScreen.component';
+export { ThemeModeToggle } from './ThemeModeToggle/ThemeModeToggle.component';

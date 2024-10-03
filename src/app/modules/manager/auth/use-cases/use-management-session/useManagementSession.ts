@@ -14,6 +14,6 @@ export function useManagementSession() {
     authenticated: !!token,
     userAuthenticated,
     handleLogout,
-    isOwner: userAuthenticated?.role === 'ADMIN'
+    isManager: userAuthenticated?.role === 'ADMIN'
   };
 }

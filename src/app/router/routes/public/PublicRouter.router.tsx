@@ -2,7 +2,12 @@ import { Route, Routes } from 'react-router-dom';
 
 import { AutManagementhMiddleware } from '@/app/middlewares';
 import { FallbackError } from '@/resources/components/manager';
-import { AuthView, HomeView } from '@/resources/views/manager';
+import {
+  AddProductView,
+  AuthView,
+  HomeView,
+  ProductsView
+} from '@/resources/views/manager';
 
 export function PublicRouter(): JSX.Element {
   return (
@@ -29,6 +34,16 @@ export function PublicRouter(): JSX.Element {
         <Route
           path='/home'
           element={<HomeView />}
+        />
+
+        <Route
+          path='/products'
+          element={<ProductsView />}
+        />
+
+        <Route
+          path='/add-product'
+          element={<AddProductView />}
         />
       </Route>
 

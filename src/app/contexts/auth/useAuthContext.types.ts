@@ -1,3 +1,5 @@
+import { IUser } from '@/shared/types';
+
 export type ITokenType = {
   exp: number;
   sub: string;
@@ -8,8 +10,8 @@ export type ITokenType = {
 };
 
 export interface IUseAuthContext {
-  userAuthenticated: ITokenType | null;
+  userAuthenticated: IUser | null;
   expiresIn: number | null;
-  handleSetUserAuth: (token: string) => void;
+  handleSetUserAuth: (token: string, user?: IUser) => void;
   handleLogout: () => void;
 }

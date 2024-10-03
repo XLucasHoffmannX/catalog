@@ -14,7 +14,7 @@ export const HttpManagerAuth = axios.create({
 });
 
 HttpManagerAuth.interceptors.request.use(config => {
-  config.headers.authorization = Cookies.get('access-token');
+  config.headers.Authorization = `Bearer ${Cookies.get('access-token')}`;
   return config;
 });
 

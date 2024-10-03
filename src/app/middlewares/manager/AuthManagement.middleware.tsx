@@ -5,6 +5,7 @@ import { Navigate, Outlet } from 'react-router-dom';
 import { useShallow } from 'zustand/react/shallow';
 
 import { useAuthContext } from '@/app/contexts/auth/useAuth.context';
+import { useGetValidateAuth } from '@/app/modules/manager/auth/use-cases';
 import { useManagementSession } from '@/app/modules/manager/auth/use-cases/use-management-session/useManagementSession';
 
 export function AutManagementhMiddleware(): JSX.Element {
@@ -16,14 +17,21 @@ export function AutManagementhMiddleware(): JSX.Element {
     useShallow(state => [state.userAuthenticated, state.handleSetUserAuth])
   );
 
-  useEffect(() => {
-    console.log(token);
-    console.log('user', userAuthenticated);
+  const { cachedUserLogged, isLoadingUserLogged } = useGetValidateAuth({
+    enabled: !!token
+  });
 
-    if (token && !userAuthenticated) {
-      handleSetUserAuth(token);
+  useEffect(() => {
+    if (token && !userAuthenticated && !isLoadingUserLogged) {
+      handleSetUserAuth(token, cachedUserLogged);
     }
-  }, [token, userAuthenticated, handleSetUserAuth]);
+  }, [
+    token,
+    userAuthenticated,
+    handleSetUserAuth,
+    isLoadingUserLogged,
+    cachedUserLogged
+  ]);
 
   if (!authenticated) {
     return <Navigate to='/' />;

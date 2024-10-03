@@ -9,7 +9,7 @@ export const useAuthContext = create<IUseAuthContext>()(set => ({
   userAuthenticated: null,
   expiresIn: null,
 
-  handleSetUserAuth: token => {
+  handleSetUserAuth: (token, user) => {
     if (token) {
       const decoded: ITokenType = jwtDecode(token);
 
@@ -17,7 +17,9 @@ export const useAuthContext = create<IUseAuthContext>()(set => ({
         expires: decoded.exp
       });
 
-      set({ userAuthenticated: decoded });
+      if (user) {
+        set({ userAuthenticated: user });
+      }
 
       if (decoded) {
         return set({ expiresIn: decoded.exp });
