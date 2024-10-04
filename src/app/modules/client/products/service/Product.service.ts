@@ -1,4 +1,6 @@
+import { HttpManagerAuth } from '@/app/api';
 import { env } from '@/app/config';
+import { IPaginatedResponse, IProductManager } from '@/shared/types';
 
 import { useGetProductListMock } from '../mocks';
 
@@ -7,7 +9,7 @@ import {
   IGetProductListPayload
 } from '../types/product.types';
 
-export class Product {
+export class ProductService {
   async getProductList(
     payload: IGetProductListPayload
   ): Promise<IGetProductList | null> {
@@ -17,5 +19,14 @@ export class Product {
 
     return null;
   }
+
+  async getProductManagerList() {
+    const { data } = await HttpManagerAuth.get<
+      IPaginatedResponse<IProductManager>
+    >('/api/products');
+
+    return data;
+  }
 }
-export default new Product();
+
+export default new ProductService();

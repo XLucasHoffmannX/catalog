@@ -17,7 +17,7 @@ export interface IProductClient {
   title: string;
   subTitle?: string;
   quantity: number;
-  isLastUnits?: boolean /* mostrar icon de ultimas undades */;
+  isLastUnits?: boolean /* mostrar icon de ultimas unidades */;
   minQuantity?: number;
   price: number;
   isDiscount?: boolean /* mostrar icon de desconto */;

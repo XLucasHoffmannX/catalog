@@ -1,11 +1,24 @@
+import { useEffect } from 'react';
+
 import { LuListChecks } from 'react-icons/lu';
 import { TbZoomMoney } from 'react-icons/tb';
 
+import ProductService from '@/app/modules/client/products/service/Product.service';
 import { ManagerDefaultLayoutWrapper } from '@/resources/components/layouts/manager';
 
 import { CardDahsboard, ChartDashboard } from './components';
 
 export function HomeView(): JSX.Element {
+  useEffect(() => {
+    async function getProduct() {
+      const res = ProductService.getProductManagerList();
+
+      console.log(res);
+    }
+
+    getProduct();
+  }, []);
+
   return (
     <ManagerDefaultLayoutWrapper>
       <section className='w-full flex justify-center p-4'>

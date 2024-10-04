@@ -19,3 +19,7 @@ export interface IUseGetProductList {
   isLoadingProducts: boolean;
 }
 /*  */
+
+export interface IGetProductManagerListPayload {
+  size: number;
+}

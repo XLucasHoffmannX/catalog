@@ -1,7 +1,7 @@
 import {
-  type IPersistenceViaCepAddress,
-  type IViaCepAddress
-} from 'data/modules/global';
+  IPersistenceViaCepAddress,
+  IViaCepAddress
+} from '../../types/global.types';
 
 class GetViaCepAddressByPostalCodeMapper {
   toDomain(persistenceAddress: IPersistenceViaCepAddress): IViaCepAddress {

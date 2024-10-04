@@ -33,3 +33,32 @@ export type MaskType =
   | 'cpf-cnpj'
   | 'credit-card'
   | 'date-mm/yy';
+
+interface IPaginatedSort {
+  empty: boolean;
+  unsorted: boolean;
+  sorted: boolean;
+}
+
+interface IPaginatedPageable {
+  pageNumber: number;
+  pageSize: number;
+  sort: IPaginatedSort;
+  offset: number;
+  unpaged: boolean;
+  paged: boolean;
+}
+
+export interface IPaginatedResponse<T> {
+  totalPages: number;
+  totalElements: number;
+  size: number;
+  content: T;
+  number: number;
+  sort: IPaginatedPageable;
+  numberOfElements: number;
+  pageable: IPaginatedSort;
+  first: boolean;
+  last: boolean;
+  empty: boolean;
+}
