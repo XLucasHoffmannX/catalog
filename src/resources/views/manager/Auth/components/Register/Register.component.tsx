@@ -90,7 +90,7 @@ export function Register(): JSX.Element {
         </div>
 
         <Button
-          className='hover:scale-105 h-[50px] transition-all duration-300 flex items-center justify-center gap-[8px] px-[24px] rounded-full transform active:scale-90 hover:opacity-[80%] w-full'
+          className='text-white hover:scale-105 h-[50px] transition-all duration-300 flex items-center justify-center gap-[8px] px-[24px] rounded-full transform active:scale-90 hover:opacity-[80%] w-full'
           type='submit'
         >
           Cadastrar

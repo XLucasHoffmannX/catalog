@@ -43,12 +43,12 @@ export function AuthView({ context }: IAuthProps): JSX.Element {
                   </p>
                   <div className='flex flex-col gap-5  mt-[34px]'>
                     <Link to='/login'>
-                      <Button className='hover:scale-105 h-[50px] transition-all duration-300 flex items-center justify-center gap-[8px] px-[24px] rounded-full transform active:scale-90 hover:opacity-[80%] w-full'>
+                      <Button className='text-white hover:scale-105 h-[50px] transition-all duration-300 flex items-center justify-center gap-[8px] px-[24px] rounded-full transform active:scale-90 hover:opacity-[80%] w-full'>
                         Entrar
                       </Button>
                     </Link>
                     <Link to='/register'>
-                      <Button className='hover:scale-105 bg-transparent h-[50px] transition-all duration-300 flex items-center justify-center gap-[8px] px-[24px] border rounded-full transform active:scale-90 hover:opacity-[80%] w-full'>
+                      <Button className='text-white hover:scale-105 bg-transparent h-[50px] transition-all duration-300 flex items-center justify-center gap-[8px] px-[24px] border rounded-full transform active:scale-90 hover:opacity-[80%] w-full'>
                         Cadastre-se
                       </Button>
                     </Link>

@@ -8,9 +8,10 @@ import { CardDahsboard, ChartDashboard } from './components';
 export function HomeView(): JSX.Element {
   return (
     <ManagerDefaultLayoutWrapper>
-      <section className='p-4 w-full flex justify-center'>
+      <section className='w-full flex justify-center p-4'>
         <div className='max-w-[1280px]'>
           <h1 className='font-bold text-3xl'>Dashboard</h1>
+
           <sub className='font-light text-sm'>
             Informações gerais de suas lojas
           </sub>

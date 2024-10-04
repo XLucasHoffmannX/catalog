@@ -1,11 +1,21 @@
 import { ManagerDefaultLayoutWrapper } from '@/resources/components/layouts/manager';
 import {
+  Button,
   Form,
   FormControl,
   FormField,
   FormItem,
   FormLabel,
   Input,
+  Label,
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+  Separator,
   Textarea
 } from '@/resources/components/ui';
 
@@ -83,6 +93,57 @@ export function AddProductView(): JSX.Element {
                   )}
                 />
               </Form>
+
+              <Separator className='my-2' />
+
+              <div className='flex flex-col'>
+                <Label className='text-base'>Adicionar imagem:</Label>
+                <p className='text-light text-sm mb-2'>
+                  Selecione o formato abaixo:
+                </p>
+                <div className='flex md:flex-nowrap flex-wrap gap-2'>
+                  <Select defaultValue='url'>
+                    <SelectTrigger className='w-full'>
+                      <SelectValue placeholder='Selecione o formato' />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectGroup>
+                        <SelectLabel>Formato:</SelectLabel>
+                        <SelectItem
+                          value='url'
+                          defaultChecked
+                        >
+                          URL
+                        </SelectItem>
+                        <SelectItem value='archive'>Arquivo</SelectItem>
+                      </SelectGroup>
+                    </SelectContent>
+                  </Select>
+
+                  <Input
+                    placeholder='Exemplo: https://picsum.photos/200/300'
+                    type='url'
+                    className='md:w-full '
+                  />
+
+                  <Button
+                    type='button'
+                    variant='outline'
+                    className='md:w-[150px] w-full'
+                  >
+                    Adicionar
+                  </Button>
+                </div>
+
+                <div className='flex flex-row-reverse mt-12'>
+                  <Button
+                    className='hover:scale-105 h-[50px] transition-all duration-300 flex items-center justify-center gap-[8px] px-[24px] transform active:scale-90 hover:opacity-[80%] md:w-[300px] w-full text-white'
+                    type='submit'
+                  >
+                    Salvar produto
+                  </Button>
+                </div>
+              </div>
             </form>
           </div>
         </div>

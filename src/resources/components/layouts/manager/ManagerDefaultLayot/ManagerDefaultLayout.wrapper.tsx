@@ -21,7 +21,7 @@ export function ManagerDefaultLayoutWrapper({
       </div>
 
       <div className='overflow-auto h-full animate-up'>
-        <div className='h-100 w-100 flex flex-col p-4 gap-6 overflow-x-hidden mb-48'>
+        <div className='h-100 w-[98%] flex flex-col gap-6 overflow-x-hidden mb-48 p-4'>
           {children}
         </div>
       </div>

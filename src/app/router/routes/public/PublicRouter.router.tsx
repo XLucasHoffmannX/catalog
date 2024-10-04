@@ -6,6 +6,7 @@ import {
   AddProductView,
   AuthView,
   HomeView,
+  OrdersView,
   ProductsView
 } from '@/resources/views/manager';
 
@@ -44,6 +45,11 @@ export function PublicRouter(): JSX.Element {
         <Route
           path='/add-product'
           element={<AddProductView />}
+        />
+
+        <Route
+          path='/orders'
+          element={<OrdersView />}
         />
       </Route>
 
