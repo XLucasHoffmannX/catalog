@@ -7,18 +7,27 @@ export interface IUser {
   companyId: number;
 }
 
-export interface IProductManagerImage {
+export interface IProductManagerImages {
   id?: number;
+  uuidControl?: string;
   url?: string;
   base64?: string;
   blob?: string[];
 }
 
 export interface IProductManager {
-  id: number;
+  id?: number;
   name: string;
   description: string;
+  subDescription: string;
   price: number;
+  avaliable: string;
+  isAvaliable: boolean;
+  minQuantity: number;
+  isLastUnits: boolean;
+  isDiscount: boolean;
+  discount: number;
+  category: boolean;
   companyId: number;
-  images: IProductManagerImage[];
+  images: IProductManagerImages[] | [];
 }

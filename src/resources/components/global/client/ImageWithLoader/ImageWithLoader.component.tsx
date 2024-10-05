@@ -8,7 +8,8 @@ export function ImageWithLoader({
   src,
   alt,
   maxW,
-  maxH
+  maxH,
+  rounded
 }: IImageWithLoaderProps): JSX.Element {
   const { handleImageLoad, isLoading } = useImageWithLoader();
 
@@ -28,7 +29,7 @@ export function ImageWithLoader({
         alt={alt}
         className={`${maxW ? `w-[${maxW}]` : 'w-[290px]'} ${
           maxH ? `h-[${maxH}]` : 'h-[290px]'
-        } w-full object-cover rounded-2xl ${
+        } w-full object-cover ${rounded ? rounded : 'rounded-2xl'}  ${
           isLoading ? 'opacity-0' : 'opacity-100'
         }`}
         onLoad={handleImageLoad}

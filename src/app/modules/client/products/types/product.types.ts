@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-empty-object-type */
 
-import { IProductClient } from '@/shared/types';
+import { IProductClient, IProductManager } from '@/shared/types';
 
 /* GET_PRODUCT_LIST */
 
@@ -22,4 +22,10 @@ export interface IUseGetProductList {
 
 export interface IGetProductManagerListPayload {
   size: number;
+}
+
+export interface IAddProductManagerPayload extends IProductManager {}
+
+export interface IRemoveProductManagerPayload {
+  id: IProductManager['id'];
 }

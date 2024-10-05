@@ -3,4 +3,5 @@ export interface IImageWithLoaderProps {
   alt: string;
   maxW?: string;
   maxH?: string;
+  rounded?: string;
 }

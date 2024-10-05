@@ -16,5 +16,6 @@ export * from './separator';
 export * from './sheet';
 export * from './skeleton';
 export { Toaster } from './sonner';
+export * from './switch';
 export * from './table';
 export * from './textarea';

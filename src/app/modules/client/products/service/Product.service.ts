@@ -5,8 +5,10 @@ import { IPaginatedResponse, IProductManager } from '@/shared/types';
 import { useGetProductListMock } from '../mocks';
 
 import {
+  IAddProductManagerPayload,
   IGetProductList,
-  IGetProductListPayload
+  IGetProductListPayload,
+  IRemoveProductManagerPayload
 } from '../types/product.types';
 
 export class ProductService {
@@ -22,10 +24,26 @@ export class ProductService {
 
   async getProductManagerList() {
     const { data } = await HttpManagerAuth.get<
-      IPaginatedResponse<IProductManager>
+      IPaginatedResponse<IProductManager[]>
     >('/api/products');
 
     return data;
+  }
+
+  async addProductManager(
+    payload: IAddProductManagerPayload
+  ): Promise<IProductManager> {
+    const { data } = await HttpManagerAuth.post('/api/products', payload);
+
+    return data;
+  }
+
+  async removeProductManager(
+    payload: IRemoveProductManagerPayload
+  ): Promise<null> {
+    await HttpManagerAuth.delete(`/api/products/${payload.id}`);
+
+    return null;
   }
 }
 

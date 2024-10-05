@@ -3,4 +3,9 @@ enum ProductQueryKeys {
   GET_PRODUCT_MANAGER_LIST = 'GET_PRODUCT_MANAGER_LIST'
 }
 
-export { ProductQueryKeys };
+enum ProductMutationKeys {
+  ADD_PRODUCT_MANAGER = 'ADD_PRODUCT_MANAGER',
+  REMOVE_PRODUCT_MANAGER = 'REMOVE_PRODUCT_MANAGER'
+}
+
+export { ProductMutationKeys, ProductQueryKeys };
