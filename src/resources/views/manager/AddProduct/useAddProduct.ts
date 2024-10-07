@@ -39,7 +39,7 @@ export function useAddProduct() {
               images.map(({ uuidControl, ...rest }) => rest)
             : [],
         isAvaliable: false,
-        price: data.price,
+        price: Number(data.price),
         name: data.name,
         discount: data.discount,
         subDescription: data.subDescription,

@@ -20,6 +20,7 @@ import {
   CarouselNext,
   CarouselPrevious
 } from '@/resources/components/ui/carousel';
+import { Currency } from '@/shared/utils/format';
 
 import { useAddProduct } from './useAddProduct';
 
@@ -62,6 +63,7 @@ export function AddProductView(): JSX.Element {
                           <Input
                             {...field}
                             className='h-[50px] rounded'
+                            value={field.value || ''}
                             errorMessage={errors.name?.message}
                           />
                         </FormControl>
@@ -81,9 +83,13 @@ export function AddProductView(): JSX.Element {
                             {...field}
                             className='h-[50px] rounded'
                             errorMessage={errors.price?.message}
-                            type='number'
+                            value={Currency.format(
+                              'BRL',
+                              Number(field.value) || 0,
+                              true
+                            )}
                             onChange={e =>
-                              field.onChange(Number(e.target.value))
+                              field.onChange(Currency.unformat(e.target.value))
                             }
                           />
                         </FormControl>
@@ -132,7 +138,9 @@ export function AddProductView(): JSX.Element {
                     name='discount'
                     render={({ field }) => (
                       <FormItem className='w-full'>
-                        <FormLabel className='text-base'>Desconto</FormLabel>
+                        <FormLabel className='text-base'>
+                          Desconto (%)
+                        </FormLabel>
                         <div className='flex items-center gap-3'>
                           <FormControl>
                             <Input
@@ -140,6 +148,7 @@ export function AddProductView(): JSX.Element {
                               className='h-[50px] rounded'
                               errorMessage={errors.price?.message}
                               type='number'
+                              value={field.value || ''}
                               onChange={e =>
                                 field.onChange(Number(e.target.value))
                               }
@@ -164,6 +173,7 @@ export function AddProductView(): JSX.Element {
                               className='h-[50px] rounded'
                               errorMessage={errors.price?.message}
                               type='number'
+                              value={field.value || ''}
                               onChange={e =>
                                 field.onChange(Number(e.target.value))
                               }

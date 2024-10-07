@@ -1,5 +1,6 @@
 import Lottie from 'react-lottie';
 
+import { RowSkeleton } from '@/resources/components/global';
 import {
   Table,
   TableBody,
@@ -12,7 +13,6 @@ import EmptyAnimation from '@/shared/assets/animations/empty-list-anm.json';
 import { useAnimationLottie } from '@/shared/hooks/useAnimationLottie';
 
 import { ProductTableRow } from '../ProductTableRow/ProductTableRow.component';
-import { RowSkeleton } from '../RowSkeleton/RowSkeleton.component';
 
 import { useTableProduct } from './useTableProducts';
 
