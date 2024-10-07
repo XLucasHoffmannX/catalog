@@ -44,9 +44,9 @@ export function UserPopover(): JSX.Element {
             </Link>
 
             {isManager && (
-              <Link to='/my-account'>
+              <Link to='/manage'>
                 <ItemLabelAndIcon
-                  label='Gerenciar loja'
+                  label='Gerenciar empresa'
                   icon={<RiDashboardLine className='h-4 w-4' />}
                 />
               </Link>

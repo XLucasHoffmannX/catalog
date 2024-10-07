@@ -8,7 +8,7 @@ import { useAuthContext } from '@/app/contexts/auth/useAuth.context';
 import { useGetValidateAuth } from '@/app/modules/manager/auth/use-cases';
 import { useManagementSession } from '@/app/modules/manager/auth/use-cases/use-management-session/useManagementSession';
 
-export function AutManagementhMiddleware(): JSX.Element {
+export function AuthManagementhMiddleware(): JSX.Element {
   const { authenticated } = useManagementSession();
 
   const token = Cookies.get('access-token') as string;

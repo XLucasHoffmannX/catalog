@@ -1,4 +1,5 @@
 import { LuContainer, LuLogOut, LuMenu, LuUser } from 'react-icons/lu';
+import { RiDashboardLine } from 'react-icons/ri';
 import { Link } from 'react-router-dom';
 
 import { useManagementSession } from '@/app/modules/manager/auth/use-cases';
@@ -12,7 +13,7 @@ import { ItemLabelAndIcon, UserInformation } from '..';
 import { ISidebarMobileProps } from './SidebarMobile.types';
 
 export function SidebarMobile({ ...rest }: ISidebarMobileProps): JSX.Element {
-  const { userAuthenticated, handleLogout } = useManagementSession();
+  const { userAuthenticated, handleLogout, isManager } = useManagementSession();
 
   return (
     <div
@@ -39,6 +40,15 @@ export function SidebarMobile({ ...rest }: ISidebarMobileProps): JSX.Element {
                 icon={<LuUser className='h-4 w-4' />}
               />
             </Link>
+
+            {isManager && (
+              <Link to='/manage'>
+                <ItemLabelAndIcon
+                  label='Gerenciar empresa'
+                  icon={<RiDashboardLine className='h-4 w-4' />}
+                />
+              </Link>
+            )}
 
             <Link to='/history'>
               <ItemLabelAndIcon

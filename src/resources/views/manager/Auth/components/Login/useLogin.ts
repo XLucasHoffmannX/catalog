@@ -17,7 +17,7 @@ export function useLogin() {
 
   const { handleSetUserAuth } = useAuthContext();
 
-  const { mutateAuth, isError, isPendingMutateAuth } = useSetAuth();
+  const { mutateAuth, isPendingMutateAuth } = useSetAuth();
 
   async function onSubmit(data: LoginSchemaType) {
     try {
@@ -29,16 +29,14 @@ export function useLogin() {
 
       navigate('/home');
     } catch (error) {
-      const errorResponse: any = error;
+      console.error(error);
 
-      toast.error(errorResponse.response.data.message);
+      toast.error('Ocorreu um erro');
     }
   }
 
   const disabledContinue =
     !methods.watch('login') || !methods.watch('password');
-
-  if (isError) toast.error('Ocorreu um erro');
 
   return {
     handleSubmit: methods.handleSubmit(onSubmit),

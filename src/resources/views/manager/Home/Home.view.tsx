@@ -1,33 +1,38 @@
-import { useEffect } from 'react';
-
 import { LuListChecks } from 'react-icons/lu';
+import { RiDashboardLine } from 'react-icons/ri';
 import { TbZoomMoney } from 'react-icons/tb';
+import { Link } from 'react-router-dom';
 
-import ProductService from '@/app/modules/client/products/service/Product.service';
+import { useManagementSession } from '@/app/modules/manager/auth/use-cases';
 import { ManagerDefaultLayoutWrapper } from '@/resources/components/layouts/manager';
 
 import { CardDahsboard, ChartDashboard } from './components';
 
 export function HomeView(): JSX.Element {
-  useEffect(() => {
-    async function getProduct() {
-      const res = ProductService.getProductManagerList();
-
-      console.log(res);
-    }
-
-    getProduct();
-  }, []);
+  const { isManager } = useManagementSession();
 
   return (
     <ManagerDefaultLayoutWrapper>
       <section className='w-full flex justify-center p-4'>
         <div className='max-w-[1280px]'>
-          <h1 className='font-bold text-3xl'>Dashboard</h1>
+          <div className='flex items-center justify-between'>
+            <div className='flex flex-col'>
+              <h1 className='font-bold text-3xl'>Dashboard</h1>
 
-          <sub className='font-light text-sm'>
-            Informações gerais de suas lojas
-          </sub>
+              <sub className='font-light text-sm'>
+                Informações gerais de suas lojas
+              </sub>
+            </div>
+
+            {isManager && (
+              <Link to='/manage'>
+                <div className='bg-primary text-white flex items-center gap-2 border rounded-md p-2 cursor-pointer hover:scale-105 transition-all h-full'>
+                  <RiDashboardLine className='h-4 w-4' />
+                  <p className='font-medium'>Gerenciar empresa</p>
+                </div>
+              </Link>
+            )}
+          </div>
 
           <div className='flex mt-6 gap-4 flex-wrap'>
             <CardDahsboard
