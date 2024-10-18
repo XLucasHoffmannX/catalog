@@ -1,1 +1,1 @@
-export { ManagerDefaultLayoutWrapper } from './ManagerDefaultLayot/ManagerDefaultLayout.wrapper';
+export { ManagerDefaultLayoutWrapper } from './ManagerDefaultLayout/ManagerDefaultLayout.wrapper';

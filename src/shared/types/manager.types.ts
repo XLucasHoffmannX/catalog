@@ -1,10 +1,11 @@
 export interface IUser {
-  id: number;
-  login: string;
-  role: string;
-  empresa: string;
-  password: string;
-  companyId: number;
+  id: string;
+  name: string;
+  email: string;
+  role: 'OWNER_USER' | string;
+  createdAt: string;
+  updateAt: string;
+  deletedAt: string | null;
 }
 
 export interface IProductManagerImages {

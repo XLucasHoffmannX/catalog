@@ -23,17 +23,22 @@ export function UserPopover(): JSX.Element {
       <ThemeModeToggle />
 
       <Popover>
-        <PopoverTrigger asChild>
+        <PopoverTrigger
+          asChild
+          className='truncate '
+        >
           <Button
             variant='outline'
             className='flex-row item-center gap-2 '
           >
-            {userAuthenticated?.login}
+            <span className='truncate max-w-[150px]'>
+              {userAuthenticated?.name} asdasdasdasdadas
+            </span>
             <LuChevronDown className='h-4 w-4' />
           </Button>
         </PopoverTrigger>
         <PopoverContent className='flex flex-col mx-4'>
-          <UserInformation text={userAuthenticated?.login as string} />
+          <UserInformation text={userAuthenticated?.name as string} />
           <Separator />
           <div className='flex flex-col justify-center py-3 cursor-pointer gap-4'>
             <Link to='/my-account'>

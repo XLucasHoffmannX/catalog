@@ -8,8 +8,13 @@ export function UserInformation({
   className
 }: IUserInformation): JSX.Element {
   return (
-    <div className={cn('flex flex-col justify-center py-3', className)}>
-      <span className='font-bold text-xs'>{text}</span>
+    <div
+      className={cn(
+        'flex flex-col justify-center py-3 max-w-[250px] truncate',
+        className
+      )}
+    >
+      <span className='font-bold text-xs max-w-[250px] truncate'>{text}</span>
       {subText && <span className='text-sm'>{subText}</span>}
     </div>
   );

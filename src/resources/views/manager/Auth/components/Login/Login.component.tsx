@@ -36,7 +36,7 @@ export function Login(): JSX.Element {
           <div className='flex flex-col gap-5 p-1'>
             <FormField
               control={methods.control}
-              name='login'
+              name='email'
               render={({ field }) => (
                 <FormItem>
                   <FormLabel className='text-base'>Usuário ou email</FormLabel>
@@ -46,7 +46,7 @@ export function Login(): JSX.Element {
                       {...field}
                       className='col-span-3 h-[50px] rounded-xl bg-white text-black'
                       placeholder='Insira seu email'
-                      errorMessage={errors.login?.message}
+                      errorMessage={errors.email?.message}
                       value={field.value || ''}
                     />
                   </FormControl>

@@ -8,13 +8,13 @@ import {
 
 class AuthService {
   async loginService(payload: IAuthPayload): Promise<IAuthResponse> {
-    const { data } = await HttpManager.post('/auth', payload);
+    const { data } = await HttpManager.post('/user/auth', payload);
 
     return data;
   }
 
   async validteAuthService(): Promise<IValidateAuthResponse> {
-    const { data } = await HttpManagerAuth.get('/validar-token');
+    const { data } = await HttpManagerAuth.get('/user/validate');
 
     return data;
   }
