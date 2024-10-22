@@ -1,5 +1,5 @@
-import { IProductManager } from '@/shared/types';
+import { IProductManagerCompany } from '@/shared/types';
 
 export interface IProductTableRowProps {
-  product: IProductManager;
+  product: IProductManagerCompany;
 }

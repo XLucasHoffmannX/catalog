@@ -42,7 +42,7 @@ export function ProductTableRow({
             rounded='rounded-none'
             src={
               product.images.length > 0
-                ? (product.images[0].url as string)
+                ? (product.images[0] as string)
                 : 'https://semantic-ui.com/images/wireframe/image.png'
             }
           />
@@ -62,9 +62,9 @@ export function ProductTableRow({
         </TableCell>
         <TableCell
           className='max-w-[90px] truncate'
-          title={product.subDescription}
+          title={product.content}
         >
-          {product.subDescription}
+          {product.content}
         </TableCell>
         <TableCell
           className='w-[150px] truncate'
@@ -76,13 +76,13 @@ export function ProductTableRow({
         </TableCell>
         <TableCell>
           <div className='flex gap-2 items-center justify-center text-gray-400'>
-            {product.isAvaliable ? (
+            {!!product.available ? (
               <>
                 <p
                   className=''
-                  title={product.avaliable}
+                  title={product.available.toString()}
                 >
-                  {product.avaliable}
+                  {product.available}
                 </p>
                 <FaStar className='' />
               </>
@@ -125,8 +125,11 @@ export function ProductTableRow({
       <RemoveConfirmationModal
         isOpen={isOpenRemoveModal.open}
         onConfirm={() => {
+          if (product.id) {
+            handleRemoveProduct(product.id);
+            return;
+          }
           handleChangeRemoveModal({ open: false, title: '' });
-          handleRemoveProduct(product.id as number);
         }}
         productTitle={isOpenRemoveModal.title}
         isLoading={isPending}

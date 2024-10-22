@@ -13,7 +13,7 @@ class AuthService {
     return data;
   }
 
-  async validteAuthService(): Promise<IValidateAuthResponse> {
+  async validateAuthService(): Promise<IValidateAuthResponse> {
     const { data } = await HttpManagerAuth.get('/user/validate');
 
     return data;

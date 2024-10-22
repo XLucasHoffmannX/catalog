@@ -32,7 +32,7 @@ export function UserPopover(): JSX.Element {
             className='flex-row item-center gap-2 '
           >
             <span className='truncate max-w-[150px]'>
-              {userAuthenticated?.name} asdasdasdasdadas
+              {userAuthenticated?.name}
             </span>
             <LuChevronDown className='h-4 w-4' />
           </Button>

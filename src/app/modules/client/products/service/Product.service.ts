@@ -1,6 +1,11 @@
 import { HttpManagerAuth } from '@/app/api';
 import { env } from '@/app/config';
-import { IPaginatedResponse, IProductManager } from '@/shared/types';
+import {
+  IPaginatedResponse,
+  IProductManager,
+  IProductManagerCompany
+} from '@/shared/types';
+import { IPaginationDefaultResponse } from '@/shared/types/paginate.types';
 
 import { useGetProductListMock } from '../mocks';
 
@@ -8,6 +13,7 @@ import {
   IAddProductManagerPayload,
   IGetProductList,
   IGetProductListPayload,
+  IGetProductManagerListByCompanyPayload,
   IRemoveProductManagerPayload
 } from '../types/product.types';
 
@@ -20,6 +26,22 @@ export class ProductService {
     }
 
     return null;
+  }
+
+  async getProductManagerListByCompany(
+    payload: IGetProductManagerListByCompanyPayload
+  ): Promise<IPaginationDefaultResponse<IProductManagerCompany>> {
+    const { data } = await HttpManagerAuth.get<
+      IPaginationDefaultResponse<IProductManagerCompany>
+    >(`/product/${payload.companyId}`, {
+      params: {
+        limit: payload.limit,
+        page: payload.page,
+        search: payload.search
+      }
+    });
+
+    return data;
   }
 
   async getProductManagerList() {
@@ -41,7 +63,7 @@ export class ProductService {
   async removeProductManager(
     payload: IRemoveProductManagerPayload
   ): Promise<null> {
-    await HttpManagerAuth.delete(`/api/products/${payload.id}`);
+    await HttpManagerAuth.delete(`/product/${payload.companyId}/${payload.id}`);
 
     return null;
   }

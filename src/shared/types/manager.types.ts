@@ -1,3 +1,26 @@
+export interface ICompany {
+  id?: string;
+  name: string;
+  createdAt: string;
+  upadteAt: string;
+}
+
+export interface IProductManagerCompany {
+  id?: string;
+  name: string;
+  price: number;
+  description: string;
+  content: string;
+  available: number;
+  discount: number;
+  quantity: number;
+  minQuantity: number;
+  category: string;
+  createdAt: string;
+  updatedAt: string;
+  images: string[];
+}
+
 export interface IUser {
   id: string;
   name: string;
@@ -6,6 +29,7 @@ export interface IUser {
   createdAt: string;
   updateAt: string;
   deletedAt: string | null;
+  company?: ICompany;
 }
 
 export interface IProductManagerImages {
@@ -31,4 +55,11 @@ export interface IProductManager {
   category: boolean;
   companyId: number;
   images: IProductManagerImages[] | [];
+}
+
+export interface IStore {
+  id: string;
+  name: string;
+  title: string;
+  description: string;
 }

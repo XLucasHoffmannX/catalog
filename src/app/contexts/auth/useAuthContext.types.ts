@@ -1,4 +1,4 @@
-import { IUser } from '@/shared/types';
+import { ICompany, IUser } from '@/shared/types';
 
 export type ITokenType = {
   exp: number;
@@ -11,6 +11,7 @@ export type ITokenType = {
 
 export interface IUseAuthContext {
   userAuthenticated: IUser | null;
+  company: ICompany | null;
   expiresIn: number | null;
   handleSetUserAuth: (token: string, user?: IUser) => void;
   handleLogout: () => void;

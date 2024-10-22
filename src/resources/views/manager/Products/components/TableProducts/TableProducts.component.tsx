@@ -17,14 +17,14 @@ import { ProductTableRow } from '../ProductTableRow/ProductTableRow.component';
 import { useTableProduct } from './useTableProducts';
 
 export function TableProducts(): JSX.Element {
-  const { productList, isFetching } = useTableProduct();
+  const { productListByCompany, isLoading } = useTableProduct();
   const defaultOptions = useAnimationLottie(EmptyAnimation);
 
   return (
     <Table className='max-w-[1200px]'>
       <TableHeader>
         <TableRow>
-          <TableHead>-</TableHead>
+          <TableHead>Imagem</TableHead>
           <TableHead>ID</TableHead>
           <TableHead>Nome</TableHead>
           <TableHead>Descrição</TableHead>
@@ -35,14 +35,14 @@ export function TableProducts(): JSX.Element {
         </TableRow>
       </TableHeader>
       <TableBody>
-        {isFetching ? (
+        {isLoading ? (
           <RowSkeleton
             cells={8}
             rows={5}
             heightRow={45}
           />
-        ) : productList?.content.length ? (
-          productList.content.map((product, index) => (
+        ) : productListByCompany?.items.length ? (
+          productListByCompany.items.map((product, index) => (
             <ProductTableRow
               product={product}
               key={`${index}-${product.id}-${product.minQuantity}`}

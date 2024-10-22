@@ -8,7 +8,7 @@ import { IUseGetValidateAuthProps } from '../../types/auth.types';
 export function useGetValidateAuth({ enabled }: IUseGetValidateAuthProps) {
   const { data, isLoading } = useQueryCache({
     queryKey: [AuthQueryKeys['VALIDATE-AUTH']],
-    queryFn: AuthService.validteAuthService,
+    queryFn: AuthService.validateAuthService,
     enabled: enabled
   });
 

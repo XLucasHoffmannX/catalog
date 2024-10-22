@@ -12,8 +12,10 @@ export function useManagementSession() {
 
   return {
     authenticated: !!token,
+    companyId: userAuthenticated?.company?.id,
+    company: userAuthenticated?.company,
     userAuthenticated,
     handleLogout,
-    isManager: userAuthenticated?.role === 'ADMIN'
+    isManager: userAuthenticated?.role === 'OWNER_USER'
   };
 }

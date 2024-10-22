@@ -1,12 +1,19 @@
-import { useGetProductManagerList } from '@/app/modules/client/products';
+import { useGetProductManagerListByCompany } from '@/app/modules/client/products';
+import { useManagementSession } from '@/app/modules/manager/auth/use-cases';
 
 export function useTableProduct() {
-  const { productList, isFetching } = useGetProductManagerList();
+  const { company } = useManagementSession();
 
-  console.log(productList);
+  const { productListByCompany, isFetching: isFetchingProductListCompany } =
+    useGetProductManagerListByCompany({
+      page: 1,
+      limit: 10,
+      companyId: company?.id || '',
+      enabled: !!company?.id
+    });
 
   return {
-    productList,
-    isFetching
+    productListByCompany,
+    isLoading: isFetchingProductListCompany
   };
 }

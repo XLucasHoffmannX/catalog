@@ -8,6 +8,7 @@ import { ITokenType, IUseAuthContext } from './useAuthContext.types';
 export const useAuthContext = create<IUseAuthContext>()(set => ({
   userAuthenticated: null,
   expiresIn: null,
+  company: null,
 
   handleSetUserAuth: (token, user) => {
     if (token) {
@@ -19,6 +20,10 @@ export const useAuthContext = create<IUseAuthContext>()(set => ({
 
       if (user) {
         set({ userAuthenticated: user });
+      }
+
+      if (user?.company) {
+        set({ company: user.company });
       }
 
       if (decoded) {
