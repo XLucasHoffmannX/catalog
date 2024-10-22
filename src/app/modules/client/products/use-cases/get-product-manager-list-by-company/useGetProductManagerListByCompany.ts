@@ -9,7 +9,7 @@ export function useGetProductManagerListByCompany(
   payload: IUseGetProductManagerListByCompanyPayload
 ) {
   const { data, isFetching } = useQueryCache({
-    queryKey: [ProductQueryKeys.GET_PRODUCT_MANAGER_LIST_BY_COMPANY],
+    queryKey: [ProductQueryKeys.GET_PRODUCT_MANAGER_LIST_BY_COMPANY, payload],
     queryFn: async () =>
       await ProductService.getProductManagerListByCompany(payload),
     enabled: payload.enabled
