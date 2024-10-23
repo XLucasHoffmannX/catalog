@@ -127,7 +127,6 @@ export function ProductTableRow({
         onConfirm={() => {
           if (product.id) {
             handleRemoveProduct(product.id);
-            return;
           }
           handleChangeRemoveModal({ open: false, title: '' });
         }}

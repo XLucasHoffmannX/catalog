@@ -16,3 +16,17 @@ export interface IValidateAuthResponse extends IUser {}
 export interface IUseGetValidateAuthProps {
   enabled: boolean;
 }
+
+/* register */
+
+export interface IRegisterPayload {
+  name: string;
+  email: string;
+  password: string;
+}
+
+export interface IRegisterResponse {
+  user: IUser;
+  token: string;
+  refreshToken: string;
+}

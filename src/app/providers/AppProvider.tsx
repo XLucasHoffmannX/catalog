@@ -1,7 +1,6 @@
 import { ReactNode, useEffect } from 'react';
 
 import Cookies from 'js-cookie';
-import { createContext } from 'vm';
 import { useShallow } from 'zustand/react/shallow';
 
 import { useAuthContext } from '../contexts/auth/useAuth.context';
@@ -13,12 +12,8 @@ export function AppProvider({
 }): JSX.Element {
   const token = Cookies.get('access-token') as string;
 
-  const [userAuthenticated, handleSetUserAuth, handleLogout] = useAuthContext(
-    useShallow(state => [
-      state.userAuthenticated,
-      state.handleSetUserAuth,
-      state.handleLogout
-    ])
+  const [userAuthenticated, handleSetUserAuth] = useAuthContext(
+    useShallow(state => [state.userAuthenticated, state.handleSetUserAuth])
   );
 
   useEffect(() => {

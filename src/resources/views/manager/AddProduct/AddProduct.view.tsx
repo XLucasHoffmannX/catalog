@@ -1,4 +1,4 @@
-import { ImageWithLoader } from '@/resources/components/global';
+import { ImageWithLoader, Loader } from '@/resources/components/global';
 import { ManagerDefaultLayoutWrapper } from '@/resources/components/layouts/manager';
 import {
   Button,
@@ -30,15 +30,21 @@ export function AddProductView(): JSX.Element {
     errors,
     handleSubmit,
     isPendingMutate,
-    handleAddImage,
-    handleRemoveImage,
-    urlInput,
-    onChangeUrlInput,
-    images
+    handleFileChange,
+    onChangePreviewImages,
+    previewImages,
+    fileInputs,
+    handleAddImages,
+    creatingProduct
   } = useAddProduct();
 
   return (
     <ManagerDefaultLayoutWrapper>
+      <Loader
+        isLoading={creatingProduct.isLoading}
+        message={creatingProduct.message}
+      />
+
       <section className='p-4 w-full flex justify-center'>
         <div className='w-full max-w-[800px]'>
           <h1 className='font-bold text-3xl'>Adicionar Produto</h1>
@@ -117,7 +123,7 @@ export function AddProductView(): JSX.Element {
 
                 <FormField
                   control={methods.control}
-                  name='subDescription'
+                  name='content'
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel className='text-base'>Conteúdo</FormLabel>
@@ -135,18 +141,16 @@ export function AddProductView(): JSX.Element {
                 <div className='flex gap-5 items-center'>
                   <FormField
                     control={methods.control}
-                    name='discount'
+                    name='quantity'
                     render={({ field }) => (
                       <FormItem className='w-full'>
-                        <FormLabel className='text-base'>
-                          Desconto (%)
-                        </FormLabel>
+                        <FormLabel className='text-base'>Quantidade</FormLabel>
                         <div className='flex items-center gap-3'>
                           <FormControl>
                             <Input
                               {...field}
                               className='h-[50px] rounded'
-                              errorMessage={errors.price?.message}
+                              errorMessage={errors.quantity?.message}
                               type='number'
                               value={field.value || ''}
                               onChange={e =>
@@ -158,6 +162,7 @@ export function AddProductView(): JSX.Element {
                       </FormItem>
                     )}
                   />
+
                   <FormField
                     control={methods.control}
                     name='minQuantity'
@@ -171,7 +176,59 @@ export function AddProductView(): JSX.Element {
                             <Input
                               {...field}
                               className='h-[50px] rounded'
-                              errorMessage={errors.price?.message}
+                              errorMessage={errors.minQuantity?.message}
+                              type='number'
+                              value={field.value || ''}
+                              onChange={e =>
+                                field.onChange(Number(e.target.value))
+                              }
+                            />
+                          </FormControl>
+                        </div>
+                      </FormItem>
+                    )}
+                  />
+                </div>
+
+                <div className='flex gap-5 items-center'>
+                  <FormField
+                    control={methods.control}
+                    name='discount'
+                    render={({ field }) => (
+                      <FormItem className='w-full'>
+                        <FormLabel className='text-base'>
+                          Desconto (%)
+                        </FormLabel>
+                        <div className='flex items-center gap-3'>
+                          <FormControl>
+                            <Input
+                              {...field}
+                              className='h-[50px] rounded'
+                              errorMessage={errors.discount?.message}
+                              type='number'
+                              value={field.value || ''}
+                              onChange={e =>
+                                field.onChange(Number(e.target.value))
+                              }
+                            />
+                          </FormControl>
+                        </div>
+                      </FormItem>
+                    )}
+                  />
+
+                  <FormField
+                    control={methods.control}
+                    name='available'
+                    render={({ field }) => (
+                      <FormItem className='w-full'>
+                        <FormLabel className='text-base'>Avaliação</FormLabel>
+                        <div className='flex items-center gap-3'>
+                          <FormControl>
+                            <Input
+                              {...field}
+                              className='h-[50px] rounded'
+                              errorMessage={errors.available?.message}
                               type='number'
                               value={field.value || ''}
                               onChange={e =>
@@ -190,59 +247,75 @@ export function AddProductView(): JSX.Element {
 
               <div className='flex flex-col'>
                 <Label className='text-base'>
-                  Adicionar imagem (opcional):
+                  Adicionar imagens (opcional):
                 </Label>
                 <p className='text-light text-sm mb-3'>
-                  Selecione o formato abaixo:
+                  Selecione os arquivos de imagem abaixo:
                 </p>
 
                 <div className='flex md:flex-nowrap flex-wrap gap-2'>
+                  {/* Múltiplos arquivos aceitos */}
                   <Input
-                    placeholder='Exemplo: https://picsum.photos/200/300'
-                    type='url'
+                    type='file'
+                    accept='image/png, image/jpeg'
                     className='md:w-full'
-                    value={urlInput || ''}
-                    onChange={e => {
-                      onChangeUrlInput(e.target.value);
-                    }}
+                    multiple // Permite múltiplos arquivos
+                    onChange={handleFileChange}
                   />
 
                   <Button
                     type='button'
                     variant='outline'
                     className='md:w-[150px] w-full'
-                    disabled={!urlInput}
-                    onClick={() => handleAddImage(urlInput)}
+                    disabled={fileInputs.length === 0}
+                    onClick={() =>
+                      fileInputs.length > 0 && handleAddImages(fileInputs)
+                    }
                   >
                     Adicionar
                   </Button>
                 </div>
 
-                {images && images?.length > 0 && (
+                {/* Pré-visualização das imagens */}
+                {previewImages.length > 0 && (
                   <div className='w-full flex items-center justify-center mt-10 animate-up'>
                     <Carousel className='w-full max-w-xs animate-left'>
                       <CarouselContent>
-                        {images
-                          ?.slice()
+                        {previewImages
+                          .slice()
                           .reverse()
-                          .map((image, index) => (
-                            <CarouselItem key={index}>
-                              <Card className='flex items-center justify-center animate-right'>
+                          .map((image: string, reversedIndex: number) => (
+                            <CarouselItem
+                              key={reversedIndex}
+                              className='flex flex-col justify-between'
+                            >
+                              <p className='w-full text-center mb-2 font-medium text-sm'>
+                                Imagem {reversedIndex + 1}/
+                                {previewImages.length}
+                              </p>
+                              <Card className='flex items-center justify-center animate-right h-full'>
                                 <CardContent className='flex items-center justify-center w-full text-secondary p-3 '>
                                   <ImageWithLoader
-                                    src={image.url as string}
-                                    alt={`${index}-${image.url}`}
+                                    src={image}
+                                    alt={`preview-${reversedIndex}`}
                                   />
                                 </CardContent>
                               </Card>
+
                               <div className='mt-2 flex items-center justify-center'>
                                 <Button
                                   type='button'
                                   variant='outline'
                                   className='w-full'
                                   onClick={() =>
-                                    handleRemoveImage(
-                                      image.uuidControl as string
+                                    onChangePreviewImages((prev: string[]) =>
+                                      prev
+                                        .slice()
+                                        .reverse()
+                                        .filter(
+                                          (item, i) => i !== reversedIndex
+                                        )
+                                        .reverse()
                                     )
                                   }
                                 >

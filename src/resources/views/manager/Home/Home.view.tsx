@@ -1,20 +1,38 @@
 import { LuListChecks } from 'react-icons/lu';
 import { RiDashboardLine } from 'react-icons/ri';
+import { RiStore2Line } from 'react-icons/ri';
 import { TbZoomMoney } from 'react-icons/tb';
 import { Link } from 'react-router-dom';
 
 import { useManagementSession } from '@/app/modules/manager/auth/use-cases';
 import { ManagerDefaultLayoutWrapper } from '@/resources/components/layouts/manager';
+import { Alert, AlertDescription, AlertTitle } from '@/resources/components/ui';
 
 import { CardDahsboard, ChartDashboard } from './components';
 
 export function HomeView(): JSX.Element {
-  const { isManager } = useManagementSession();
+  const { isManager, store } = useManagementSession();
 
   return (
     <ManagerDefaultLayoutWrapper>
       <section className='w-full flex justify-center p-4'>
         <div className='max-w-[1280px]'>
+          {isManager && !store && (
+            <Alert className='mb-5'>
+              <RiStore2Line className='h-4 w-4' />
+              <AlertTitle>Crie uma loja!</AlertTitle>
+              <AlertDescription>
+                Parece que você ainda não possui uma loja criada.
+                <Link
+                  to='/'
+                  className='text-primary'
+                >
+                  {' '}
+                  Crie aqui
+                </Link>
+              </AlertDescription>
+            </Alert>
+          )}
           <div className='flex items-center justify-between'>
             <div className='flex flex-col'>
               <h1 className='font-bold text-3xl'>Dashboard</h1>

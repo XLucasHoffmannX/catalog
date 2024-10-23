@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-empty-object-type */
 
 import {
+  IAddProduct,
   IProductClient,
-  IProductManager,
   IProductManagerCompany
 } from '@/shared/types';
 
@@ -28,7 +28,7 @@ export interface IGetProductManagerListPayload {
   size: number;
 }
 
-export interface IAddProductManagerPayload extends IProductManager {}
+export interface IAddProductManagerPayload extends IAddProduct {}
 
 export interface IRemoveProductManagerPayload {
   id: IProductManagerCompany['id'];
@@ -49,3 +49,5 @@ export interface IUseGetProductManagerListByCompanyPayload
   extends IGetProductManagerListByCompanyPayload {
   enabled?: boolean;
 }
+
+/* addProductImages */

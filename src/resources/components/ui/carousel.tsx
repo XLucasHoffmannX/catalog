@@ -220,6 +220,7 @@ const CarouselPrevious = React.forwardRef<
           : '-top-12 left-1/2 -translate-x-1/2 rotate-90',
         className
       )}
+      type='button'
       disabled={!canScrollPrev}
       onClick={scrollPrev}
       {...props}
@@ -252,6 +253,7 @@ const CarouselNext = React.forwardRef<
       )}
       disabled={!canScrollNext}
       onClick={scrollNext}
+      type='button'
       {...props}
     >
       <ArrowRightIcon className='h-4 w-4' />

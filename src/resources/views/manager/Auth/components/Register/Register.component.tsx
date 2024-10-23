@@ -6,7 +6,8 @@ import { Button, Input, Label, PasswordInput } from '@/resources/components/ui';
 import { useRegister } from './useRegister';
 
 export function Register(): JSX.Element {
-  const { methods, handleSubmit, errors } = useRegister();
+  const { methods, handleSubmit, errors, disabledContinue, isLoading } =
+    useRegister();
 
   return (
     <div className='animate-up'>
@@ -92,6 +93,8 @@ export function Register(): JSX.Element {
         <Button
           className='text-white hover:scale-105 h-[50px] transition-all duration-300 flex items-center justify-center gap-[8px] px-[24px] rounded-full transform active:scale-90 hover:opacity-[80%] w-full'
           type='submit'
+          disabled={disabledContinue}
+          isLoading={isLoading}
         >
           Cadastrar
         </Button>

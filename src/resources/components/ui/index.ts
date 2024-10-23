@@ -1,3 +1,4 @@
+export * from './alert';
 export * from './alert-dialog';
 export * from './avatar';
 export * from './badge';
@@ -9,6 +10,7 @@ export * from './dropdown-menu';
 export * from './form';
 export * from './input';
 export * from './label';
+export * from './pagination';
 export * from './password-input';
 export * from './popover';
 export * from './select';

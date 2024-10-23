@@ -6,24 +6,35 @@ import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'sonner';
 
-import { useAddProductManager } from '@/app/modules/client/products';
+import { useProductManagerContext } from '@/app/contexts';
+import {
+  useAddProductImages,
+  useAddProductManager
+} from '@/app/modules/client/products';
 import { ProductQueryKeys } from '@/app/modules/client/products/keys/products.key';
 import { useManagementSession } from '@/app/modules/manager/auth/use-cases';
-import { IProductManager, IProductManagerImages } from '@/shared/types';
+import { IAddProduct } from '@/shared/types';
 
 import { addProductSchema, AddProductSchemaType } from './add-product.schema';
 
+import { CreatingProductType } from './AddProduct.types';
+
 export function useAddProduct() {
-  const { userAuthenticated } = useManagementSession();
+  const { companyId, storeId } = useManagementSession();
   const queryClient = useQueryClient();
 
+  const [fileInputs, setFileInputs] = useState<File[]>([]);
+
+  const [previewImages, setPreviewImages] = useState<string[]>([]);
+  const [creatingProduct, setCreatingProduct] = useState<CreatingProductType>({
+    message: '',
+    isLoading: false
+  });
+
+  const { filters } = useProductManagerContext();
   const navigate = useNavigate();
-
-  const [urlInput, setUrlInput] = useState<string>();
-
-  const [images, setImages] = useState<IProductManagerImages[]>();
-
   const { mutateAddProductManager, isPendingMutate } = useAddProductManager();
+  const { mutateAddProductImages } = useAddProductImages();
 
   const methods = useForm<AddProductSchemaType>({
     resolver: zodResolver(addProductSchema)
@@ -31,66 +42,121 @@ export function useAddProduct() {
 
   async function onSubmit(data: AddProductSchemaType) {
     try {
-      const payload: IProductManager = {
-        companyId: userAuthenticated?.companyId || 0,
-        images:
-          images && images.length > 0
-            ? // eslint-disable-next-line @typescript-eslint/no-unused-vars
-              images.map(({ uuidControl, ...rest }) => rest)
-            : [],
-        isAvaliable: false,
-        price: Number(data.price),
-        name: data.name,
-        discount: data.discount,
-        subDescription: data.subDescription,
-        description: data.description,
-        minQuantity: data.minQuantity,
-        isDiscount: !!data.discount,
-        avaliable: '-',
-        category: true,
-        isLastUnits: false
-      };
+      if (companyId && storeId) {
+        setCreatingProduct({ message: 'Criando seu produto', isLoading: true });
 
-      const response = await mutateAddProductManager(payload);
+        const payload: IAddProduct = {
+          ...data,
+          companyId,
+          storeId,
+          price: Number(data.price),
+          name: data.name,
+          discount: data.discount,
+          content: data.content,
+          description: data.description,
+          minQuantity: data.minQuantity,
+          category: '',
+          available: 100
+        };
 
-      queryClient.invalidateQueries({
-        queryKey: [ProductQueryKeys.GET_PRODUCT_MANAGER_LIST]
-      });
+        await mutateAddProductManager(payload)
+          .then(async res => {
+            toast.success(`Produto ${res.id} adicionado com sucesso!`);
 
-      toast.success(`Produto ${response.id} adicionado com sucesso!`);
+            queryClient.invalidateQueries({
+              queryKey: [
+                ProductQueryKeys.GET_PRODUCT_MANAGER_LIST_BY_COMPANY,
+                {
+                  page: filters.page,
+                  limit: filters.limit,
+                  companyId: companyId || '',
+                  search: filters.search
+                }
+              ]
+            });
 
-      navigate('/products');
+            if (fileInputs.length > 0 && res.id) {
+              setCreatingProduct({
+                message: 'Adicionando imagens...',
+                isLoading: true
+              });
+
+              const formData = new FormData();
+              formData.append('productId', res.id); // Adiciona o productId ao FormData
+
+              fileInputs.forEach(file => {
+                formData.append('images', file); // 'images' deve corresponder ao campo no backend
+              });
+
+              await mutateAddProductImages(formData)
+                .then(() => {
+                  setCreatingProduct({ message: '', isLoading: false });
+                  navigate('/products');
+                })
+                .catch(() => {
+                  toast.error('Falha ao adicionar imagens.');
+                  setCreatingProduct({ message: '', isLoading: false });
+                });
+            } else {
+              setCreatingProduct({ message: '', isLoading: false });
+              navigate('/products');
+            }
+          })
+          .catch(error => {
+            setCreatingProduct({ message: '', isLoading: false });
+            toast.error(error);
+          });
+
+        return;
+      }
+
+      return toast.error(
+        'Não foi possível adicionar seu produto! (Nenhuma loja foi criada ainda!)'
+      );
     } catch (error) {
       console.error(error);
-
+      setCreatingProduct({ message: '', isLoading: false });
       toast.error('Não foi possível adicionar seu produto!');
     }
   }
 
-  function handleAddImage(value: string | undefined) {
-    if (value && value !== '') {
-      setImages(prev => [
-        ...(prev || []),
-        { url: value, uuidControl: crypto.randomUUID() }
-      ]);
+  const handleAddImages = (files: File[]) => {
+    files.forEach(file => {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setPreviewImages(prev => [...prev, reader.result as string]);
+      };
+      reader.readAsDataURL(file);
+    });
 
-      setUrlInput('');
+    setFileInputs(prevFiles => [...prevFiles, ...files]);
+  };
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = e.target.files;
+
+    if (files && fileInputs.length + files.length > 10) {
+      toast.error('Você pode adicionar no máximo 10 imagens.');
+      e.target.value = '';
+      return;
     }
-  }
 
-  function handleRemoveImage(uuidControl: string) {
-    setImages(prev => prev?.filter(image => image.uuidControl !== uuidControl));
-  }
+    if (files) {
+      const filesArray = Array.from(files);
+      handleAddImages(filesArray);
+    }
+  };
 
   return {
     handleSubmit: methods.handleSubmit(onSubmit),
     isPendingMutate,
     methods,
     errors: methods.formState.errors,
-    handleAddImage,
-    handleRemoveImage,
-    urlInput,
-    onChangeUrlInput: setUrlInput,
-    images
+    handleAddImages,
+    handleFileChange,
+    fileInputs,
+    previewImages,
+    creatingProduct,
+    onChangePreviewImages: setPreviewImages
   };
 }

@@ -54,8 +54,8 @@ export class ProductService {
 
   async addProductManager(
     payload: IAddProductManagerPayload
-  ): Promise<IProductManager> {
-    const { data } = await HttpManagerAuth.post('/api/products', payload);
+  ): Promise<IProductManagerCompany> {
+    const { data } = await HttpManagerAuth.post('/product', payload);
 
     return data;
   }
@@ -66,6 +66,12 @@ export class ProductService {
     await HttpManagerAuth.delete(`/product/${payload.companyId}/${payload.id}`);
 
     return null;
+  }
+
+  async addProductImages(payload: FormData) {
+    const { data } = await HttpManagerAuth.post('/product-images', payload);
+
+    return data;
   }
 }
 

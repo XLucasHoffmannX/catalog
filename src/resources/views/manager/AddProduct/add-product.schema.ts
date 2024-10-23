@@ -5,9 +5,11 @@ const requeriredError = 'Campo obrigatório';
 export const addProductSchema = z.object({
   name: z.string({ required_error: requeriredError }),
   description: z.string({ required_error: requeriredError }),
-  subDescription: z.string({ required_error: requeriredError }),
+  content: z.string({ required_error: requeriredError }),
   price: z.number({ required_error: requeriredError }),
+  available: z.number({ required_error: requeriredError }),
   discount: z.number({ required_error: requeriredError }),
+  quantity: z.number({ required_error: requeriredError }),
   minQuantity: z.number({ required_error: requeriredError })
 });
 

@@ -7,6 +7,8 @@ export interface ICompany {
 
 export interface IProductManagerCompany {
   id?: string;
+  companyId?: string;
+  storeId?: string;
   name: string;
   price: number;
   description: string;
@@ -62,4 +64,18 @@ export interface IStore {
   name: string;
   title: string;
   description: string;
+}
+
+export interface IAddProduct {
+  name: string;
+  description: string;
+  content: string;
+  price: number;
+  available: number;
+  discount: number;
+  quantity: number;
+  minQuantity: number;
+  category: string;
+  storeId: string;
+  companyId: string;
 }

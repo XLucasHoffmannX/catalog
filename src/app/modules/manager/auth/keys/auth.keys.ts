@@ -1,5 +1,6 @@
 enum AuthMutationKeys {
-  'AUTH' = 'AUTH'
+  'AUTH' = 'AUTH',
+  'REGISTER' = 'REGISTER'
 }
 
 enum AuthQueryKeys {

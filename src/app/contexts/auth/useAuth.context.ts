@@ -35,10 +35,12 @@ export const useAuthContext = create<IUseAuthContext>()(set => ({
   },
 
   handleLogout: () => {
-    Cookies.remove('access-token');
+    Cookies.remove('access-token', { path: '/', domain: 'localhost' });
 
     set({ userAuthenticated: null });
 
     toast.info('Desconectado!');
+
+    window.location.reload();
   }
 }));

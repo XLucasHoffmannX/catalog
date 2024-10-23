@@ -3,17 +3,17 @@ import { useGetProductManagerListByCompany } from '@/app/modules/client/products
 import { useManagementSession } from '@/app/modules/manager/auth/use-cases';
 
 export function useTableProduct() {
-  const { company } = useManagementSession();
+  const { companyId } = useManagementSession();
 
   const { filters } = useProductManagerContext();
 
   const { productListByCompany, isFetching: isFetchingProductListCompany } =
     useGetProductManagerListByCompany({
       page: filters.page,
-      limit: filters.limit,
-      companyId: company?.id || '',
+      limit: 15,
+      companyId: companyId || '',
       search: filters.search,
-      enabled: !!company?.id
+      enabled: !!companyId
     });
 
   return {
