@@ -30,7 +30,6 @@ export function AccountSwitcher({
   const { store, handleSetStore } = useStoreContext();
   const { company, isManager } = useManagementSession();
 
-  // Verificar se `isManager` ou `listStores` estão carregando
   const isLoading = isLoadingListStores || typeof isManager === 'undefined';
 
   if (isLoading) {

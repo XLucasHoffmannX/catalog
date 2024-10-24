@@ -5,11 +5,13 @@ import { ManagerMiddleware } from '@/app/middlewares/manager/Manager.middleware'
 import { FallbackError } from '@/resources/components/manager';
 import {
   AddProductView,
+  AddStoreView,
   AuthView,
   HomeView,
   ManagerAreaView,
   OrdersView,
-  ProductsView
+  ProductsView,
+  StoreView
 } from '@/resources/views/manager';
 
 export function PublicRouter(): JSX.Element {
@@ -62,6 +64,16 @@ export function PublicRouter(): JSX.Element {
           <Route
             path='/manage'
             element={<ManagerAreaView />}
+          />
+
+          <Route
+            path='/manage/store'
+            element={<StoreView />}
+          />
+
+          <Route
+            path='/manage/add-store'
+            element={<AddStoreView />}
           />
         </Route>
       </Route>

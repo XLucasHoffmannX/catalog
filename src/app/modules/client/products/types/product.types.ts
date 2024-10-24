@@ -2,8 +2,10 @@
 
 import {
   IAddProduct,
+  ICompany,
   IProductClient,
-  IProductManagerCompany
+  IProductManagerCompany,
+  IStore
 } from '@/shared/types';
 
 /* GET_PRODUCT_LIST */
@@ -51,3 +53,6 @@ export interface IUseGetProductManagerListByCompanyPayload
 }
 
 /* addProductImages */
+export interface IAddStoreServiceResponse extends IStore {
+  company: ICompany;
+}

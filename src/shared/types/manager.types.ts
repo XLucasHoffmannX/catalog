@@ -79,3 +79,10 @@ export interface IAddProduct {
   storeId: string;
   companyId: string;
 }
+
+export interface IAddStore {
+  companyId: string;
+  name: string;
+  title: string;
+  description: string;
+}

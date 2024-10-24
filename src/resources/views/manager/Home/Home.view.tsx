@@ -24,7 +24,7 @@ export function HomeView(): JSX.Element {
               <AlertDescription>
                 Parece que você ainda não possui uma loja criada.
                 <Link
-                  to='/'
+                  to='/manage/add-store'
                   className='text-primary'
                 >
                   {' '}
