@@ -18,3 +18,14 @@ export interface IUseGetListStoresByCompany {
 export interface IAddStoreService extends IAddStore {}
 
 export interface IUseAddStorePayload extends IAddStoreService {}
+
+/* getStore */
+
+export interface IGetStorePayload {
+  companyId: string;
+  storeId: string;
+}
+
+export interface IUseGetStorePayload extends IGetStorePayload {
+  enabled?: boolean;
+}

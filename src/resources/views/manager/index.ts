@@ -6,3 +6,4 @@ export { ManagerAreaView } from './ManagerArea/ManagerArea.view';
 export { OrdersView } from './Orders/Orders.view';
 export { ProductsView } from './Products/Products.view';
 export { StoreView } from './Store/Store.view';
+export { StoreManagementView } from './StoreManagement/StoreManagement.view';

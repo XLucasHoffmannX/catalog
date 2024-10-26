@@ -1,3 +1,4 @@
+import { useManagementSession } from '@/app/modules/manager/auth/use-cases';
 import { ImageWithLoader, Loader } from '@/resources/components/global';
 import { ManagerDefaultLayoutWrapper } from '@/resources/components/layouts/manager';
 import {
@@ -38,6 +39,8 @@ export function AddProductView(): JSX.Element {
     creatingProduct
   } = useAddProduct();
 
+  const { store } = useManagementSession();
+
   return (
     <ManagerDefaultLayoutWrapper>
       <Loader
@@ -47,7 +50,12 @@ export function AddProductView(): JSX.Element {
 
       <section className='p-4 w-full flex justify-center'>
         <div className='w-full max-w-[800px]'>
-          <h1 className='font-bold text-3xl'>Adicionar Produto</h1>
+          <div className='flex flex-col'>
+            <h1 className='font-bold text-3xl'>Adicionar Produto</h1>
+            <span className='font-light'>
+              Adicionando para : <b className='font-medium  '>{store?.name}</b>
+            </span>
+          </div>
 
           <div className='mt-6'>
             <form

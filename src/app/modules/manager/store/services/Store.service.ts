@@ -4,7 +4,8 @@ import { IStore } from '@/shared/types';
 
 import {
   IAddStoreService,
-  IGetListStoresByCompanyPayload
+  IGetListStoresByCompanyPayload,
+  IGetStorePayload
 } from '../types/stores.types';
 
 class StoreService {
@@ -12,6 +13,14 @@ class StoreService {
     payload: IGetListStoresByCompanyPayload
   ): Promise<IStore[]> {
     const { data } = await HttpManagerAuth.get(`/store/${payload.companyId}`);
+
+    return data;
+  }
+
+  async getStore(payload: IGetStorePayload): Promise<IStore> {
+    const { data } = await HttpManagerAuth.get(
+      `/store/${payload.companyId}/${payload.storeId}`
+    );
 
     console.log(data);
 

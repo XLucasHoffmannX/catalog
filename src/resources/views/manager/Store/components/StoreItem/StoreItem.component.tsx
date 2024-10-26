@@ -19,7 +19,7 @@ export function StoreItem({ store }: IStoreItemProps): JSX.Element {
             {store.name}
             <span className='font-light text-sm'>{store.title}</span>
           </div>
-          <Link to='/manage/store'>
+          <Link to={`/manage/store/${store.id}`}>
             <CgOptions className='text-primary cursor-pointer text-lg' />
           </Link>
         </CardTitle>

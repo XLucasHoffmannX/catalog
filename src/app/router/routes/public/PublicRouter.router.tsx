@@ -11,6 +11,7 @@ import {
   ManagerAreaView,
   OrdersView,
   ProductsView,
+  StoreManagementView,
   StoreView
 } from '@/resources/views/manager';
 
@@ -74,6 +75,11 @@ export function PublicRouter(): JSX.Element {
           <Route
             path='/manage/add-store'
             element={<AddStoreView />}
+          />
+
+          <Route
+            path='/manage/store/:id'
+            element={<StoreManagementView />}
           />
         </Route>
       </Route>
