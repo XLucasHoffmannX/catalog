@@ -24,6 +24,5 @@ export interface IUseGetDomain {
 export interface IUseGetClient {
   client: IGetDomain['client'] | undefined;
   theme: IGetDomain['theme'] | undefined;
-  token: string | undefined;
   isLoading: boolean;
 }

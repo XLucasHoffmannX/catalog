@@ -1,3 +1,3 @@
-export { ClientThemeMiddleware } from './ClientThemeMiddleware/ClientTheme.middleware';
+export { ClientThemeMiddleware } from './client/ClientThemeMiddleware/ClientTheme.middleware';
 export { AuthManagementhMiddleware } from './manager/AuthManagement.middleware';
-export {} from './manager/Manager.middleware';
+export { ManagerMiddleware } from './manager/Manager.middleware';

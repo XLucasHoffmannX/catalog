@@ -6,7 +6,6 @@ import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'sonner';
 
-import { useProductManagerContext } from '@/app/contexts';
 import {
   useAddProductImages,
   useAddProductManager
@@ -31,7 +30,6 @@ export function useAddProduct() {
     isLoading: false
   });
 
-  const { filters } = useProductManagerContext();
   const navigate = useNavigate();
   const { mutateAddProductManager, isPendingMutate } = useAddProductManager();
   const { mutateAddProductImages } = useAddProductImages();
@@ -63,16 +61,8 @@ export function useAddProduct() {
           .then(async res => {
             toast.success(`Produto ${res.id} adicionado com sucesso!`);
 
-            queryClient.invalidateQueries({
-              queryKey: [
-                ProductQueryKeys.GET_PRODUCT_MANAGER_LIST_BY_COMPANY,
-                {
-                  page: filters.page,
-                  limit: filters.limit,
-                  companyId: companyId || '',
-                  search: filters.search
-                }
-              ]
+            queryClient.resetQueries({
+              queryKey: [ProductQueryKeys.GET_PRODUCT_MANAGER_LIST_BY_COMPANY]
             });
 
             if (fileInputs.length > 0 && res.id) {

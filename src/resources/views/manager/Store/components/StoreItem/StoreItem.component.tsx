@@ -1,6 +1,7 @@
 import { CgOptions } from 'react-icons/cg';
 import { Link } from 'react-router-dom';
 
+import { Button } from '@/resources/components/ui';
 import {
   Card,
   CardDescription,
@@ -23,7 +24,25 @@ export function StoreItem({ store }: IStoreItemProps): JSX.Element {
             <CgOptions className='text-primary cursor-pointer text-lg' />
           </Link>
         </CardTitle>
-        <CardDescription>{store.description}</CardDescription>
+        <CardDescription className='flex flex-col justify-between gap-3'>
+          <p
+            className='max-w-[200px] truncate'
+            title={store.description}
+          >
+            {store.description}
+          </p>
+          <div className='flex items-center justify-end'>
+            <Link
+              to={`//${store.domain}.${window.location.hostname}${
+                window.location.port ? `:${window.location.port}` : ''
+              }`}
+              target='_blank'
+              rel='noopener noreferrer'
+            >
+              <Button>Acessar loja</Button>
+            </Link>
+          </div>
+        </CardDescription>
       </CardHeader>
     </Card>
   );

@@ -10,7 +10,6 @@ export function useGetClient(): IUseGetClient {
   return {
     client: data?.client,
     theme: data?.theme,
-    token: data?.client.token,
     isLoading
   };
 }

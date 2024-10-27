@@ -5,5 +5,7 @@ export const env: IEnv = {
   VITE_MOCK_API: import.meta.env.VITE_MOCK_API,
   VITE_APP_URL_ROOT: import.meta.env.VITE_APP_URL_ROOT,
   COOKIE_DOMAIN: import.meta.env.COOKIE_DOMAIN,
-  COOKIE_LOCAL: import.meta.env.COOKIE_LOCAL
+  COOKIE_LOCAL: import.meta.env.COOKIE_LOCAL,
+  APP_CLIENT: import.meta.env.VITE_APP_CLIENT,
+  PASS_CLIENT: import.meta.env.VITE_PASS_CLIENT
 };

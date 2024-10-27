@@ -4,7 +4,6 @@ export interface IClient {
   clientDescription: string;
   titleHmtl: string;
   clientDomain: string;
-  token: string;
   clientBackground?: string;
   mediaLinks?: string[];
   useBackgroundDefaultPage?: boolean;

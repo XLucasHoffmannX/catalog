@@ -15,7 +15,7 @@ import {
   StoreView
 } from '@/resources/views/manager';
 
-export function PublicRouter(): JSX.Element {
+export function ManagerRouter(): JSX.Element {
   return (
     <Routes>
       <Route

@@ -4,6 +4,8 @@ import { IStore } from '@/shared/types';
 
 import {
   IAddStoreService,
+  IGetAvailableDomainPayload,
+  IGetAvailableDomainResponse,
   IGetListStoresByCompanyPayload,
   IGetStorePayload
 } from '../types/stores.types';
@@ -31,6 +33,18 @@ class StoreService {
     payload: IAddStoreService
   ): Promise<IAddStoreServiceResponse> {
     const { data } = await HttpManagerAuth.post('/store', payload);
+
+    return data;
+  }
+
+  async getAvailableDomain(
+    payload: IGetAvailableDomainPayload
+  ): Promise<IGetAvailableDomainResponse> {
+    const { data } = await HttpManagerAuth.get('/store/validate-domain', {
+      params: {
+        domain: payload.domain
+      }
+    });
 
     return data;
   }

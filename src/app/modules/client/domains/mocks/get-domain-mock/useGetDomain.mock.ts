@@ -1,5 +1,3 @@
-import { faker } from '@faker-js/faker';
-
 import { MockApi } from '@/shared/utils';
 
 import { IGetDomain, IGetDomainPayload } from '../../types/domain.types';
@@ -15,7 +13,6 @@ export async function useGetDomainMock(
       clientLogo:
         'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS8GcwXkYZrbCU7lvGmBQyZHDu_KiwX-aKH5Q&s',
       clientName: 'Jhon Roger',
-      token: faker.string.uuid(),
       useBackgroundDefaultPage: false,
       clientBackground:
         'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTfb2gAaAHBTLVSpX7m_3Yf3gAuB80wbZk3zw&s'

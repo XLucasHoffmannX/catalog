@@ -3,8 +3,6 @@ import Cookies from 'js-cookie';
 
 import { env } from '@/app/config';
 
-console.log(env.VITE_APP_URL_ROOT);
-
 export const HttpManager = axios.create({
   baseURL: env.VITE_APP_URL_ROOT
 });

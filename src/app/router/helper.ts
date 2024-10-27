@@ -1,20 +1,18 @@
 import { domain } from './constants';
+import { ClientRouter } from './routes';
 
 export function useGetApp() {
-  console.log(window.location.hostname);
   const subdomain = useGetSubdomain(window.location.hostname);
 
-  const main = domain.find(app => app.main);
+  const mainDomain = domain.find(app => app.main);
 
-  if (!main) throw new Error('Must have main router');
+  if (!mainDomain) throw new Error('Must have main router');
 
-  if (subdomain === '') return main.app;
+  // Verifica se há um subdomínio; se sim, usa ClientRouter
+  if (subdomain) return ClientRouter;
 
-  const app = domain.find(app => subdomain === app.subdomain);
-
-  if (!app) return main.app;
-
-  return app.app;
+  // Caso contrário, usa ManagerRouter
+  return mainDomain.app;
 }
 
 export function useGetSubdomain(loc: string) {
@@ -22,8 +20,8 @@ export function useGetSubdomain(loc: string) {
 
   const isLocalHost = locationParts.slice(-1)[0] === 'localhost';
 
+  // Extrai o subdomínio para localhost ou um domínio com mais de dois segmentos
   if (isLocalHost && locationParts.length > 1) {
-    console.log('entrei');
     return locationParts.slice(0, -1).join('');
   }
 
@@ -31,5 +29,5 @@ export function useGetSubdomain(loc: string) {
     return locationParts.slice(0, -2).join('.');
   }
 
-  return '';
+  return ''; // Retorna vazio para o domínio principal (sem subdomínio)
 }

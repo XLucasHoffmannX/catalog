@@ -22,6 +22,12 @@ class Mask {
           .replace(/^(\d{2})\B/, '($1) ')
           .replace(/(\d{1})?(\d{4})(\d{4})/, '$1 $2-$3');
 
+      case 'domain':
+        return value
+          .toLowerCase()
+          .replace(/\s+/g, '')
+          .replace(/[^a-z]/g, '');
+
       case 'cpf':
         if (value.length > 14) {
           return value

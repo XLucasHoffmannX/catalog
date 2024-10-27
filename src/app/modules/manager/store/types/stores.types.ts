@@ -29,3 +29,18 @@ export interface IGetStorePayload {
 export interface IUseGetStorePayload extends IGetStorePayload {
   enabled?: boolean;
 }
+
+/* availableDomain */
+export interface IGetAvailableDomainPayload {
+  domain: string;
+}
+
+export interface IGetAvailableDomainResponse {
+  available: boolean;
+  message: string;
+}
+
+export interface IUseGetAvailableDomainPayload
+  extends IGetAvailableDomainPayload {
+  enabled?: boolean;
+}

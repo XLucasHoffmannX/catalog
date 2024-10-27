@@ -15,10 +15,13 @@ import {
   Input,
   Textarea
 } from '@/resources/components/ui';
+import { cn } from '@/shared/lib/utils';
+import { Mask } from '@/shared/utils/format';
 
 import { useAddStore } from './useAddStore';
 export function AddStoreView(): JSX.Element {
-  const { methods, errors, handleSubmit, isPendingMutate } = useAddStore();
+  const { methods, errors, handleSubmit, isPendingMutate, isAvailableDomain } =
+    useAddStore();
 
   useEffect(() => {
     console.log(errors);
@@ -75,18 +78,43 @@ export function AddStoreView(): JSX.Element {
                         <FormLabel className='text-base'>
                           Nome de sua loja
                         </FormLabel>
-
                         <FormControl>
                           <Input
                             {...field}
-                            className='h-[50px] rounded'
+                            className={cn(
+                              'h-[50px] rounded',
+                              isAvailableDomain?.available &&
+                                'border border-green-600 text-green-600',
+                              !!methods.watch('name') &&
+                                !isAvailableDomain?.available &&
+                                'border border-red-600 text-red-600'
+                            )}
                             value={field.value || ''}
+                            maxLength={20}
+                            onChange={e => {
+                              const maskedValue = Mask.apply(
+                                'letters',
+                                e.target.value
+                              )
+                                .replace(/\s+/g, '')
+                                .toLowerCase();
+                              field.onChange(maskedValue);
+                            }}
                             errorMessage={errors.name?.message}
                           />
                         </FormControl>
                       </FormItem>
                     )}
                   />
+                </div>
+                <div className='flex justify-end'>
+                  {isAvailableDomain?.available && (
+                    <p className='text-green-600'>Nome disponivel</p>
+                  )}
+
+                  {!!methods.watch('name') && !isAvailableDomain?.available && (
+                    <p className='text-red-600'>Nome insdiponivel</p>
+                  )}
                 </div>
                 <FormField
                   control={methods.control}

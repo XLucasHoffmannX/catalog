@@ -64,6 +64,7 @@ export interface IStore {
   name: string;
   title: string;
   description: string;
+  domain: string;
 }
 
 export interface IAddProduct {
@@ -85,4 +86,5 @@ export interface IAddStore {
   name: string;
   title: string;
   description: string;
+  domain: string;
 }

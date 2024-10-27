@@ -6,7 +6,7 @@ type OpenModalType = {
 type FilterProductType = {
   page: number;
   limit: number;
-  search: string | undefined;
+  search: string | null;
 };
 
 export interface IProductManagerContext {

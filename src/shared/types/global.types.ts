@@ -32,7 +32,8 @@ export type MaskType =
   | 'legalNature'
   | 'cpf-cnpj'
   | 'credit-card'
-  | 'date-mm/yy';
+  | 'date-mm/yy'
+  | 'domain';
 
 interface IPaginatedSort {
   empty: boolean;

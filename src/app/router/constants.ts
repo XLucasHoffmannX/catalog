@@ -1,19 +1,9 @@
-import { ClientRouter, ManagementRouter, PublicRouter } from './routes';
+import { ManagerRouter } from './routes';
 
 export const domain = [
   {
-    subdomain: 'admin',
-    app: ManagementRouter,
-    main: false
-  },
-  {
-    subdomain: 'client',
-    app: ClientRouter,
-    main: false
-  },
-  {
     subdomain: '',
-    app: PublicRouter,
+    app: ManagerRouter,
     main: true
   }
 ];
