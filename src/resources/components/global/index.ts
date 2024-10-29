@@ -1,3 +1,5 @@
+export { AccordionSection } from './AccordionSection/AccordionSection.component';
+export { BadgeStatus } from './BadgeStatus/BadgeStatus.component';
 export { Content } from './client/Content/Content.component';
 export { ErrorScreen } from './client/ErrorScreen/ErrorScreen.component';
 export { ImageWithLoader } from './client/ImageWithLoader/ImageWithLoader.component';

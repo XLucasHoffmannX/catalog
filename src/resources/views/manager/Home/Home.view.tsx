@@ -33,6 +33,7 @@ export function HomeView(): JSX.Element {
               </AlertDescription>
             </Alert>
           )}
+
           <div className='flex items-center justify-between'>
             <div className='flex flex-col'>
               <h1 className='font-bold text-3xl'>Dashboard</h1>
@@ -51,6 +52,22 @@ export function HomeView(): JSX.Element {
               </Link>
             )}
           </div>
+
+          {isManager && store && (
+            <Alert className='my-5'>
+              <RiStore2Line className='h-4 w-4' />
+              <AlertTitle></AlertTitle>
+              <AlertDescription>
+                Acessar loja(s).
+                <Link
+                  to='/manage/store'
+                  className='text-primary ml-2'
+                >
+                  Gerenciar aqui
+                </Link>
+              </AlertDescription>
+            </Alert>
+          )}
 
           <div className='flex mt-6 gap-4 flex-wrap'>
             <CardDahsboard

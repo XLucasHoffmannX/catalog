@@ -63,6 +63,7 @@ export interface IStore {
   id: string;
   name: string;
   title: string;
+  status: boolean;
   description: string;
   domain: string;
 }

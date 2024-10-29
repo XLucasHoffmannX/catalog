@@ -1,5 +1,3 @@
-import { useEffect } from 'react';
-
 import { HiMiniChevronLeft } from 'react-icons/hi2';
 import { Link } from 'react-router-dom';
 
@@ -22,10 +20,6 @@ import { useAddStore } from './useAddStore';
 export function AddStoreView(): JSX.Element {
   const { methods, errors, handleSubmit, isPendingMutate, isAvailableDomain } =
     useAddStore();
-
-  useEffect(() => {
-    console.log(errors);
-  }, []);
 
   return (
     <ManagerDefaultLayoutWrapper>
@@ -133,6 +127,17 @@ export function AddStoreView(): JSX.Element {
                   )}
                 />
               </Form>
+              {methods.watch('name') && isAvailableDomain?.available && (
+                <div className='flex flex-col justify-center mt-2'>
+                  <p>Exemplo do domínio de sua loja:</p>
+                  <span className='font-medium text-primary'>{`${methods.watch(
+                    'name'
+                  )}.${window.location.hostname}${
+                    window.location.port ? `:${window.location.port}` : ''
+                  }`}</span>
+                </div>
+              )}
+
               <div className='flex flex-row-reverse mt-12'>
                 <Button
                   className='hover:scale-105 h-[50px] transition-all duration-300 flex items-center justify-center gap-[8px] px-[24px] transform active:scale-90 hover:opacity-[80%] md:w-[300px] w-full text-white'

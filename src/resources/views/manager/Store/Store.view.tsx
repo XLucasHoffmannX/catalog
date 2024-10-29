@@ -1,23 +1,32 @@
 import { HiMiniChevronLeft } from 'react-icons/hi2';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
+import { useStoreContext } from '@/app/contexts';
 import { ManagerDefaultLayoutWrapper } from '@/resources/components/layouts/manager';
 import { Button, Input } from '@/resources/components/ui';
 
+import { FinishStoreModal } from './components/FinishStoreModal/FinishStoreModal.component';
 import { useStoreList } from './components/StoreList/useStoreList';
 import { StoreList } from './components';
 
 export function StoreView(): JSX.Element {
   const { listStores } = useStoreList();
+  const navigate = useNavigate();
+  const { visibleFinishModal, handleVisibleFinishModal } = useStoreContext();
 
   return (
     <ManagerDefaultLayoutWrapper>
       <section className='w-full flex justify-center p-4 '>
         <div className='w-full max-w-[1280px]'>
-          <Link to='/manage'>
+          <Link
+            to='#'
+            onClick={() => {
+              navigate(-1);
+            }}
+          >
             <Button variant='outline'>
               <HiMiniChevronLeft className='text-lg' />
-              <p>Voltar a gestão</p>
+              <p>Voltar</p>
             </Button>
           </Link>
 
@@ -42,6 +51,17 @@ export function StoreView(): JSX.Element {
           <StoreList />
         </div>
       </section>
+
+      <FinishStoreModal
+        isOpen={visibleFinishModal.isVisible}
+        onCancel={() => {
+          handleVisibleFinishModal({ isVisible: false, storeId: undefined });
+        }}
+        onConfirm={() => {
+          navigate(`/manage/store/${visibleFinishModal.storeId}`);
+          handleVisibleFinishModal({ isVisible: false, storeId: undefined });
+        }}
+      />
     </ManagerDefaultLayoutWrapper>
   );
 }

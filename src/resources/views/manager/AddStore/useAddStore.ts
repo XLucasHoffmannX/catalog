@@ -4,6 +4,7 @@ import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'sonner';
 
+import { useStoreContext } from '@/app/contexts';
 import { useManagementSession } from '@/app/modules/manager/auth/use-cases';
 import { StoreQueryKeys } from '@/app/modules/manager/store/keys/store.keys';
 import {
@@ -18,6 +19,9 @@ export function useAddStore() {
   const methods = useForm<AddStoreSchemaType>({
     resolver: zodResolver(addStoreSchema)
   });
+
+  const { handleVisibleFinishModal } = useStoreContext();
+
   const queryClient = useQueryClient();
 
   const { companyId } = useManagementSession();
@@ -31,15 +35,13 @@ export function useAddStore() {
     enabled: !!methods.watch('name')
   });
 
-  console.log(isAvailableDomain);
-
   async function onSubmit(data: AddStoreSchemaType) {
     try {
       if (!!methods.getValues('name') && !isAvailableDomain?.available) {
         return toast.error('Dominio indisponivel! tente outro!');
       }
 
-      await mutateAddStore({
+      const res = await mutateAddStore({
         ...data,
         domain: data.name,
         companyId: companyId || ''
@@ -48,6 +50,8 @@ export function useAddStore() {
       queryClient.invalidateQueries({
         queryKey: [StoreQueryKeys.GET_LIST_STORES_BY_COMPANY]
       });
+
+      handleVisibleFinishModal({ isVisible: true, storeId: res.id });
 
       navigate('/manage/store');
       return;

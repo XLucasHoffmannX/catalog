@@ -1,6 +1,7 @@
 import { CgOptions } from 'react-icons/cg';
 import { Link } from 'react-router-dom';
 
+import { BadgeStatus } from '@/resources/components/global';
 import { Button } from '@/resources/components/ui';
 import {
   Card,
@@ -17,8 +18,11 @@ export function StoreItem({ store }: IStoreItemProps): JSX.Element {
       <CardHeader>
         <CardTitle className='flex items-center justify-between mb-3'>
           <div className='flex flex-col gap-2'>
-            {store.name}
-            <span className='font-light text-sm'>{store.title}</span>
+            <div className='mb-2'>
+              <BadgeStatus status={store?.status || false} />
+            </div>
+            {store.title}
+            <span className='font-light text-sm'>{store.name}</span>
           </div>
           <Link to={`/manage/store/${store.id}`}>
             <CgOptions className='text-primary cursor-pointer text-lg' />
@@ -39,7 +43,7 @@ export function StoreItem({ store }: IStoreItemProps): JSX.Element {
               target='_blank'
               rel='noopener noreferrer'
             >
-              <Button>Acessar loja</Button>
+              <Button disabled={!store?.status}>Acessar loja</Button>
             </Link>
           </div>
         </CardDescription>
