@@ -1,13 +1,16 @@
 import { HttpManagerAuth } from '@/app/api';
+import { ISetupStore } from '@/app/modules/client/domains/types/domain.types';
 import { IAddStoreServiceResponse } from '@/app/modules/client/products/types/product.types';
 import { IStore } from '@/shared/types';
 
 import {
-  IAddStoreService,
+  IAddStoreServicePayload,
   IGetAvailableDomainPayload,
   IGetAvailableDomainResponse,
   IGetListStoresByCompanyPayload,
-  IGetStorePayload
+  IGetStorePayload,
+  IGetStoreSetupByStoreIdPayload,
+  IUpdateStoreService
 } from '../types/stores.types';
 
 class StoreService {
@@ -30,9 +33,18 @@ class StoreService {
   }
 
   async addStoreService(
-    payload: IAddStoreService
+    payload: IAddStoreServicePayload
   ): Promise<IAddStoreServiceResponse> {
     const { data } = await HttpManagerAuth.post('/store', payload);
+
+    return data;
+  }
+
+  async updateStoreService({
+    storeId,
+    ...payload
+  }: IUpdateStoreService): Promise<IStore> {
+    const { data } = await HttpManagerAuth.patch(`/store/${storeId}`, payload);
 
     return data;
   }
@@ -45,6 +57,16 @@ class StoreService {
         domain: payload.domain
       }
     });
+
+    return data;
+  }
+
+  async getStoreSetupByStoreId(
+    payload: IGetStoreSetupByStoreIdPayload
+  ): Promise<ISetupStore> {
+    const { data } = await HttpManagerAuth.get(
+      `/store-setup/store/${payload.storeId}`
+    );
 
     return data;
   }

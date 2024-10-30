@@ -88,4 +88,13 @@ export interface IAddStore {
   title: string;
   description: string;
   domain: string;
+  status?: boolean;
+}
+
+export interface IUpdateStore {
+  name: string;
+  title: string;
+  description: string;
+  domain: string;
+  status?: boolean;
 }

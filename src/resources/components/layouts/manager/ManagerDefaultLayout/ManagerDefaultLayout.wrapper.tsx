@@ -9,7 +9,7 @@ export function ManagerDefaultLayoutWrapper({
 }: IManagerDefaultLayotProps): JSX.Element {
   return (
     <div
-      className='h-screen w-screen overflow-hidden overscroll-contain '
+      className='h-screen  overscroll-contain '
       {...rest}
     >
       <div className='w-full border-b flex items-center justify-between p-4'>
@@ -20,8 +20,8 @@ export function ManagerDefaultLayoutWrapper({
         <SidebarMobile />
       </div>
 
-      <div className='overflow-auto h-full animate-up'>
-        <div className='h-100 w-[98%] flex flex-col gap-6 overflow-x-hidden mb-48 p-4'>
+      <div className='h-full animate-up'>
+        <div className='h-100 w-[98%] md:w-[100%] flex flex-col gap-6  mb-48'>
           {children}
         </div>
       </div>

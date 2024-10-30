@@ -1,6 +1,7 @@
 import { AiOutlineProduct } from 'react-icons/ai';
 import { Link } from 'react-router-dom';
 
+import { useManagementSession } from '@/app/modules/manager/auth/use-cases';
 import { Button } from '@/resources/components/ui';
 import BackgroundAuth from '@/shared/assets/images/bg-auth.svg';
 
@@ -9,6 +10,8 @@ import { Login, Register } from './components';
 import { IAuthProps } from './Auth.types';
 
 export function AuthView({ context }: IAuthProps): JSX.Element {
+  const { authenticated, userAuthenticated } = useManagementSession();
+
   return (
     <div className='flex h-svh flex-col justify-between md:h-screen '>
       <main className='flex flex-1 flex-col'>
@@ -52,6 +55,17 @@ export function AuthView({ context }: IAuthProps): JSX.Element {
                         Cadastre-se
                       </Button>
                     </Link>
+
+                    {authenticated && (
+                      <Link to='/home'>
+                        <Button
+                          variant='ghost'
+                          className='text-white hover:scale-105 h-[50px] transition-all duration-300 flex items-center justify-center gap-[8px] px-[24px] rounded-full transform active:scale-90 hover:opacity-[80%] w-full'
+                        >
+                          Continuar como {userAuthenticated?.name}
+                        </Button>
+                      </Link>
+                    )}
                   </div>
                   <p className='text-muted font-medium text-neutral-600 text-lg mt-6'>
                     Criando uma conta, você concorda com todos os nossos {''}

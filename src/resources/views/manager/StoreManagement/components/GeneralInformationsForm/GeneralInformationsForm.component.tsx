@@ -1,3 +1,5 @@
+import { useEffect } from 'react';
+
 import { AccordionSection } from '@/resources/components/global';
 import {
   Button,
@@ -14,7 +16,21 @@ import { Mask } from '@/shared/utils/format';
 
 import { useGeneralInformationsForm } from './useGeneralInformationsForm';
 export function GeneralInformationsForm(): JSX.Element {
-  const { methods, handleSubmit, errors } = useGeneralInformationsForm();
+  const {
+    methods,
+    handleSubmit,
+    errors,
+    store,
+    isAvailableDomain,
+    isNameDirty,
+    handleSetStatusStore,
+    isLoadingButton
+  } = useGeneralInformationsForm();
+
+  useEffect(() => {
+    console.log(errors);
+  }, [errors]);
+
   return (
     <AccordionSection
       title='Informações gerais'
@@ -56,7 +72,16 @@ export function GeneralInformationsForm(): JSX.Element {
                   <FormControl>
                     <Input
                       {...field}
-                      className={cn('h-[50px] rounded')}
+                      className={cn(
+                        'h-[50px] rounded',
+                        isAvailableDomain?.available &&
+                          methods.watch('name') !== '' &&
+                          'border border-green-600 text-green-600',
+                        isNameDirty &&
+                          !isAvailableDomain?.available &&
+                          methods.watch('name') !== '' &&
+                          'border border-red-600 text-red-600'
+                      )}
                       value={field.value || ''}
                       maxLength={20}
                       onChange={e => {
@@ -74,6 +99,17 @@ export function GeneralInformationsForm(): JSX.Element {
                 </FormItem>
               )}
             />
+          </div>
+          <div className='flex justify-end'>
+            {methods.watch('name') !== '' && isAvailableDomain?.available && (
+              <p className='text-green-600'>Nome disponivel</p>
+            )}
+
+            {isNameDirty &&
+              !isAvailableDomain?.available &&
+              methods.watch('name') !== '' && (
+                <p className='text-red-600'>Nome insdiponivel</p>
+              )}
           </div>
 
           <FormField
@@ -93,10 +129,25 @@ export function GeneralInformationsForm(): JSX.Element {
             )}
           />
         </Form>
-        <div className='flex flex-row-reverse mt-1'>
+        <div className='flex justify-between mt-1'>
+          <Button
+            variant='outline'
+            className='hover:scale-105 h-[50px] transition-all duration-300 flex items-center justify-center gap-[8px] px-[24px] transform active:scale-90 hover:opacity-[80%] md:w-[300px] w-full '
+            type='button'
+            onClick={() => {
+              if (store) {
+                handleSetStatusStore(!store?.status);
+              }
+            }}
+            isLoading={isLoadingButton}
+          >
+            {store?.status ? 'Desativar' : 'Ativar'} loja
+          </Button>
+
           <Button
             className='hover:scale-105 h-[50px] transition-all duration-300 flex items-center justify-center gap-[8px] px-[24px] transform active:scale-90 hover:opacity-[80%] md:w-[300px] w-full text-white'
             type='submit'
+            isLoading={isLoadingButton}
           >
             Atualizar
           </Button>

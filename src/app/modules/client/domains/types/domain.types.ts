@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-empty-object-type */
 
-import { IClient, IThemeVariables } from '@/shared/types';
+import { IClient, IStore, IThemeVariables } from '@/shared/types';
 
 /* GET_DOMAIN */
 export interface IGetDomainPayload {
@@ -25,4 +25,28 @@ export interface IUseGetClient {
   client: IGetDomain['client'] | undefined;
   theme: IGetDomain['theme'] | undefined;
   isLoading: boolean;
+}
+
+export type ThemeType =
+  | 'zinc'
+  | 'slate'
+  | 'stone'
+  | 'gray'
+  | 'neutral'
+  | 'red'
+  | 'rose'
+  | 'orange'
+  | 'green'
+  | 'blue'
+  | 'yellow'
+  | 'violet';
+
+export interface ISetupStore {
+  id?: string;
+  themeType: ThemeType;
+  setup: {
+    client: IClient;
+    theme: IThemeVariables;
+  };
+  store: IStore;
 }

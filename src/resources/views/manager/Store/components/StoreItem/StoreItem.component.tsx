@@ -18,7 +18,7 @@ export function StoreItem({ store }: IStoreItemProps): JSX.Element {
       <CardHeader>
         <CardTitle className='flex items-center justify-between mb-3'>
           <div className='flex flex-col gap-2'>
-            <div className='mb-2'>
+            <div className='mb-2 max-w-[70px]'>
               <BadgeStatus status={store?.status || false} />
             </div>
             {store.title}

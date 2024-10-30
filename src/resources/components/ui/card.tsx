@@ -49,7 +49,7 @@ const CardDescription = React.forwardRef<
   React.HTMLAttributes<HTMLParagraphElement>
   // eslint-disable-next-line react/prop-types
 >(({ className, ...props }, ref) => (
-  <p
+  <div
     ref={ref}
     className={cn('text-sm text-muted-foreground', className)}
     {...props}

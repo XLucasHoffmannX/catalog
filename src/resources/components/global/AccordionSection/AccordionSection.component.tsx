@@ -1,6 +1,7 @@
 import { HiChevronDown, HiChevronUp } from 'react-icons/hi2';
 
 import { cn } from '@/shared/lib/utils';
+import { useTheme } from '@/shared/styles/theme/theme-provider';
 
 import { Separator } from '../../ui';
 
@@ -14,10 +15,16 @@ export function AccordionSection({
   separator
 }: IAccordionSectionProps): JSX.Element {
   const { visibleContent, onChangeVisibleContent } = useAccordionSection();
+  const { theme } = useTheme();
 
   return (
     <>
-      <div className='mt-6 bg-neutral-50 p-4 rounded '>
+      <div
+        className={cn(
+          'mt-6  p-4 rounded ',
+          theme === 'light' && 'bg-neutral-50'
+        )}
+      >
         <div className='flex items-center justify-between'>
           <h1 className={cn('text-xl font-light', visibleContent && 'mb-5')}>
             {title}
@@ -35,6 +42,7 @@ export function AccordionSection({
             />
           )}
         </div>
+
         {visibleContent && <div className='animate-up'>{children}</div>}
       </div>
 

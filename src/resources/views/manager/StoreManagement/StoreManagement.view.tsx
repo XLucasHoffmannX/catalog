@@ -31,7 +31,6 @@ export function StoreManagementView(): JSX.Element {
             <div className='flex flex-col md:flex-row md:items-center items-start md:gap-4'>
               <div className='flex items-center'>
                 <h1>
-                  Gerenciar:{' '}
                   {isLoadingStore ? (
                     <Skeleton className='h-7 w-[100px]' />
                   ) : (

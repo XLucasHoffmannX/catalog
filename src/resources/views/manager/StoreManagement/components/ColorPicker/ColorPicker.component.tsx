@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
+import { ThemeType } from '@/app/modules/client/domains/types/domain.types';
 import { Button } from '@/resources/components/ui';
 
 interface IColorButtonProps {
@@ -10,8 +11,29 @@ interface IColorButtonProps {
 }
 
 interface IColorPickerProps {
-  onChange: (selectedColor: string) => void;
+  onChange: (selectedColor: ThemeType) => void;
+  themeType?: ThemeType;
 }
+
+const themeTypeToColorName: Record<ThemeType, string> = {
+  zinc: 'Zinco',
+  slate: 'Ardósia',
+  stone: 'Pedra',
+  gray: 'Cinza',
+  neutral: 'Neutro',
+  red: 'Vermelho',
+  rose: 'Rosa',
+  orange: 'Laranja',
+  green: 'Verde',
+  blue: 'Azul',
+  yellow: 'Amarelo',
+  violet: 'Violeta'
+};
+
+// Reverso para obter o themeType a partir do colorName
+const colorNameToThemeType = Object.fromEntries(
+  Object.entries(themeTypeToColorName).map(([key, value]) => [value, key])
+) as Record<string, ThemeType>;
 
 function ColorButton({
   colorClass,
@@ -31,8 +53,22 @@ function ColorButton({
   );
 }
 
-export function ColorPicker({ onChange }: IColorPickerProps): JSX.Element {
-  const [selectedColor, setSelectedColor] = useState<string | null>(null);
+export function ColorPicker({
+  onChange,
+  themeType
+}: IColorPickerProps): JSX.Element {
+  const initialColor = themeType ? themeTypeToColorName[themeType] : null;
+  const [selectedColor, setSelectedColor] = useState<string | null>(
+    initialColor
+  );
+
+  useEffect(() => {
+    if (themeType) {
+      const initialColorName = themeTypeToColorName[themeType];
+      setSelectedColor(initialColorName);
+      onChange(themeType);
+    }
+  }, [themeType, onChange]);
 
   const colors = [
     { colorClass: 'bg-zinc-500', colorName: 'Zinco' },
@@ -51,7 +87,8 @@ export function ColorPicker({ onChange }: IColorPickerProps): JSX.Element {
 
   const handleSelectColor = (colorName: string) => {
     setSelectedColor(colorName);
-    onChange(colorName);
+    const selectedThemeType = colorNameToThemeType[colorName];
+    onChange(selectedThemeType);
   };
 
   return (

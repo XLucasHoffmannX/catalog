@@ -16,7 +16,8 @@ import { ColorPicker } from '../ColorPicker/ColorPicker.component';
 import { useSetupForm } from './useSetupForm';
 
 export function SetupStoreForm(): JSX.Element {
-  const { methods, handleSubmit, errors } = useSetupForm();
+  const { methods, handleSubmit, errors, themeType, handleChangeSetTheme } =
+    useSetupForm();
 
   return (
     <AccordionSection title='Customizar minha loja'>
@@ -24,7 +25,8 @@ export function SetupStoreForm(): JSX.Element {
         Selecione o tema padrão de sua loja:
       </p>
       <ColorPicker
-        onChange={(color: string) => console.log('Cor selecionada:', color)}
+        onChange={(color: string) => handleChangeSetTheme(color)}
+        themeType={themeType ? themeType : undefined}
       />
 
       <form
@@ -38,12 +40,15 @@ export function SetupStoreForm(): JSX.Element {
               name='client.clientLogo'
               render={({ field }) => (
                 <FormItem className='w-full'>
-                  <FormLabel className='text-base'>Logo do Cliente</FormLabel>
+                  <FormLabel className='text-base'>
+                    Logo do loja (url)
+                  </FormLabel>
                   <FormControl>
                     <Input
                       {...field}
                       type='url'
                       className='h-[50px] rounded'
+                      value={field.value || ''}
                       errorMessage={errors.client?.clientLogo?.message}
                     />
                   </FormControl>
@@ -60,10 +65,12 @@ export function SetupStoreForm(): JSX.Element {
                 <FormItem className='flex items-center gap-3'>
                   <FormLabel className='text-base'>Logo</FormLabel>
                   <FormControl>
-                    <Switch
-                      checked={field.value}
-                      onCheckedChange={field.onChange}
-                    />
+                    <div>
+                      <Switch
+                        checked={field.value}
+                        onCheckedChange={field.onChange}
+                      />
+                    </div>
                   </FormControl>
                 </FormItem>
               )}
@@ -75,12 +82,11 @@ export function SetupStoreForm(): JSX.Element {
             name='client.clientDescription'
             render={({ field }) => (
               <FormItem>
-                <FormLabel className='text-base'>
-                  Descrição do Cliente
-                </FormLabel>
+                <FormLabel className='text-base'>Descrição do loja</FormLabel>
                 <FormControl>
                   <Textarea
                     {...field}
+                    value={field.value || ''}
                     className='h-[70px] rounded'
                   />
                 </FormControl>
@@ -98,6 +104,7 @@ export function SetupStoreForm(): JSX.Element {
                   <Input
                     {...field}
                     className='h-[50px] rounded'
+                    value={field.value || ''}
                     errorMessage={errors.client?.titleHmtl?.message}
                   />
                 </FormControl>
@@ -107,14 +114,60 @@ export function SetupStoreForm(): JSX.Element {
 
           <FormField
             control={methods.control}
+            name='client.clientBackground'
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel className='text-base'>
+                  Imagem de fundo da loja (url)
+                </FormLabel>
+                <FormControl>
+                  <Input
+                    {...field}
+                    type='url'
+                    className='h-[50px] rounded'
+                    value={field.value || ''}
+                    errorMessage={errors.theme?.header?.titleColor?.message}
+                  />
+                </FormControl>
+              </FormItem>
+            )}
+          />
+
+          <div className='flex items-center'>
+            <FormField
+              control={methods.control}
+              name='client.useBackgroundDefaultPage'
+              render={({ field }) => (
+                <FormItem className='flex items-center gap-3'>
+                  <FormLabel className='text-base'>
+                    Usar fundo em todas as páginas?
+                  </FormLabel>
+                  <FormControl>
+                    <div>
+                      <Switch
+                        checked={field.value}
+                        onCheckedChange={field.onChange}
+                      />
+                    </div>
+                  </FormControl>
+                </FormItem>
+              )}
+            />
+          </div>
+
+          <FormField
+            control={methods.control}
             name='theme.header.titleColor'
             render={({ field }) => (
               <FormItem>
-                <FormLabel className='text-base'>Cor do Título</FormLabel>
+                <FormLabel className='text-base'>
+                  Cor do título da loja
+                </FormLabel>
                 <FormControl>
                   <Input
                     {...field}
                     className='h-[50px] rounded'
+                    value={field.value || ''}
                     errorMessage={errors.theme?.header?.titleColor?.message}
                   />
                 </FormControl>
@@ -127,10 +180,13 @@ export function SetupStoreForm(): JSX.Element {
             name='theme.header.subTitleColor'
             render={({ field }) => (
               <FormItem>
-                <FormLabel className='text-base'>Cor do Subtítulo</FormLabel>
+                <FormLabel className='text-base'>
+                  Cor do subtítulo da loja
+                </FormLabel>
                 <FormControl>
                   <Input
                     {...field}
+                    value={field.value || ''}
                     className='h-[50px] rounded'
                     errorMessage={errors.theme?.header?.subTitleColor?.message}
                   />
