@@ -73,7 +73,7 @@ export function useGeneralInformationsForm() {
     try {
       await mutateUpdateStore({
         ...data,
-        status: store?.status,
+        status: store?.status || false,
         domain: data.name,
         storeId: id || ''
       });

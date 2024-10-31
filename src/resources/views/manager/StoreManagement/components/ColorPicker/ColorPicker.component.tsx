@@ -30,7 +30,7 @@ const themeTypeToColorName: Record<ThemeType, string> = {
   violet: 'Violeta'
 };
 
-// Reverso para obter o themeType a partir do colorName
+// Mapeamento reverso para obter o `ThemeType` a partir do `colorName`
 const colorNameToThemeType = Object.fromEntries(
   Object.entries(themeTypeToColorName).map(([key, value]) => [value, key])
 ) as Record<string, ThemeType>;
@@ -63,12 +63,13 @@ export function ColorPicker({
   );
 
   useEffect(() => {
+    // Atualiza `selectedColor` quando `themeType` muda
     if (themeType) {
       const initialColorName = themeTypeToColorName[themeType];
       setSelectedColor(initialColorName);
-      onChange(themeType);
+      onChange(themeType); // Notifica a alteração para o `onChange`
     }
-  }, [themeType, onChange]);
+  }, [themeType]);
 
   const colors = [
     { colorClass: 'bg-zinc-500', colorName: 'Zinco' },
@@ -88,6 +89,7 @@ export function ColorPicker({
   const handleSelectColor = (colorName: string) => {
     setSelectedColor(colorName);
     const selectedThemeType = colorNameToThemeType[colorName];
+    console.log('ThemeType selecionado:', selectedThemeType);
     onChange(selectedThemeType);
   };
 

@@ -1,3 +1,7 @@
+import { ThemeType } from '@/app/modules/client/domains/types/domain.types';
+
+import { IThemeVariables } from './theme.types';
+
 export interface IClient {
   clientName: string;
   clientLogo: string;
@@ -47,4 +51,12 @@ export interface IAddressClient {
   neighborhood: string;
   city: string;
   state: string;
+}
+
+export interface IUpdateStoreSetup {
+  client: IClient;
+  theme: {
+    type: ThemeType;
+    header?: IThemeVariables['header'];
+  };
 }

@@ -1,4 +1,9 @@
-import { IAddStore, IStore, IUpdateStore } from '@/shared/types';
+import {
+  IAddStore,
+  IStore,
+  IUpdateStore,
+  IUpdateStoreSetup
+} from '@/shared/types';
 
 export interface IGetListStoresByCompanyPayload {
   companyId: string;
@@ -52,12 +57,24 @@ export interface IUseGetAvailableDomainPayload
   enabled?: boolean;
 }
 
-/*  */
+/* getStoreSetupByStoreId */
 export interface IGetStoreSetupByStoreIdPayload {
   storeId: string;
 }
 
 export interface IUseGetStoreSetupByStoreIdPayload
   extends IGetStoreSetupByStoreIdPayload {
+  enabled?: boolean;
+}
+
+/* updateStoreSetup */
+export interface IUpdateStoreSetupPayload {
+  setup: IUpdateStoreSetup;
+  storeSetupId: string;
+}
+
+export interface IUseUpdateStoreSetupPayload {
+  setup: IUpdateStoreSetup;
+  storeSetupId: string;
   enabled?: boolean;
 }

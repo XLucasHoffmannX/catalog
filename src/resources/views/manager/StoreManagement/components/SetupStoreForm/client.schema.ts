@@ -2,8 +2,6 @@ import { z } from 'zod';
 
 const requiredError = 'Campo obrigatório';
 
-const themeUtilTypeSchema = z.record(z.string());
-
 const clientSchema = z.object({
   clientName: z.string({ required_error: requiredError }),
   clientLogo: z.string({ required_error: requiredError }),
@@ -22,9 +20,7 @@ const themeVariablesSchema = z.object({
       subTitleColor: z.string({ required_error: requiredError }),
       logoAccept: z.boolean({ required_error: requiredError })
     })
-    .optional(),
-  light: themeUtilTypeSchema,
-  dark: themeUtilTypeSchema
+    .optional()
 });
 
 export const clientDomainSchema = z.object({

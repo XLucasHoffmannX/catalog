@@ -1,19 +1,28 @@
 import { useEffect, useState } from 'react';
 
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useQueryClient } from '@tanstack/react-query';
 import { useForm } from 'react-hook-form';
 import { useParams } from 'react-router-dom';
 import { toast } from 'sonner';
 
 import { ThemeType } from '@/app/modules/client/domains/types/domain.types';
-import { useGetStoreSetupByStoreId } from '@/app/modules/manager/store/use-cases';
+import { StoreQueryKeys } from '@/app/modules/manager/store/keys/store.keys';
+import {
+  useGetStoreSetupByStoreId,
+  useUpdateStoreSetup
+} from '@/app/modules/manager/store/use-cases';
+import { axiosErrorHandler } from '@/shared/utils';
 
 import { clientDomainSchema, ClientSchemaType } from './client.schema';
 
 export function useSetupForm() {
   const { id } = useParams();
+  const queryClient = useQueryClient();
 
-  const [theme, setTheme] = useState<string>();
+  const [theme, setTheme] = useState<ThemeType>();
+
+  const { mutateUpdateStoreStup, isPendingMutate } = useUpdateStoreSetup();
 
   const { setup, isError } = useGetStoreSetupByStoreId({
     storeId: id || '',
@@ -41,8 +50,39 @@ export function useSetupForm() {
     }
   }, [setup, methods, isError]);
 
-  function onSubmit(data: ClientSchemaType) {
-    console.log(data);
+  async function onSubmit(data: ClientSchemaType) {
+    try {
+      if (theme) {
+        console.log(theme);
+        await mutateUpdateStoreStup({
+          storeSetupId: setup?.id || '',
+          setup: {
+            client: data.client,
+            theme: {
+              type: theme,
+              header: data.theme.header
+            }
+          }
+        });
+
+        queryClient.invalidateQueries({
+          queryKey: [
+            StoreQueryKeys.GET_STORE_STEUP_BY_STORE_ID,
+            { storeId: id }
+          ]
+        });
+
+        queryClient.invalidateQueries({
+          queryKey: [StoreQueryKeys.GET_LIST_STORES_BY_COMPANY]
+        });
+
+        toast.success('Dados atualizados com sucesso!');
+
+        return;
+      }
+    } catch (error) {
+      axiosErrorHandler(error);
+    }
   }
 
   return {
@@ -50,6 +90,7 @@ export function useSetupForm() {
     methods,
     errors: methods.formState.errors,
     themeType: setup?.themeType,
-    handleChangeSetTheme: setTheme
+    handleChangeSetTheme: setTheme,
+    isLoading: isPendingMutate
   };
 }

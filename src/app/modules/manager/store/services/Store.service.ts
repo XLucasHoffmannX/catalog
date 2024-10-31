@@ -10,7 +10,8 @@ import {
   IGetListStoresByCompanyPayload,
   IGetStorePayload,
   IGetStoreSetupByStoreIdPayload,
-  IUpdateStoreService
+  IUpdateStoreService,
+  IUpdateStoreSetupPayload
 } from '../types/stores.types';
 
 class StoreService {
@@ -66,6 +67,15 @@ class StoreService {
   ): Promise<ISetupStore> {
     const { data } = await HttpManagerAuth.get(
       `/store-setup/store/${payload.storeId}`
+    );
+
+    return data;
+  }
+
+  async updateStoreSetup({ setup, storeSetupId }: IUpdateStoreSetupPayload) {
+    const { data } = await HttpManagerAuth.patch(
+      `/store-setup/${storeSetupId}`,
+      { setup: setup }
     );
 
     return data;

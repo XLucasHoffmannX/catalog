@@ -1,3 +1,4 @@
+import { ThemeType } from '@/app/modules/client/domains/types/domain.types';
 import { AccordionSection } from '@/resources/components/global';
 import {
   Button,
@@ -16,16 +17,26 @@ import { ColorPicker } from '../ColorPicker/ColorPicker.component';
 import { useSetupForm } from './useSetupForm';
 
 export function SetupStoreForm(): JSX.Element {
-  const { methods, handleSubmit, errors, themeType, handleChangeSetTheme } =
-    useSetupForm();
+  const {
+    methods,
+    handleSubmit,
+    errors,
+    themeType,
+    handleChangeSetTheme,
+    isLoading
+  } = useSetupForm();
 
   return (
     <AccordionSection title='Customizar minha loja'>
       <p className='font-semibold text-base'>
         Selecione o tema padrão de sua loja:
       </p>
+
       <ColorPicker
-        onChange={(color: string) => handleChangeSetTheme(color)}
+        onChange={(color: ThemeType) => {
+          console.log('Color selecionado no onChange:', color);
+          handleChangeSetTheme(color);
+        }}
         themeType={themeType ? themeType : undefined}
       />
 
@@ -199,6 +210,7 @@ export function SetupStoreForm(): JSX.Element {
             <Button
               className='hover:scale-105 h-[50px] transition-all duration-300 flex items-center justify-center gap-[8px] px-[24px] transform active:scale-90 hover:opacity-[80%] md:w-[300px] w-full text-white'
               type='submit'
+              isLoading={isLoading}
             >
               Salvar
             </Button>

@@ -4,3 +4,4 @@ export { useGetListStoresByCompany } from './get-list-stores-by-company/useGetLi
 export { useGetStore } from './get-store/useGetStore';
 export { useGetStoreSetupByStoreId } from './get-store-setup-by-store-id/useGetStoreSetupByStoreId';
 export { useUpdateStoreManager } from './update-store-manager/useUpdateStoreManager';
+export { useUpdateStoreSetup } from './update-store-setup/useUpdateStoreSetup';
