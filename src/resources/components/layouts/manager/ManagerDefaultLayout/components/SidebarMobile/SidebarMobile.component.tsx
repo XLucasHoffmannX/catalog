@@ -28,7 +28,7 @@ export function SidebarMobile({ ...rest }: ISidebarMobileProps): JSX.Element {
           <LogoActionHeader mobile />
 
           <UserInformation
-            text={userAuthenticated?.login || ''}
+            text={userAuthenticated?.name || ''}
             className='my-4'
           />
 

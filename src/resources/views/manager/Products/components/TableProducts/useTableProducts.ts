@@ -12,7 +12,7 @@ export function useTableProduct() {
       page: filters.page,
       limit: 15,
       companyId: companyId || '',
-      search: filters.search,
+      search: filters.search || '',
       enabled: !!companyId
     });
 
