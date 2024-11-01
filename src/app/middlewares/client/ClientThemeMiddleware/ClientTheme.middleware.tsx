@@ -2,23 +2,31 @@ import { useEffect } from 'react';
 
 import { Outlet } from 'react-router-dom';
 
-import { useGetClient } from '@/app/modules/client/products';
-import { SplashScreen } from '@/resources/components/global';
+import { useGetDomainClient } from '@/app/modules/client/domains/use-cases/get-domain-client/useGetDomainClient';
+import { ErrorScreen, SplashScreen } from '@/resources/components/global';
+import { useSubdomain } from '@/shared/hooks';
 import { useTheme } from '@/shared/styles/theme/theme-provider';
 
 export function ClientThemeMiddleware(): JSX.Element {
   const { theme } = useTheme();
 
-  const { theme: themeClient, isLoading, client } = useGetClient();
+  const subdomain = useSubdomain();
+
+  const { data, isLoading } = useGetDomainClient({
+    domain: subdomain,
+    enabled: !!subdomain
+  });
+
+  const titleHtml = data?.store.storeSetup.setup.client.titleHmtl;
 
   useEffect(() => {
-    if (client?.titleHmtl && client?.titleHmtl !== '') {
-      document.title = client.titleHmtl;
+    if (titleHtml && titleHtml !== '') {
+      document.title = titleHtml;
     }
 
     const root = document.documentElement;
 
-    const themeVariables = themeClient;
+    const themeVariables = data?.theme;
 
     const setCSSVariables = (variables: { [key: string]: string }) => {
       Object.keys(variables).forEach(key => {
@@ -34,10 +42,14 @@ export function ClientThemeMiddleware(): JSX.Element {
 
       setCSSVariables(themeVariables.light);
     }
-  }, [theme, themeClient]);
+  }, [theme, data?.theme]);
 
   if (isLoading) {
     return <SplashScreen />;
+  }
+
+  if (!data?.store.status) {
+    return <ErrorScreen description='Loja indisponível no momento' />;
   }
 
   return <Outlet />;

@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-empty-object-type */
 
-import { IClient, IStore, IThemeVariables } from '@/shared/types';
+import { IClient, ICompany, IStore, IThemeVariables } from '@/shared/types';
 
 /* GET_DOMAIN */
 export interface IGetDomainPayload {
@@ -49,4 +49,21 @@ export interface ISetupStore {
     theme: IThemeVariables;
   };
   store: IStore;
+}
+
+/* getDomainClient */
+export interface IGetDomainClientPayload {
+  domain: string;
+}
+
+export interface IDomainClient {
+  store: IStore & {
+    company: ICompany;
+    storeSetup: ISetupStore;
+  };
+  theme: IThemeVariables;
+}
+
+export interface IUseGetDomainClientPayload extends IGetDomainClientPayload {
+  enabled?: boolean;
 }
