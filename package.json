@@ -28,6 +28,7 @@
     "@types/node": "^22.5.1",
     "add": "^2.0.6",
     "axios": "^1.7.5",
+    "cheerio": "^1.0.0",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "embla-carousel-react": "^8.2.0",

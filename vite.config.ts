@@ -3,8 +3,10 @@ import path from 'path';
 import { defineConfig } from 'vite';
 import tsconfigPaths from 'vite-tsconfig-paths';
 
+import sri from './vite-plugin-sri.js';
+
 export default defineConfig({
-  plugins: [react(), tsconfigPaths()],
+  plugins: [react(), tsconfigPaths(), sri()],
   server: {
     open: '/',
     port: 4200
