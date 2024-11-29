@@ -21,7 +21,7 @@ export function TableProducts(): JSX.Element {
   const defaultOptions = useAnimationLottie(EmptyAnimation);
 
   return (
-    <Table className='max-w-[1200px]'>
+    <Table>
       <TableHeader>
         <TableRow>
           <TableHead>Imagem</TableHead>

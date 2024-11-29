@@ -1,6 +1,7 @@
 import { CgOptions } from 'react-icons/cg';
 import { Link } from 'react-router-dom';
 
+import { managerRoutes } from '@/app/router/routes/manager/managerRoutes.constant';
 import { BadgeStatus } from '@/resources/components/global';
 import { Button } from '@/resources/components/ui';
 import {
@@ -24,7 +25,7 @@ export function StoreItem({ store }: IStoreItemProps): JSX.Element {
             {store.title}
             <span className='font-light text-sm'>{store.name}</span>
           </div>
-          <Link to={`/manage/store/${store.id}`}>
+          <Link to={`${managerRoutes.manageStoreId}${store.id}`}>
             <CgOptions className='text-primary cursor-pointer text-lg' />
           </Link>
         </CardTitle>

@@ -7,3 +7,4 @@ export { OrdersView } from './Orders/Orders.view';
 export { ProductsView } from './Products/Products.view';
 export { StoreView } from './Store/Store.view';
 export { StoreManagementView } from './StoreManagement/StoreManagement.view';
+export { TestView } from './Test/Test.view';

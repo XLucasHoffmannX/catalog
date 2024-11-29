@@ -1,8 +1,8 @@
-import { HiMiniChevronLeft } from 'react-icons/hi2';
 import { Link, useNavigate } from 'react-router-dom';
 
 import { useStoreContext } from '@/app/contexts';
-import { ManagerDefaultLayoutWrapper } from '@/resources/components/layouts/manager';
+import { managerRoutes } from '@/app/router/routes/manager/managerRoutes.constant';
+import { ManageAppLayoutWrapper } from '@/resources/components/layouts/manager';
 import { Button, Input } from '@/resources/components/ui';
 
 import { FinishStoreModal } from './components/FinishStoreModal/FinishStoreModal.component';
@@ -15,23 +15,16 @@ export function StoreView(): JSX.Element {
   const { visibleFinishModal, handleVisibleFinishModal } = useStoreContext();
 
   return (
-    <ManagerDefaultLayoutWrapper>
-      <section className='w-full flex justify-center p-4 '>
-        <div className='w-full max-w-[1280px]'>
-          <Link
-            to='#'
-            onClick={() => {
-              navigate(-1);
-            }}
-          >
-            <Button variant='outline'>
-              <HiMiniChevronLeft className='text-lg' />
-              <p>Voltar</p>
-            </Button>
-          </Link>
-
+    <ManageAppLayoutWrapper
+      breadcrumbs={[
+        { name: 'Empresa', url: managerRoutes.manage },
+        { name: 'Lojas' }
+      ]}
+    >
+      <section className='w-full flex justify-center'>
+        <div className='w-full'>
           <div className='flex flex-col'>
-            <h1 className='font-bold text-3xl mt-5'>Minhas Lojas</h1>
+            <h1 className='font-bold text-3xl'>Lojas</h1>
             <p className='font-light font-sm'>
               {listStores?.length} de 10 criadas
             </p>
@@ -62,6 +55,6 @@ export function StoreView(): JSX.Element {
           handleVisibleFinishModal({ isVisible: false, storeId: undefined });
         }}
       />
-    </ManagerDefaultLayoutWrapper>
+    </ManageAppLayoutWrapper>
   );
 }

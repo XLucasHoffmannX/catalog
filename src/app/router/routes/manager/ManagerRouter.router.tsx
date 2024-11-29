@@ -15,6 +15,8 @@ import {
   StoreView
 } from '@/resources/views/manager';
 
+import { managerRoutes } from './managerRoutes.constant';
+
 export function ManagerRouter(): JSX.Element {
   return (
     <Routes>
@@ -24,12 +26,12 @@ export function ManagerRouter(): JSX.Element {
       />
 
       <Route
-        path='/login'
+        path={managerRoutes.login}
         element={<AuthView context='login' />}
       />
 
       <Route
-        path='/register'
+        path={managerRoutes.register}
         element={<AuthView context='register' />}
       />
 
@@ -38,22 +40,22 @@ export function ManagerRouter(): JSX.Element {
         element={<AuthManagementhMiddleware />}
       >
         <Route
-          path='/home'
+          path={managerRoutes.home}
           element={<HomeView />}
         />
 
         <Route
-          path='/products'
+          path={managerRoutes.products}
           element={<ProductsView />}
         />
 
         <Route
-          path='/add-product'
+          path={managerRoutes.addProduct}
           element={<AddProductView />}
         />
 
         <Route
-          path='/orders'
+          path={managerRoutes.addProduct}
           element={<OrdersView />}
         />
 
@@ -63,22 +65,22 @@ export function ManagerRouter(): JSX.Element {
           element={<ManagerMiddleware />}
         >
           <Route
-            path='/manage'
+            path={managerRoutes.manage}
             element={<ManagerAreaView />}
           />
 
           <Route
-            path='/manage/store'
+            path={managerRoutes.manageStore}
             element={<StoreView />}
           />
 
           <Route
-            path='/manage/add-store'
+            path={managerRoutes.manageAddStore}
             element={<AddStoreView />}
           />
 
           <Route
-            path='/manage/store/:id'
+            path={`${managerRoutes.manageStoreId}:id`}
             element={<StoreManagementView />}
           />
         </Route>

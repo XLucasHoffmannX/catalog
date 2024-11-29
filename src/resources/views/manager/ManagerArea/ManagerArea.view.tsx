@@ -3,15 +3,21 @@ import { FaUsers } from 'react-icons/fa';
 import { PiStorefrontDuotone } from 'react-icons/pi';
 import { TbGraphFilled } from 'react-icons/tb';
 
-import { ManagerDefaultLayoutWrapper } from '@/resources/components/layouts/manager';
+import { managerRoutes } from '@/app/router/routes/manager/managerRoutes.constant';
+import { ManageAppLayoutWrapper } from '@/resources/components/layouts/manager';
 
 import { ManagerItem } from './components';
 
 export function ManagerAreaView(): JSX.Element {
   return (
-    <ManagerDefaultLayoutWrapper>
-      <section className='w-full flex justify-center p-4 '>
-        <div className='w-full max-w-[1280px]'>
+    <ManageAppLayoutWrapper
+      breadcrumbs={[
+        { name: 'Empresa', url: managerRoutes.manage },
+        { name: 'Gerenciar' }
+      ]}
+    >
+      <section className='w-full flex justify-center '>
+        <div className='w-full'>
           <h1 className='font-bold text-3xl'>Gerenciar empresa</h1>
 
           <sub className='font-light text-sm'>Área de controle geral</sub>
@@ -42,6 +48,6 @@ export function ManagerAreaView(): JSX.Element {
           </div>
         </div>
       </section>
-    </ManagerDefaultLayoutWrapper>
+    </ManageAppLayoutWrapper>
   );
 }

@@ -1,8 +1,8 @@
-import { HiMiniChevronLeft } from 'react-icons/hi2';
 import { Link } from 'react-router-dom';
 
+import { managerRoutes } from '@/app/router/routes/manager/managerRoutes.constant';
 import { BadgeStatus, Loader } from '@/resources/components/global';
-import { ManagerDefaultLayoutWrapper } from '@/resources/components/layouts/manager';
+import { ManageAppLayoutWrapper } from '@/resources/components/layouts/manager';
 import { Button, Separator, Skeleton } from '@/resources/components/ui';
 
 import { GeneralInformationsForm, SetupStoreForm } from './components';
@@ -12,18 +12,17 @@ export function StoreManagementView(): JSX.Element {
   const { store, isLoadingStore } = useStoreManagement();
 
   return (
-    <ManagerDefaultLayoutWrapper>
+    <ManageAppLayoutWrapper
+      breadcrumbs={[
+        { name: 'Empresa', url: managerRoutes.manage },
+        { name: 'Lojas', url: managerRoutes.manageStore },
+        { name: store?.title || '' }
+      ]}
+    >
       <Loader isLoading={isLoadingStore} />
 
-      <section className='w-full flex justify-center p-4 '>
-        <div className='w-full max-w-[1280px]'>
-          <Link to='/manage/store'>
-            <Button variant='outline'>
-              <HiMiniChevronLeft className='text-lg' />
-              <p>Voltar</p>
-            </Button>
-          </Link>
-
+      <section className='w-full flex justify-center '>
+        <div className='w-full'>
           <div className='font-bold text-3xl mt-5 flex flex-col'>
             <div className='flex items-center'>
               <BadgeStatus status={store?.status || false} />
@@ -60,6 +59,6 @@ export function StoreManagementView(): JSX.Element {
           <SetupStoreForm />
         </div>
       </section>
-    </ManagerDefaultLayoutWrapper>
+    </ManageAppLayoutWrapper>
   );
 }

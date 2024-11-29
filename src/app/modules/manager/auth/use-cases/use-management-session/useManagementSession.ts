@@ -6,6 +6,7 @@ import { useAuthContext } from '@/app/contexts/auth/useAuth.context';
 
 export function useManagementSession() {
   const { store } = useStoreContext();
+
   const token = Cookies.get('access-token') as string;
 
   const [userAuthenticated, handleLogout] = useAuthContext(

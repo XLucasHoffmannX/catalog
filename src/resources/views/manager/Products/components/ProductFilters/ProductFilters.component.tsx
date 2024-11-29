@@ -2,6 +2,7 @@ import { PiStorefrontDuotone } from 'react-icons/pi';
 import { Link } from 'react-router-dom';
 
 import { useProductManagerContext, useStoreContext } from '@/app/contexts';
+import { managerRoutes } from '@/app/router/routes/manager/managerRoutes.constant';
 import {
   Button,
   Input,
@@ -62,7 +63,7 @@ export function ProductFilters(): JSX.Element {
           ))}
         </SelectContent>
       </Select>
-      <Link to='/add-product'>
+      <Link to={managerRoutes.addProduct}>
         <Button className='text-white'>Adicionar +</Button>
       </Link>
     </div>

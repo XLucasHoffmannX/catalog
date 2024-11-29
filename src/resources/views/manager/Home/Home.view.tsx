@@ -5,7 +5,7 @@ import { TbZoomMoney } from 'react-icons/tb';
 import { Link } from 'react-router-dom';
 
 import { useManagementSession } from '@/app/modules/manager/auth/use-cases';
-import { ManagerDefaultLayoutWrapper } from '@/resources/components/layouts/manager';
+import { ManageAppLayoutWrapper } from '@/resources/components/layouts/manager';
 import { Alert, AlertDescription, AlertTitle } from '@/resources/components/ui';
 
 import { CardDahsboard, ChartDashboard } from './components';
@@ -13,10 +13,12 @@ import { CardDahsboard, ChartDashboard } from './components';
 export function HomeView(): JSX.Element {
   const { isManager, store } = useManagementSession();
 
+  console.log(store);
+
   return (
-    <ManagerDefaultLayoutWrapper>
-      <section className='w-full flex justify-center p-4'>
-        <div className='max-w-[1280px]'>
+    <ManageAppLayoutWrapper breadcrumbs={[{ name: 'Inicio' }]}>
+      <section className='w-full p-4'>
+        <div className=''>
           {isManager && !store && (
             <Alert className='mb-5'>
               <RiStore2Line className='h-4 w-4' />
@@ -85,11 +87,11 @@ export function HomeView(): JSX.Element {
             />
           </div>
 
-          <div className='mt-4 max-w-[1200px]'>
+          <div className='mt-4 '>
             <ChartDashboard />
           </div>
         </div>
       </section>
-    </ManagerDefaultLayoutWrapper>
+    </ManageAppLayoutWrapper>
   );
 }

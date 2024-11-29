@@ -1,8 +1,6 @@
-import { HiMiniChevronLeft } from 'react-icons/hi2';
-import { Link } from 'react-router-dom';
-
+import { managerRoutes } from '@/app/router/routes/manager/managerRoutes.constant';
 import { Loader } from '@/resources/components/global';
-import { ManagerDefaultLayoutWrapper } from '@/resources/components/layouts/manager';
+import { ManageAppLayoutWrapper } from '@/resources/components/layouts/manager';
 import {
   Button,
   Form,
@@ -22,19 +20,17 @@ export function AddStoreView(): JSX.Element {
     useAddStore();
 
   return (
-    <ManagerDefaultLayoutWrapper>
+    <ManageAppLayoutWrapper
+      breadcrumbs={[
+        { name: 'Empresa', url: managerRoutes.manage },
+        { name: 'Adicionar Loja' }
+      ]}
+    >
       <Loader isLoading={isPendingMutate} />
 
       <section className='p-4 w-full flex justify-center'>
         <div className='w-full max-w-[800px]'>
-          <Link to='/manage/store'>
-            <Button variant='outline'>
-              <HiMiniChevronLeft className='text-lg' />
-              <p>Voltar </p>
-            </Button>
-          </Link>
-
-          <h1 className='font-bold text-3xl mt-4'>Adicionar Loja</h1>
+          <h1 className='font-bold text-3xl'>Adicionar Loja</h1>
 
           <div className='mt-6'>
             <form
@@ -150,6 +146,6 @@ export function AddStoreView(): JSX.Element {
           </div>
         </div>
       </section>
-    </ManagerDefaultLayoutWrapper>
+    </ManageAppLayoutWrapper>
   );
 }

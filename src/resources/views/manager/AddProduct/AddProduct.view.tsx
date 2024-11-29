@@ -1,6 +1,7 @@
 import { useManagementSession } from '@/app/modules/manager/auth/use-cases';
+import { managerRoutes } from '@/app/router/routes/manager/managerRoutes.constant';
 import { ImageWithLoader, Loader } from '@/resources/components/global';
-import { ManagerDefaultLayoutWrapper } from '@/resources/components/layouts/manager';
+import { ManageAppLayoutWrapper } from '@/resources/components/layouts/manager';
 import {
   Button,
   Form,
@@ -42,13 +43,18 @@ export function AddProductView(): JSX.Element {
   const { store } = useManagementSession();
 
   return (
-    <ManagerDefaultLayoutWrapper>
+    <ManageAppLayoutWrapper
+      breadcrumbs={[
+        { name: 'Produtos', url: managerRoutes.products },
+        { name: 'Adicionar novo produto' }
+      ]}
+    >
       <Loader
         isLoading={creatingProduct.isLoading}
         message={creatingProduct.message}
       />
 
-      <section className='p-4 w-full flex justify-center'>
+      <section className='w-full flex justify-center'>
         <div className='w-full max-w-[800px]'>
           <div className='flex flex-col'>
             <h1 className='font-bold text-3xl'>Adicionar Produto</h1>
@@ -353,6 +359,6 @@ export function AddProductView(): JSX.Element {
           </div>
         </div>
       </section>
-    </ManagerDefaultLayoutWrapper>
+    </ManageAppLayoutWrapper>
   );
 }

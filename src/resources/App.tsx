@@ -26,14 +26,14 @@ export function App(): JSX.Element {
       <QueryClientProvider client={queryClient}>
         <ReactQueryDevtools
           initialIsOpen={false}
-          buttonPosition='bottom-left'
+          buttonPosition='bottom-right'
         />
 
         <Router />
 
         <Toaster
           richColors
-          position='top-center'
+          position='top-right'
         />
       </QueryClientProvider>
     </ThemeProvider>
