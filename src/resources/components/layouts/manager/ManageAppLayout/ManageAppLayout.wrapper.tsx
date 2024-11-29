@@ -1,18 +1,12 @@
 import { ThemeModeToggle } from '@/resources/components/global';
 import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbList,
-  BreadcrumbPage,
-  BreadcrumbSeparator,
   Separator,
   SidebarInset,
   SidebarProvider,
   SidebarTrigger
 } from '@/resources/components/ui';
 
-import { ManageAppSidebar } from './components';
+import { BreadcrumbsHeader, ManageAppSidebar } from './components';
 
 import { IManageAppLayoutProps } from './ManageAppLayout.types';
 
@@ -34,31 +28,7 @@ export function ManageAppLayoutWrapper({
               className='mr-2 h-4'
             />
 
-            {breadcrumbs &&
-              breadcrumbs?.length > 0 &&
-              breadcrumbs.map((bread, index) => (
-                <Breadcrumb key={`${bread.name}-${index}`}>
-                  <BreadcrumbList>
-                    {bread.name && bread.url && (
-                      <BreadcrumbItem className='hidden md:block'>
-                        <BreadcrumbLink to={bread.url}>
-                          {bread.name}
-                        </BreadcrumbLink>
-                      </BreadcrumbItem>
-                    )}
-
-                    {bread.name && !bread.url && (
-                      <BreadcrumbItem>
-                        <BreadcrumbPage>{bread.name}</BreadcrumbPage>
-                      </BreadcrumbItem>
-                    )}
-
-                    {index < breadcrumbs.length - 1 && (
-                      <BreadcrumbSeparator className='hidden md:block' />
-                    )}
-                  </BreadcrumbList>
-                </Breadcrumb>
-              ))}
+            <BreadcrumbsHeader items={breadcrumbs} />
           </div>
 
           <ThemeModeToggle />

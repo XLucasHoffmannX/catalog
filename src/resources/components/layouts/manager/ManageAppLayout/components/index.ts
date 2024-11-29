@@ -1,3 +1,4 @@
+export { BreadcrumbsHeader } from './BreadcrumbsHeader/BreadcrumbsHeader.component';
 export { ManageAppSidebar } from './ManageAppSidebar/ManageAppSidebar.component';
 export { NavArea } from './NavArea/NavArea.component';
 export { NavMain } from './NavMain/NavMain.component';
