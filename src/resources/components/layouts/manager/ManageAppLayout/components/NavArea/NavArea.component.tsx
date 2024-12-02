@@ -21,7 +21,7 @@ import {
 
 import { useNavArea } from './useNavArea';
 
-export function NavArea() {
+export function NavArea(): JSX.Element | null {
   const { isMobile } = useSidebar();
 
   const { listStores, isLoadingListStores } = useNavArea();
@@ -31,20 +31,17 @@ export function NavArea() {
     return <Skeleton className='h-[120px] w-[240px] ml-2' />;
   }
 
-  return (
-    <SidebarGroup className='group-data-[collapsible=icon]:hidden'>
-      <Separator className='mb-3' />
+  if (listStores && listStores.length > 0)
+    return (
+      <SidebarGroup className='group-data-[collapsible=icon]:hidden'>
+        <Separator className='mb-3' />
 
-      <SidebarGroupLabel>Lojas</SidebarGroupLabel>
-      <SidebarMenu>
-        {listStores &&
-          listStores.slice(0, 5).map((store, index) => (
-            <>
-              <SidebarMenuItem key={`${store.id}-${index}`}>
-                <Link
-                  to={`${managerRoutes.manageStoreId}${store.id}`}
-                  className='flex gap-2 items-center'
-                >
+        <SidebarGroupLabel>Lojas</SidebarGroupLabel>
+        <SidebarMenu>
+          {listStores &&
+            listStores.slice(0, 5).map((store, index) => (
+              <>
+                <SidebarMenuItem key={`${store.id}-${index}`}>
                   <SidebarMenuButton>
                     <PiStorefrontDuotone />
                     <span>{store.name}</span>
@@ -62,33 +59,50 @@ export function NavArea() {
                       align={isMobile ? 'end' : 'start'}
                     >
                       <DropdownMenuItem>
-                        <PiStorefrontDuotone className='text-muted-foreground size-4 mr-2' />
-                        <span>Editar loja</span>
+                        <Link
+                          to={`${managerRoutes.manageStoreId}${store.id}`}
+                          className='flex items-center'
+                        >
+                          <PiStorefrontDuotone className='text-muted-foreground size-4 mr-2' />
+                          <span>Editar loja</span>
+                        </Link>
                       </DropdownMenuItem>
-                      <DropdownMenuItem>
-                        <Forward className='text-muted-foreground size-4 mr-2' />
 
-                        <span>Acessar loja</span>
+                      <DropdownMenuItem>
+                        <Link
+                          to={`//${store.domain}.${window.location.hostname}${
+                            window.location.port
+                              ? `:${window.location.port}`
+                              : ''
+                          }`}
+                          target='_blank'
+                          rel='noopener noreferrer'
+                          className='flex items-center'
+                        >
+                          <Forward className='text-muted-foreground size-4 mr-2' />
+                          <span>Acessar loja</span>
+                        </Link>
                       </DropdownMenuItem>
                     </DropdownMenuContent>
                   </DropdownMenu>
-                </Link>
-              </SidebarMenuItem>
-            </>
-          ))}
+                </SidebarMenuItem>
+              </>
+            ))}
 
-        <SidebarMenuItem>
-          <SidebarMenuButton className='text-sidebar-foreground/70'>
-            <Link
-              to={managerRoutes.manageStore}
-              className='flex items-center gap-2'
-            >
-              <MoreHorizontal className='text-sidebar-foreground/70' />
-              <span>Ver todas</span>
-            </Link>
-          </SidebarMenuButton>
-        </SidebarMenuItem>
-      </SidebarMenu>
-    </SidebarGroup>
-  );
+          <SidebarMenuItem>
+            <SidebarMenuButton className='text-sidebar-foreground/70'>
+              <Link
+                to={managerRoutes.manageStore}
+                className='flex items-center gap-2'
+              >
+                <MoreHorizontal className='text-sidebar-foreground/70' />
+                <span>Ver todas</span>
+              </Link>
+            </SidebarMenuButton>
+          </SidebarMenuItem>
+        </SidebarMenu>
+      </SidebarGroup>
+    );
+
+  return null;
 }

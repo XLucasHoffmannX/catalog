@@ -3,7 +3,14 @@ import { Link } from 'react-router-dom';
 import { managerRoutes } from '@/app/router/routes/manager/managerRoutes.constant';
 import { BadgeStatus, Loader } from '@/resources/components/global';
 import { ManageAppLayoutWrapper } from '@/resources/components/layouts/manager';
-import { Button, Separator, Skeleton } from '@/resources/components/ui';
+import {
+  Button,
+  Skeleton,
+  Tabs,
+  TabsContent,
+  TabsList,
+  TabsTrigger
+} from '@/resources/components/ui';
 
 import { GeneralInformationsForm, SetupStoreForm } from './components';
 import { useStoreManagement } from './useStoreManagement';
@@ -52,11 +59,25 @@ export function StoreManagementView(): JSX.Element {
             </div>
             <span className='text-base font-normal'>{store?.title}</span>
           </div>
-          <Separator className='my-4' />
 
-          <GeneralInformationsForm />
+          <Tabs
+            defaultValue='costumize'
+            className=' mt-5'
+          >
+            <TabsList className=''>
+              <TabsTrigger value='generalInformation'>
+                Informações Gerais
+              </TabsTrigger>
+              <TabsTrigger value='costumize'>Personalizar</TabsTrigger>
+            </TabsList>
 
-          <SetupStoreForm />
+            <TabsContent value='generalInformation'>
+              <GeneralInformationsForm />
+            </TabsContent>
+            <TabsContent value='costumize'>
+              <SetupStoreForm />
+            </TabsContent>
+          </Tabs>
         </div>
       </section>
     </ManageAppLayoutWrapper>

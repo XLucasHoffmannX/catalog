@@ -3,16 +3,13 @@ import { HiChevronDown, HiChevronUp } from 'react-icons/hi2';
 import { cn } from '@/shared/lib/utils';
 import { useTheme } from '@/shared/styles/theme/theme-provider';
 
-import { Separator } from '../../ui';
-
 import { useAccordionSection } from './useAccordionSection';
 
 import { IAccordionSectionProps } from './AccordionSection.types';
 
 export function AccordionSection({
   title,
-  children,
-  separator
+  children
 }: IAccordionSectionProps): JSX.Element {
   const { visibleContent, onChangeVisibleContent } = useAccordionSection();
   const { theme } = useTheme();
@@ -20,10 +17,7 @@ export function AccordionSection({
   return (
     <>
       <div
-        className={cn(
-          'mt-6  p-4 rounded ',
-          theme === 'light' && 'bg-neutral-50'
-        )}
+        className={cn('mt-6  rounded ', theme === 'light' && 'bg-neutral-50')}
       >
         <div className='flex items-center justify-between'>
           <h1 className={cn('text-xl font-light', visibleContent && 'mb-5')}>
@@ -45,8 +39,6 @@ export function AccordionSection({
 
         {visibleContent && <div className='animate-up'>{children}</div>}
       </div>
-
-      {separator && <Separator className='my-4' />}
     </>
   );
 }

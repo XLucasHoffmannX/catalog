@@ -56,3 +56,13 @@ export interface IUseGetProductManagerListByCompanyPayload
 export interface IAddStoreServiceResponse extends IStore {
   company: ICompany;
 }
+
+/* getProductsClient */
+
+export interface IGetProductClientPayload {
+  storeId: string;
+}
+
+export interface IUseGetProductClientPayload extends IGetProductClientPayload {
+  enabled?: boolean;
+}

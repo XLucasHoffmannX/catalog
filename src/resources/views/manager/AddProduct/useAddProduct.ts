@@ -20,6 +20,7 @@ import { CreatingProductType } from './AddProduct.types';
 
 export function useAddProduct() {
   const { companyId, storeId } = useManagementSession();
+
   const queryClient = useQueryClient();
 
   const [fileInputs, setFileInputs] = useState<File[]>([]);
@@ -49,12 +50,12 @@ export function useAddProduct() {
           storeId,
           price: Number(data.price),
           name: data.name,
-          discount: data.discount,
+          discount: data.discount || 0,
           content: data.content,
           description: data.description,
           minQuantity: data.minQuantity,
           category: '',
-          available: 100
+          available: data.available
         };
 
         await mutateAddProductManager(payload)

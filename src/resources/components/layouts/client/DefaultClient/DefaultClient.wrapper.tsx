@@ -19,11 +19,11 @@ export function DefaultClientWrapper({
           <div className='mt-8 p-3 flex flex-col gap-3 animate-up items-center'>
             <DefaultClientCategories />
 
-            {/* scroll order */}
             <>{children}</>
           </div>
         </div>
       </div>
+
       <DefaultClientCartFloat />
     </div>
   );

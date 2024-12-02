@@ -1,5 +1,6 @@
 export { useAddProductImages } from './add-product-images/useAddProductImages';
 export { useAddProductManager } from './add-product-manager/useAddProductManager';
+export { useGetProductClient } from './get-product-client/useGetProductClient';
 export { useGetProductList } from './get-product-list/useGetProductList';
 export { useGetProductManagerList } from './get-product-manager-list/useGetProductManagerList';
 export { useGetProductManagerListByCompany } from './get-product-manager-list-by-company/useGetProductManagerListByCompany';

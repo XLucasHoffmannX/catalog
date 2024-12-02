@@ -32,10 +32,7 @@ export function GeneralInformationsForm(): JSX.Element {
   }, [errors]);
 
   return (
-    <AccordionSection
-      title='Informações gerais'
-      separator
-    >
+    <AccordionSection title='Informações gerais'>
       <form
         onSubmit={handleSubmit}
         className='flex flex-col gap-3'

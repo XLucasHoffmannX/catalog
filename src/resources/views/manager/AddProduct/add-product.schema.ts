@@ -8,7 +8,7 @@ export const addProductSchema = z.object({
   content: z.string({ required_error: requeriredError }),
   price: z.number({ required_error: requeriredError }),
   available: z.number({ required_error: requeriredError }),
-  discount: z.number({ required_error: requeriredError }),
+  discount: z.number({ required_error: requeriredError }).optional(),
   quantity: z.number({ required_error: requeriredError }),
   minQuantity: z.number({ required_error: requeriredError })
 });

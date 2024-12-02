@@ -1,4 +1,5 @@
 import { HttpManagerAuth } from '@/app/api';
+import { HttpClientAuth } from '@/app/api/client/client';
 import { env } from '@/app/config';
 import {
   IPaginatedResponse,
@@ -11,6 +12,7 @@ import { useGetProductListMock } from '../mocks';
 
 import {
   IAddProductManagerPayload,
+  IGetProductClientPayload,
   IGetProductList,
   IGetProductListPayload,
   IGetProductManagerListByCompanyPayload,
@@ -70,6 +72,14 @@ export class ProductService {
 
   async addProductImages(payload: FormData) {
     const { data } = await HttpManagerAuth.post('/product-images', payload);
+
+    return data;
+  }
+
+  async getProductClient(payload: IGetProductClientPayload) {
+    const { data } = await HttpClientAuth.get<IProductManager[]>(
+      `/product/${payload.storeId}`
+    );
 
     return data;
   }

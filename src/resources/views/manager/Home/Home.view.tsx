@@ -19,23 +19,6 @@ export function HomeView(): JSX.Element {
     <ManageAppLayoutWrapper breadcrumbs={[{ name: 'Inicio' }]}>
       <section className='w-full p-4'>
         <div className=''>
-          {isManager && !store && (
-            <Alert className='mb-5'>
-              <RiStore2Line className='h-4 w-4' />
-              <AlertTitle>Crie uma loja!</AlertTitle>
-              <AlertDescription>
-                Parece que você ainda não possui uma loja criada.
-                <Link
-                  to='/manage/add-store'
-                  className='text-primary'
-                >
-                  {' '}
-                  Crie aqui
-                </Link>
-              </AlertDescription>
-            </Alert>
-          )}
-
           <div className='flex items-center justify-between'>
             <div className='flex flex-col'>
               <h1 className='font-bold text-3xl'>Dashboard</h1>
@@ -66,6 +49,23 @@ export function HomeView(): JSX.Element {
                   className='text-primary ml-2'
                 >
                   Gerenciar aqui
+                </Link>
+              </AlertDescription>
+            </Alert>
+          )}
+
+          {isManager && !store && (
+            <Alert className='my-5 '>
+              <RiStore2Line className='h-4 w-4' />
+              <AlertTitle>Crie uma loja!</AlertTitle>
+              <AlertDescription>
+                Parece que você ainda não possui uma loja criada.
+                <Link
+                  to='/manage/add-store'
+                  className='text-primary'
+                >
+                  {' '}
+                  Crie aqui
                 </Link>
               </AlertDescription>
             </Alert>
