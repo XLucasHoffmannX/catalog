@@ -7,7 +7,9 @@ export type VisibleFinishModalType = {
 
 export interface IUseStoreContext {
   store: IStore | undefined;
+  storeClient: IStore | undefined;
   visibleFinishModal: VisibleFinishModalType;
   handleVisibleFinishModal: (value: VisibleFinishModalType) => void;
   handleSetStore: (store: IStore) => void;
+  handleSetStoreClient: (storeClient: IStore) => void;
 }

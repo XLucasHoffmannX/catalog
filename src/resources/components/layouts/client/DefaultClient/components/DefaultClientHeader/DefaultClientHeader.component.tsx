@@ -1,14 +1,11 @@
 import { AiFillInstagram } from 'react-icons/ai';
-import { FaUser } from 'react-icons/fa';
 import { HiShoppingBag } from 'react-icons/hi2';
 import { IoLogoWhatsapp } from 'react-icons/io';
-import { IoMenu } from 'react-icons/io5';
 import { MdDarkMode } from 'react-icons/md';
 import { MdOutlineLightMode } from 'react-icons/md';
-import { TbFilterSearch } from 'react-icons/tb';
 import { useNavigate } from 'react-router-dom';
 
-import { useCartContext } from '@/app/contexts';
+import { useCartContext, useClientContext } from '@/app/contexts';
 import { useGetClient } from '@/app/modules/client/products';
 import { Avatar, AvatarImage, Badge, Input } from '@/resources/components/ui';
 import { useTheme } from '@/shared/styles/theme/theme-provider';
@@ -21,6 +18,7 @@ export function DefaultClientHeader({
   hiddenSearch
 }: IDefaultClientHeaderProps): JSX.Element {
   const navigate = useNavigate();
+  const { handleChangeFilter } = useClientContext();
 
   const { client, theme: themeClient, isLoading } = useGetClient();
 
@@ -45,14 +43,14 @@ export function DefaultClientHeader({
       <div className='flex items-center justify-center'>
         <div className='flex items-center justify-between gap-2 w-full md:w-[800px] '>
           <div className='flex items-center gap-2'>
-            <div className='bg-secondary p-2 rounded-lg flex gap-2 items-center justify-center cursor-pointer'>
+            {/* <div className='bg-secondary p-2 rounded-lg flex gap-2 items-center justify-center cursor-pointer'>
               <IoMenu className='text-secondary-foreground text-xl' />
-            </div>
+            </div> */}
 
-            <div className='bg-secondary p-2 rounded-lg flex gap-2 items-center justify-center cursor-pointer'>
+            {/* <div className='bg-secondary p-2 rounded-lg flex gap-2 items-center justify-center cursor-pointer'>
               <FaUser className='text-primary text-sm' />
               <p className='leading-4 text-sm font-semibold'>Entrar</p>
-            </div>
+            </div> */}
           </div>
 
           <div className='flex items-center gap-2'>
@@ -143,12 +141,15 @@ export function DefaultClientHeader({
             <Input
               className='bg-white h-12 rounded-2xl shadow-lg shadow-slate-500/30 animate-up md:w-[800px] text-black'
               placeholder='Buscar...'
+              onChange={e => {
+                handleChangeFilter({ search: e.target.value });
+              }}
             />
 
-            <div className='flex border border-input items-center gap-2 bg-white rounded-2xl shadow-lg shadow-slate-500/30 animate-up p-3 text-muted-foreground hover:text-secondary-foreground active:text-secondary-foreground cursor-pointer'>
+            {/* <div className='flex border border-input items-center gap-2 bg-white rounded-2xl shadow-lg shadow-slate-500/30 animate-up p-3 text-muted-foreground hover:text-secondary-foreground active:text-secondary-foreground cursor-pointer'>
               <p>Filtros</p>
               <TbFilterSearch className='text-primary' />
-            </div>
+            </div> */}
           </div>
         </div>
       )}

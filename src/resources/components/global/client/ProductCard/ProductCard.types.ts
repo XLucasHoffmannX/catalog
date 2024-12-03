@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-empty-object-type */
 
-import { IProductClient } from '@/shared/types';
+import { IProduct } from '@/shared/types';
 
 export interface IProductCardProps {
-  product: IProductClient;
+  product: IProduct;
 }

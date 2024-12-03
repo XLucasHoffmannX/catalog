@@ -7,6 +7,7 @@ type FilterProductType = {
   page: number;
   limit: number;
   search: string | null;
+  storeId: string | null;
 };
 
 export interface IProductManagerContext {

@@ -1,12 +1,18 @@
-import { useGetProductList } from '@/app/modules/client/products';
 import {
   ProductCard,
   ProductCardSkeleton
 } from '@/resources/components/global';
 import { DefaultClientWrapper } from '@/resources/components/layouts/client';
 
+import { useCatalog } from './useCatalog';
+
 export function CatalogView(): JSX.Element {
-  const { productList, isLoadingProducts } = useGetProductList({ limit: 5 });
+  const { products, isLoadingProducts, loadMoreProducts, itemCount } =
+    useCatalog();
+
+  console.log(products?.meta.totalItems !== products?.items.length);
+  console.log('totalItems', products?.meta.totalItems);
+  console.log('items', products?.items.length);
 
   return (
     <DefaultClientWrapper>
@@ -15,13 +21,13 @@ export function CatalogView(): JSX.Element {
           <p className='font-bold text-muted-foreground w-[900px]'>Produtos</p>
         </div>
 
-        <div className='w-full flex md:flex-row flex-col flex-wrap justify-center gap-3 '>
+        <div className='w-full flex md:flex-row flex-col flex-wrap justify-center gap-3 grow'>
           {isLoadingProducts &&
             Array.from({ length: 5 }).map((item, index) => (
               <ProductCardSkeleton key={index} />
             ))}
 
-          {productList?.map((product, index) => (
+          {products?.items?.map((product, index) => (
             <ProductCard
               product={product}
               key={`${product.id}-${index}`}
@@ -29,13 +35,17 @@ export function CatalogView(): JSX.Element {
           ))}
         </div>
 
-        {productList && productList?.length > 0 && (
-          <div className='flex items-center justify-center'>
-            <div className='bg-primary text-secondary border border-input py-3 px-4 rounded-xl cursor-pointer'>
-              <p>Ver mais produtos</p>
+        {products?.meta.totalItems &&
+          itemCount < products?.meta?.totalItems && (
+            <div className='flex items-center justify-center'>
+              <div
+                className='bg-primary text-secondary border border-input py-3 px-4 rounded-xl cursor-pointer'
+                onClick={loadMoreProducts}
+              >
+                <p>Ver mais produtos</p>
+              </div>
             </div>
-          </div>
-        )}
+          )}
       </div>
     </DefaultClientWrapper>
   );

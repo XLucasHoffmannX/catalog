@@ -7,8 +7,6 @@ import { Skeleton } from '@/resources/components/ui';
 export function DefaultClientCategories(): JSX.Element {
   const { categories, isLoadingCategories } = useGetCategories({ limit: 10 });
 
-  console.log(categories);
-
   return (
     <Fragment>
       {isLoadingCategories ? (

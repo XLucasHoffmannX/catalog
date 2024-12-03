@@ -4,6 +4,8 @@ import { IUseStoreContext } from './useStoreContext.types';
 
 export const useStoreContext = create<IUseStoreContext>()(set => ({
   store: undefined,
+  storeClient: undefined,
+
   visibleFinishModal: {
     isVisible: false,
     storeId: undefined
@@ -15,5 +17,9 @@ export const useStoreContext = create<IUseStoreContext>()(set => ({
 
   handleSetStore: store => {
     set({ store: store });
+  },
+
+  handleSetStoreClient: store => {
+    set({ storeClient: store });
   }
 }));

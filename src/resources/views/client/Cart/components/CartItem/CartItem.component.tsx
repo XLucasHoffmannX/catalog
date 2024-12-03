@@ -23,26 +23,28 @@ export function CartItem({ item }: ICartItemClientProps): JSX.Element {
   return (
     <div className='bg-secondary p-3 rounded-xl flex items-center justify-between gap-2 shadow-lg md:w-[500px] animate-up'>
       <div className='w-[100px] h-[100px] rounded-xl bg-primary flex items-center justify-center text-secondary font-bold overflow-hidden'>
-        {!!item.images?.length && (
-          <ImageWithLoader
-            src={item.images[0]}
-            alt={item.title}
-            maxH='100'
-            maxW='100'
-          />
-        )}
+        <ImageWithLoader
+          src={
+            item.images.length > 0
+              ? (item.images[0] as string)
+              : 'https://semantic-ui.com/images/wireframe/image.png'
+          }
+          alt={item.name}
+          maxH='100px'
+          maxW='100px'
+        />
       </div>
       <div className='h-[100px] flex flex-col justify-between'>
         <p className='leading-4 text-sm font-medium truncate w-[150px]'>
-          {item.title}
+          {item.name}
         </p>
 
         <div>
-          {item.fareUnique && (
+          {/* {item.fareUnique && (
             <small className='font-bold text-secondary-foreground'>
               Frete: R$ 00,00
             </small>
-          )}
+          )} */}
 
           <p className='leading-4 text-sm font-bold text-primary'>
             {Currency.format('BRL', item.price, true)}

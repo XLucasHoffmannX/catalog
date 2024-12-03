@@ -1,8 +1,4 @@
-import {
-  DefaultClientCartFloat,
-  DefaultClientCategories,
-  DefaultClientHeader
-} from './components';
+import { DefaultClientCartFloat, DefaultClientHeader } from './components';
 
 import { IDefaultLayoutProps } from './DefaultClient.types';
 
@@ -17,7 +13,7 @@ export function DefaultClientWrapper({
           <DefaultClientHeader pageGeneral={pageGeneral} />
 
           <div className='mt-8 p-3 flex flex-col gap-3 animate-up items-center'>
-            <DefaultClientCategories />
+            {/* <DefaultClientCategories /> */}
 
             <>{children}</>
           </div>

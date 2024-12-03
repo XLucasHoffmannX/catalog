@@ -55,7 +55,7 @@ export function useAddProduct() {
           description: data.description,
           minQuantity: data.minQuantity,
           category: '',
-          available: data.available
+          available: data.available || 0
         };
 
         await mutateAddProductManager(payload)

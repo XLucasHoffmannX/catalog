@@ -50,6 +50,12 @@ export function ProductTableRow({
         <TableCell title={product.id?.toString()}>{product.id}</TableCell>
         <TableCell
           className='max-w-[150px] truncate'
+          title={product.store.title}
+        >
+          {product.store.title}
+        </TableCell>
+        <TableCell
+          className='max-w-[150px] truncate'
           title={product.name}
         >
           {product.name}

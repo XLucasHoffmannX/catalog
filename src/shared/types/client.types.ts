@@ -1,5 +1,6 @@
 import { ThemeType } from '@/app/modules/client/domains/types/domain.types';
 
+import { IProduct } from './manager.types';
 import { IThemeVariables } from './theme.types';
 
 export interface IClient {
@@ -31,7 +32,7 @@ export interface IProductClient {
   fareUnique?: number;
 }
 
-export interface ICartItemClient extends IProductClient {
+export interface ICartItemClient extends IProduct {
   uuidControl: string;
   quantityCart?: number;
   dateAdd: string;

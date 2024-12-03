@@ -13,6 +13,8 @@ export function useTableProduct() {
       limit: 15,
       companyId: companyId || '',
       search: filters.search || '',
+      storeId:
+        filters.storeId === 'none' ? undefined : filters.storeId || undefined,
       enabled: !!companyId
     });
 

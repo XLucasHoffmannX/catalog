@@ -6,7 +6,7 @@ export interface ICart {
   quantityItems: number;
 }
 
-export interface IUseCartontext {
+export interface IUseCartContext {
   cart: ICart;
   itemToBeRemoved: ICartItemClient | null;
   cartItems: ICartItemClient[] | null;

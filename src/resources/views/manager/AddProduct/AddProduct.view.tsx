@@ -2,6 +2,7 @@ import { useManagementSession } from '@/app/modules/manager/auth/use-cases';
 import { managerRoutes } from '@/app/router/routes/manager/managerRoutes.constant';
 import { ImageWithLoader, Loader } from '@/resources/components/global';
 import { ManageAppLayoutWrapper } from '@/resources/components/layouts/manager';
+import { AccountSwitcher } from '@/resources/components/layouts/manager/ManagerDefaultLayout/components/AccountSwitcher/AccountSwitch.component';
 import {
   Button,
   Form,
@@ -35,8 +36,6 @@ export function AddProductView(): JSX.Element {
     handleFileChange,
     onChangePreviewImages,
     previewImages,
-    fileInputs,
-    handleAddImages,
     creatingProduct
   } = useAddProduct();
 
@@ -58,9 +57,11 @@ export function AddProductView(): JSX.Element {
         <div className='w-full max-w-[800px]'>
           <div className='flex flex-col'>
             <h1 className='font-bold text-3xl'>Adicionar Produto</h1>
-            <span className='font-light'>
+            <span className='font-light mb-4'>
               Adicionando para : <b className='font-medium  '>{store?.name}</b>
             </span>
+
+            <AccountSwitcher />
           </div>
 
           <div className='mt-6'>
@@ -248,6 +249,9 @@ export function AddProductView(): JSX.Element {
                               onChange={e =>
                                 field.onChange(Number(e.target.value))
                               }
+                              maxLength={1}
+                              min={1}
+                              max={5}
                             />
                           </FormControl>
                         </div>
@@ -268,26 +272,13 @@ export function AddProductView(): JSX.Element {
                 </p>
 
                 <div className='flex md:flex-nowrap flex-wrap gap-2'>
-                  {/* Múltiplos arquivos aceitos */}
                   <Input
                     type='file'
                     accept='image/png, image/jpeg'
                     className='md:w-full'
-                    multiple // Permite múltiplos arquivos
+                    multiple
                     onChange={handleFileChange}
                   />
-
-                  <Button
-                    type='button'
-                    variant='outline'
-                    className='md:w-[150px] w-full'
-                    disabled={fileInputs.length === 0}
-                    onClick={() =>
-                      fileInputs.length > 0 && handleAddImages(fileInputs)
-                    }
-                  >
-                    Adicionar
-                  </Button>
                 </div>
 
                 {/* Pré-visualização das imagens */}

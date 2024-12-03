@@ -32,12 +32,13 @@ export function ProductCard({ product }: IProductCardProps): JSX.Element {
     <Card className='shadow-md w-full md:w-96 mb-10 flex flex-col justify-between'>
       <CardHeader>
         <div className='mb-3 flex gap-2'>
-          {product.isDiscount && product.discount && (
+          {typeof product.discount === 'number' && product.discount > 0 && (
             <Badge className='w-auto bg-orange-600 hover:bg-orange-600 flex gap-1'>
               {product.discount}%
               <TbSquareRoundedArrowDownFilled className='h-4 w-4' />
             </Badge>
           )}
+
           {product.minQuantity && product.quantity <= product.minQuantity && (
             <Badge className='w-auto bg-orange-600 hover:bg-orange-600 flex gap-1'>
               Últimas unidades
@@ -45,65 +46,80 @@ export function ProductCard({ product }: IProductCardProps): JSX.Element {
             </Badge>
           )}
         </div>
-        <CardTitle>{product.title}</CardTitle>
-        {product.subTitle && (
-          <CardDescription>{product.subTitle}</CardDescription>
+        <CardTitle>{product.name}</CardTitle>
+        {product.description && (
+          <CardDescription>{product.description}</CardDescription>
         )}
       </CardHeader>
 
       <CardContent>
         <Carousel className='w-full'>
           <CarouselContent>
-            {product.images?.map((image, index) => (
-              <CarouselItem key={index}>
+            {product.images.length > 0 ? (
+              product.images?.map((image, index) => (
+                <CarouselItem key={index}>
+                  <Card className='bg-primary flex items-center justify-center animate-right'>
+                    <CardContent className='flex items-center justify-center w-full text-secondary p-3 '>
+                      <ImageWithLoader
+                        src={image}
+                        alt={product.name}
+                      />
+                    </CardContent>
+                  </Card>
+                </CarouselItem>
+              ))
+            ) : (
+              <CarouselItem>
                 <Card className='bg-primary flex items-center justify-center animate-right'>
                   <CardContent className='flex items-center justify-center w-full text-secondary p-3 '>
                     <ImageWithLoader
-                      src={image}
-                      alt={product.title}
+                      src='https://semantic-ui.com/images/wireframe/image.png'
+                      alt={product.name}
                     />
                   </CardContent>
                 </Card>
               </CarouselItem>
-            ))}
+            )}
           </CarouselContent>
-          <CarouselPrevious className='absolute left-0 top-1/2 transform -translate-y-1/2 ml-2 z-10' />
-          <CarouselNext className='absolute right-0 top-1/2 transform -translate-y-1/2 mr-2 z-10' />
+          {product.images.length > 0 && (
+            <>
+              <CarouselPrevious className='absolute left-0 top-1/2 transform -translate-y-1/2 ml-2 z-10' />
+              <CarouselNext className='absolute right-0 top-1/2 transform -translate-y-1/2 mr-2 z-10' />
+            </>
+          )}
         </Carousel>
       </CardContent>
 
       <CardFooter>
         <div className='w-full'>
-          {product.isAvaliable && product.avaliable && (
+          {typeof product.discount === 'number' && product.available > 0 && (
             <div className='flex items-center justify-between gap-2 mb-3'>
               <span className='text-sm text-gray-500'>Avaliação</span>
               <div className='flex items-center gap-2'>
                 <LuStar className='h-6 w-6 text-yellow-500' />
                 <span className='text-sm text-gray-500 font-medium'>
-                  {product.avaliable}
+                  {product.available}
                 </span>
               </div>
             </div>
           )}
 
-          {product.isDiscount && product.discount && (
+          {typeof product.discount === 'number' && product.discount > 0 && (
             <span className='line-through text-sm text-red-400'>
               {Currency.format('BRL', product.price, true)}
             </span>
           )}
+
           <h2 className='text-2xl font-bold'>
-            {product.isDiscount && product.discount ? (
-              <>
-                {Currency.format(
+            {product.discount > 0
+              ? Currency.format(
                   'BRL',
                   product.price - product.price * (product.discount / 100),
                   true
-                )}
-              </>
-            ) : (
-              <> {Currency.format('BRL', product.price, true)}</>
-            )}
+                )
+              : Currency.format('BRL', product.price, true)}
           </h2>
+
           <p className='text-sm text-gray-500'>Á vista</p>
 
           <div className='flex flex-col gap-3 mt-3'>
@@ -114,7 +130,7 @@ export function ProductCard({ product }: IProductCardProps): JSX.Element {
             <Button
               className='w-full hover:text-primary hover:bg-white'
               onClick={() => {
-                if (product.isDiscount && product.discount) {
+                if (product.discount) {
                   handleSetCartItem({
                     ...product,
                     price:

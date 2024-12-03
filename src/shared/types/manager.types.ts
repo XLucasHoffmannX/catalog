@@ -20,6 +20,26 @@ export interface IProductManagerCompany {
   category: string;
   createdAt: string;
   updatedAt: string;
+  store: IStore;
+  images: string[];
+}
+
+export interface IProduct {
+  id?: string;
+  companyId?: string;
+  storeId?: string;
+  name: string;
+  price: number;
+  description: string;
+  content: string;
+  available: number;
+  discount: number;
+  quantity: number;
+  minQuantity: number;
+  category: string;
+  createdAt: string;
+  updatedAt: string;
+  store: IStore;
   images: string[];
 }
 

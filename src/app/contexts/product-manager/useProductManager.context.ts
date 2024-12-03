@@ -11,13 +11,16 @@ export const useProductManagerContext = create<IProductManagerContext>()(
     filters: {
       page: 1,
       limit: 10,
-      search: null
+      search: null,
+      storeId: null
     },
-    handleChangeFilter: ({ page, limit, search }) => {
+
+    handleChangeFilter: ({ page, limit, search, storeId }) => {
       set(state => ({
         filters: {
           ...state.filters,
           ...(typeof search !== null && { search }),
+          ...(typeof storeId !== null && { storeId }),
           ...(page && { page }),
           ...(limit && { limit })
         }

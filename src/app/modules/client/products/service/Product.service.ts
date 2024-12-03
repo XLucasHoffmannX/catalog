@@ -3,6 +3,7 @@ import { HttpClientAuth } from '@/app/api/client/client';
 import { env } from '@/app/config';
 import {
   IPaginatedResponse,
+  IProduct,
   IProductManager,
   IProductManagerCompany
 } from '@/shared/types';
@@ -39,7 +40,8 @@ export class ProductService {
       params: {
         limit: payload.limit,
         page: payload.page,
-        search: payload.search
+        search: payload.search,
+        storeId: payload.storeId
       }
     });
 
@@ -77,9 +79,15 @@ export class ProductService {
   }
 
   async getProductClient(payload: IGetProductClientPayload) {
-    const { data } = await HttpClientAuth.get<IProductManager[]>(
-      `/product/${payload.storeId}`
-    );
+    const { data } = await HttpClientAuth.get<
+      IPaginationDefaultResponse<IProduct>
+    >(`/client/product/${payload.storeId}`, {
+      params: {
+        limit: payload.limit,
+        page: payload.page,
+        search: payload.search
+      }
+    });
 
     return data;
   }

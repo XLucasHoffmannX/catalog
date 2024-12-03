@@ -1,8 +1,8 @@
 import { create } from 'zustand';
 
-import { IUseCartontext } from './useCartContext.types';
+import { IUseCartContext } from './useCartContext.types';
 
-export const useCartContext = create<IUseCartontext>()((set, get) => ({
+export const useCartContext = create<IUseCartContext>()((set, get) => ({
   cartItems: null,
   cart: {
     amountTotal: 0,

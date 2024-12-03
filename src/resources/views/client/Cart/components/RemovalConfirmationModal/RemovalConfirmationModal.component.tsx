@@ -32,10 +32,10 @@ export function RemovalConfirmationModal({
       <AlertDialogContent className='sm:max-w-md  w-[95%] rounded-lg'>
         <AlertDialogHeader>
           <AlertDialogTitle>
-            Tem certeza que deseja remover {itemToBeRemoved?.title}?
+            Tem certeza que deseja remover {itemToBeRemoved?.name}?
           </AlertDialogTitle>
           <AlertDialogDescription>
-            Após confirmar {itemToBeRemoved?.title} será removido
+            Após confirmar {itemToBeRemoved?.name} será removido
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>

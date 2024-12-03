@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 
 import { Outlet } from 'react-router-dom';
 
+import { useStoreContext } from '@/app/contexts';
 import { useGetDomainClient } from '@/app/modules/client/domains/use-cases/get-domain-client/useGetDomainClient';
 import { ErrorScreen, SplashScreen } from '@/resources/components/global';
 import { useSubdomain } from '@/shared/hooks';
@@ -11,6 +12,8 @@ export function ClientThemeMiddleware(): JSX.Element {
   const { theme } = useTheme();
 
   const subdomain = useSubdomain();
+
+  const { handleSetStoreClient } = useStoreContext();
 
   const { data, isLoading } = useGetDomainClient({
     domain: subdomain,
@@ -43,6 +46,12 @@ export function ClientThemeMiddleware(): JSX.Element {
       setCSSVariables(themeVariables.light);
     }
   }, [theme, data?.theme]);
+
+  useEffect(() => {
+    if (data?.store) {
+      handleSetStoreClient(data.store);
+    }
+  }, [data?.store]);
 
   if (isLoading) {
     return <SplashScreen />;

@@ -45,6 +45,7 @@ export interface IGetProductManagerListByCompanyPayload {
   page: number;
   companyId: string;
   search?: string;
+  storeId?: string;
 }
 
 export interface IUseGetProductManagerListByCompanyPayload
@@ -61,6 +62,9 @@ export interface IAddStoreServiceResponse extends IStore {
 
 export interface IGetProductClientPayload {
   storeId: string;
+  limit: number;
+  page: number;
+  search?: string;
 }
 
 export interface IUseGetProductClientPayload extends IGetProductClientPayload {

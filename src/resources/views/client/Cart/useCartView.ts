@@ -24,16 +24,16 @@ export function useCartView() {
     const searchLowerCase = searchString.toLowerCase();
 
     return cartItems
-      .filter(item => item.title.toLowerCase().includes(searchLowerCase))
+      .filter(item => item.name.toLowerCase().includes(searchLowerCase))
       .sort((itemA, itemB) => {
-        const aIncludes = itemA.title.toLowerCase().includes(searchLowerCase);
-        const bIncludes = itemB.title.toLowerCase().includes(searchLowerCase);
+        const aIncludes = itemA.name.toLowerCase().includes(searchLowerCase);
+        const bIncludes = itemB.name.toLowerCase().includes(searchLowerCase);
 
         return aIncludes && !bIncludes
           ? -1
           : !aIncludes && bIncludes
           ? 1
-          : itemA.title.localeCompare(itemB.title);
+          : itemA.name.localeCompare(itemB.name);
       });
   }
 

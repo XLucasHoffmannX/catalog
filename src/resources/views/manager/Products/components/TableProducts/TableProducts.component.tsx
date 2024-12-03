@@ -25,7 +25,8 @@ export function TableProducts(): JSX.Element {
       <TableHeader>
         <TableRow>
           <TableHead>Imagem</TableHead>
-          <TableHead>ID</TableHead>
+          <TableHead className='w-[20%]'>ID</TableHead>
+          <TableHead>Loja</TableHead>
           <TableHead>Nome</TableHead>
           <TableHead>Descrição</TableHead>
           <TableHead>Conteúdo</TableHead>
@@ -34,6 +35,7 @@ export function TableProducts(): JSX.Element {
           <TableHead className='text-center'>-</TableHead>
         </TableRow>
       </TableHeader>
+
       <TableBody>
         {isLoading ? (
           <RowSkeleton
