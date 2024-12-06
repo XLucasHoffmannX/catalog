@@ -32,8 +32,10 @@ export function useAddProduct() {
   });
 
   const navigate = useNavigate();
-  const { mutateAddProductManager, isPendingMutate } = useAddProductManager();
-  const { mutateAddProductImages } = useAddProductImages();
+  const { mutateAddProductManager, isPendingMutate: isLoadingAddProduct } =
+    useAddProductManager();
+  const { mutateAddProductImages, isPendingMutate: isLoadingAddImage } =
+    useAddProductImages();
 
   const methods = useForm<AddProductSchemaType>({
     resolver: zodResolver(addProductSchema)
@@ -140,7 +142,7 @@ export function useAddProduct() {
 
   return {
     handleSubmit: methods.handleSubmit(onSubmit),
-    isPendingMutate,
+    isLoading: isLoadingAddProduct || isLoadingAddImage,
     methods,
     errors: methods.formState.errors,
     handleAddImages,

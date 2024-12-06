@@ -32,7 +32,7 @@ export function AddProductView(): JSX.Element {
     methods,
     errors,
     handleSubmit,
-    isPendingMutate,
+    isLoading,
     handleFileChange,
     onChangePreviewImages,
     previewImages,
@@ -49,8 +49,8 @@ export function AddProductView(): JSX.Element {
       ]}
     >
       <Loader
-        isLoading={creatingProduct.isLoading}
-        message={creatingProduct.message}
+        isLoading={creatingProduct.isLoading || isLoading}
+        message={creatingProduct.message ? creatingProduct.message : undefined}
       />
 
       <section className='w-full flex justify-center'>
@@ -340,7 +340,7 @@ export function AddProductView(): JSX.Element {
                   <Button
                     className='hover:scale-105 h-[50px] transition-all duration-300 flex items-center justify-center gap-[8px] px-[24px] transform active:scale-90 hover:opacity-[80%] md:w-[300px] w-full text-white'
                     type='submit'
-                    isLoading={isPendingMutate}
+                    isLoading={isLoading}
                   >
                     Salvar produto
                   </Button>

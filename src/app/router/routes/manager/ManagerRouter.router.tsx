@@ -55,7 +55,7 @@ export function ManagerRouter(): JSX.Element {
         />
 
         <Route
-          path={managerRoutes.addProduct}
+          path={managerRoutes.orders}
           element={<OrdersView />}
         />
 

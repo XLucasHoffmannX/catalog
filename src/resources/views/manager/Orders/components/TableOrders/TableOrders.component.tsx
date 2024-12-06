@@ -56,7 +56,7 @@ const invoices = [
 
 export function TableOrders(): JSX.Element {
   return (
-    <Table className='max-w-[1200px]'>
+    <Table>
       <TableCaption>A list of your recent invoices.</TableCaption>
       <TableHeader>
         <TableRow>

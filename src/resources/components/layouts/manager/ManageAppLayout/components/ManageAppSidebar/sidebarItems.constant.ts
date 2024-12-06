@@ -7,12 +7,12 @@ export const sidebarItems = {
   principalItems: [
     {
       title: 'Pedidos',
-      url: '#',
+      url: managerRoutes.orders,
       icon: LuListChecks,
       items: [
         {
           title: 'Meus Pedidos',
-          url: '/orders'
+          url: managerRoutes.orders
         },
         {
           title: 'Histórico',

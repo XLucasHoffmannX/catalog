@@ -1,3 +1,5 @@
+import { RiInformationLine } from 'react-icons/ri';
+
 import { managerRoutes } from '@/app/router/routes/manager/managerRoutes.constant';
 import { Loader } from '@/resources/components/global';
 import { ManageAppLayoutWrapper } from '@/resources/components/layouts/manager';
@@ -9,7 +11,12 @@ import {
   FormItem,
   FormLabel,
   Input,
-  Textarea
+  Separator,
+  Textarea,
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger
 } from '@/resources/components/ui';
 import { cn } from '@/shared/lib/utils';
 import { Mask } from '@/shared/utils/format';
@@ -45,7 +52,7 @@ export function AddStoreView(): JSX.Element {
                     render={({ field }) => (
                       <FormItem className='w-full'>
                         <FormLabel className='text-base'>
-                          Titulo de sua loja
+                          Titulo de sua loja *
                         </FormLabel>
 
                         <FormControl>
@@ -66,7 +73,7 @@ export function AddStoreView(): JSX.Element {
                     render={({ field }) => (
                       <FormItem className='w-full'>
                         <FormLabel className='text-base'>
-                          Nome de sua loja
+                          Nome de sua loja *
                         </FormLabel>
                         <FormControl>
                           <Input
@@ -111,7 +118,7 @@ export function AddStoreView(): JSX.Element {
                   name='description'
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className='text-base'>Descrição</FormLabel>
+                      <FormLabel className='text-base'>Descrição *</FormLabel>
 
                       <FormControl>
                         <Textarea
@@ -122,17 +129,181 @@ export function AddStoreView(): JSX.Element {
                     </FormItem>
                   )}
                 />
-              </Form>
-              {methods.watch('name') && isAvailableDomain?.available && (
-                <div className='flex flex-col justify-center mt-2'>
-                  <p>Exemplo do domínio de sua loja:</p>
-                  <span className='font-medium text-primary'>{`${methods.watch(
-                    'name'
-                  )}.${window.location.hostname}${
-                    window.location.port ? `:${window.location.port}` : ''
-                  }`}</span>
+                {methods.watch('name') && isAvailableDomain?.available && (
+                  <div className='flex flex-col justify-center mt-2'>
+                    <p>Exemplo do domínio de sua loja:</p>
+                    <span className='font-medium text-primary'>{`${methods.watch(
+                      'name'
+                    )}.${window.location.hostname}${
+                      window.location.port ? `:${window.location.port}` : ''
+                    }`}</span>
+                  </div>
+                )}
+
+                {/* Endereço da empresa */}
+                <div className='flex items-center mt-4 gap-2'>
+                  <h1 className='font-bold text-xl'>Endereço da loja</h1>
+
+                  <TooltipProvider>
+                    <Tooltip>
+                      <TooltipTrigger>
+                        <RiInformationLine />
+                      </TooltipTrigger>
+                      <TooltipContent>
+                        <p>
+                          Este é o endereço de origem para envio dos produtos ou
+                          para retirada pelo cliente.
+                        </p>
+                      </TooltipContent>
+                    </Tooltip>
+                  </TooltipProvider>
                 </div>
-              )}
+
+                <Separator className='mb-4' />
+
+                <div className='flex gap-5 items-center'>
+                  <FormField
+                    control={methods.control}
+                    name='title'
+                    render={({ field }) => (
+                      <FormItem className='w-full'>
+                        <FormLabel className='text-base'>CEP *</FormLabel>
+
+                        <FormControl>
+                          <Input
+                            {...field}
+                            className='h-[50px] rounded'
+                            value={field.value || ''}
+                            errorMessage={errors.title?.message}
+                          />
+                        </FormControl>
+                      </FormItem>
+                    )}
+                  />
+
+                  <FormField
+                    control={methods.control}
+                    name='title'
+                    render={({ field }) => (
+                      <FormItem className='w-full'>
+                        <FormLabel className='text-base'>Rua *</FormLabel>
+
+                        <FormControl>
+                          <Input
+                            {...field}
+                            className='h-[50px] rounded'
+                            value={field.value || ''}
+                            errorMessage={errors.title?.message}
+                          />
+                        </FormControl>
+                      </FormItem>
+                    )}
+                  />
+                </div>
+
+                <div className='flex gap-5 items-center'>
+                  <FormField
+                    control={methods.control}
+                    name='title'
+                    render={({ field }) => (
+                      <FormItem className='w-full'>
+                        <FormLabel className='text-base'>Número *</FormLabel>
+
+                        <FormControl>
+                          <Input
+                            {...field}
+                            className='h-[50px] rounded'
+                            value={field.value || ''}
+                            type='number'
+                            errorMessage={errors.title?.message}
+                          />
+                        </FormControl>
+                      </FormItem>
+                    )}
+                  />
+
+                  <FormField
+                    control={methods.control}
+                    name='title'
+                    render={({ field }) => (
+                      <FormItem className='w-full'>
+                        <FormLabel className='text-base'>Estado *</FormLabel>
+
+                        <FormControl>
+                          <Input
+                            {...field}
+                            className='h-[50px] rounded'
+                            value={field.value || ''}
+                            errorMessage={errors.title?.message}
+                            maxLength={45}
+                          />
+                        </FormControl>
+                      </FormItem>
+                    )}
+                  />
+                </div>
+
+                <div className='flex gap-5 items-center'>
+                  <FormField
+                    control={methods.control}
+                    name='title'
+                    render={({ field }) => (
+                      <FormItem className='w-full'>
+                        <FormLabel className='text-base'>Bairro *</FormLabel>
+
+                        <FormControl>
+                          <Input
+                            {...field}
+                            className='h-[50px] rounded'
+                            value={field.value || ''}
+                            type='number'
+                            errorMessage={errors.title?.message}
+                          />
+                        </FormControl>
+                      </FormItem>
+                    )}
+                  />
+
+                  <FormField
+                    control={methods.control}
+                    name='title'
+                    render={({ field }) => (
+                      <FormItem className='w-full'>
+                        <FormLabel className='text-base'>Cidade *</FormLabel>
+
+                        <FormControl>
+                          <Input
+                            {...field}
+                            className='h-[50px] rounded'
+                            value={field.value || ''}
+                            errorMessage={errors.title?.message}
+                            maxLength={45}
+                          />
+                        </FormControl>
+                      </FormItem>
+                    )}
+                  />
+                </div>
+                <FormField
+                  control={methods.control}
+                  name='title'
+                  render={({ field }) => (
+                    <FormItem className='w-full'>
+                      <FormLabel className='text-base'>Complemento</FormLabel>
+
+                      <FormControl>
+                        <Input
+                          {...field}
+                          className='h-[50px] rounded'
+                          value={field.value || ''}
+                          errorMessage={errors.title?.message}
+                          maxLength={45}
+                        />
+                      </FormControl>
+                    </FormItem>
+                  )}
+                />
+              </Form>
 
               <div className='flex flex-row-reverse mt-12'>
                 <Button
